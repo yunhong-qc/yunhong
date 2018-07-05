@@ -1,0 +1,24 @@
+171.221.221.50:8870
+PC,1878000
+
+域名：study.cdqckj.com
+
+端口范围：8870-8880
+
+mysql：8871
+tomcat：8872
+svn:8873
+
+数据库：171.221.221.50:8871,root,qaz123
+
+
+
+公众号：421709591@qq.com Abc123456
+产品id：48353
+deviceid:   gh_05fc6bc0923c_d833299770e35fb9
+二维码：http://we.qq.com/d/AQCc2ZPSN2xHP0hRv1BqjmHZ22Pr616N2L_hCbra
+
+appID:   wx3d7f7c26f2369785
+appsecret:   c34fde54dfac1f9c2870ee8edf467ebf
+
+11_hnTUE9PFsEnpEwrWNOJxpMfLdDHFH_igV6OU2gbJJ3cDyPjB9olKdXc8jbXNe0sruamlhhS-StSBL-3YIfsWKClgkVyd1Ek1aEu1-zTE0SiGM76i1HikO7J_xtkHYaNAA-M8mJujBTsIbl7vVEDcAAAAJI
