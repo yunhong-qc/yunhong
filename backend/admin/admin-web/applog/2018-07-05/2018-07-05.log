@@ -1,0 +1,756 @@
+2018-07-05 19:47:00 -Starting AdminWebApplication on haoe with PID 1804 (C:\GitWork\qinc\backend\admin\admin-web\target\classes started by fengchaseyou in C:\GitWork\qinc\backend\admin\admin-web)
+2018-07-05 19:47:00 -Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+2018-07-05 19:47:00 -The following profiles are active: dev
+2018-07-05 19:47:01 -Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@550dbc7a: startup date [Thu Jul 05 19:47:01 CST 2018]; root of context hierarchy
+2018-07-05 19:47:01 -HV000001: Hibernate Validator 5.3.6.Final
+2018-07-05 19:47:04 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-07-05 19:47:07 -Bean 'org.springframework.cache.annotation.ProxyCachingConfiguration' of type [org.springframework.cache.annotation.ProxyCachingConfiguration$$EnhancerBySpringCGLIB$$f00a4688] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:08 -Bean 'org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration' of type [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration$$EnhancerBySpringCGLIB$$e47e0b2c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:08 -Bean 'spring.cache-org.springframework.boot.autoconfigure.cache.CacheProperties' of type [org.springframework.boot.autoconfigure.cache.CacheProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:08 -Bean 'cacheManagerCustomizers' of type [org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:08 -Bean 'org.springframework.boot.autoconfigure.cache.EhCacheCacheConfiguration' of type [org.springframework.boot.autoconfigure.cache.EhCacheCacheConfiguration$$EnhancerBySpringCGLIB$$7f1cd82a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:09 -Bean 'ehCacheCacheManager' of type [net.sf.ehcache.CacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:09 -Bean 'cacheManager' of type [org.springframework.cache.ehcache.EhCacheCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:09 -Bean 'cacheAutoConfigurationValidator' of type [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration$CacheManagerValidator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:09 -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$a6f8106a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:09 -Bean 'shiroConfig' of type [com.admin.system.config.ShiroConfig$$EnhancerBySpringCGLIB$$eeade4a9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:10 -Bean 'userRealm' of type [com.admin.system.shiro.UserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:10 -No configuration found. Configuring ehcache from ehcache-failsafe.xml  found in the classpath: jar:file:/D:/MaveStroage/net/sf/ehcache/ehcache-core/2.5.3/ehcache-core-2.5.3.jar!/ehcache-failsafe.xml
+2018-07-05 19:47:10 -Bean 'ehCacheManager' of type [org.apache.shiro.cache.ehcache.EhCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:10 -Cache with name 'com.admin.system.shiro.UserRealm.authorizationCache' does not yet exist.  Creating now.
+2018-07-05 19:47:10 -Added EhCache named [com.admin.system.shiro.UserRealm.authorizationCache]
+2018-07-05 19:47:10 -Bean 'sessionDAO' of type [org.apache.shiro.session.mgt.eis.MemorySessionDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:10 -Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:10 -Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:11 -Bean 'authorizationAttributeSourceAdvisor' of type [org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-05 19:47:11 -Tomcat initialized with port(s): 8088 (http)
+2018-07-05 19:47:11 -Starting service [Tomcat]
+2018-07-05 19:47:11 -Starting Servlet Engine: Apache Tomcat/8.5.23
+2018-07-05 19:47:12 -Initializing Spring embedded WebApplicationContext
+2018-07-05 19:47:12 -Root WebApplicationContext: initialization completed in 10995 ms
+2018-07-05 19:47:13 -Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-05 19:47:13 -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-05 19:47:13 -Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-05 19:47:13 -Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-05 19:47:13 -Mapping filter: 'springSecurityFilterChain' to: [/*]
+2018-07-05 19:47:13 -Filter xssFilter was not registered (disabled)
+2018-07-05 19:47:13 -Mapping filter: 'webStatFilter' to urls: [/*]
+2018-07-05 19:47:13 -Mapping filter: 'shiroFilterFactoryBean' to: [/*]
+2018-07-05 19:47:13 -Mapping servlet: 'statViewServlet' to [/druid/*]
+2018-07-05 19:47:13 -Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-05 19:47:15 -{dataSource-1} inited
+2018-07-05 19:47:16 -ApplicationContext registed-->org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@550dbc7a: startup date [Thu Jul 05 19:47:01 CST 2018]; root of context hierarchy
+2018-07-05 19:47:17 -Using default implementation for ThreadExecutor
+2018-07-05 19:47:17 -Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-07-05 19:47:17 -Quartz Scheduler v.2.2.1 created.
+2018-07-05 19:47:17 -RAMJobStore initialized.
+2018-07-05 19:47:17 -Scheduler meta-data: Quartz Scheduler (v2.2.1) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-07-05 19:47:17 -Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+2018-07-05 19:47:17 -Quartz scheduler version: 2.2.1
+2018-07-05 19:47:17 -JobFactory set to: com.admin.common.quartz.factory.JobFactory@4a9b3956
+2018-07-05 19:47:17 -Initializing ExecutorService  'clientInboundChannelExecutor'
+2018-07-05 19:47:17 -Initializing ExecutorService  'clientOutboundChannelExecutor'
+2018-07-05 19:47:20 -Mapped "{[/common/dict/add],methods=[GET]}" onto java.lang.String com.admin.common.controller.DictController.add()
+2018-07-05 19:47:20 -Mapped "{[/common/dict/remove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.DictController.remove(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/common/dict/batchRemove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.DictController.remove(java.lang.Long[])
+2018-07-05 19:47:20 -Mapped "{[/common/dict/update]}" onto public com.admin.common.utils.R com.admin.common.controller.DictController.update(com.admin.common.domain.DictDO)
+2018-07-05 19:47:20 -Mapped "{[/common/dict/list],methods=[GET]}" onto public com.admin.common.utils.PageUtils com.admin.common.controller.DictController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/common/dict/save],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.DictController.save(com.admin.common.domain.DictDO)
+2018-07-05 19:47:20 -Mapped "{[/common/dict/type],methods=[GET]}" onto public java.util.List<com.admin.common.domain.DictDO> com.admin.common.controller.DictController.listType()
+2018-07-05 19:47:20 -Mapped "{[/common/dict/list/{type}],methods=[GET]}" onto public java.util.List<com.admin.common.domain.DictDO> com.admin.common.controller.DictController.listByType(java.lang.String)
+2018-07-05 19:47:20 -Mapped "{[/common/dict/add/{type}/{description}],methods=[GET]}" onto java.lang.String com.admin.common.controller.DictController.addD(org.springframework.ui.Model,java.lang.String,java.lang.String)
+2018-07-05 19:47:20 -Mapped "{[/common/dict/edit/{id}],methods=[GET]}" onto java.lang.String com.admin.common.controller.DictController.edit(java.lang.Long,org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/common/dict],methods=[GET]}" onto java.lang.String com.admin.common.controller.DictController.dict()
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile/add],methods=[GET]}" onto java.lang.String com.admin.common.controller.FileController.add()
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile/remove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.FileController.remove(java.lang.Long,javax.servlet.http.HttpServletRequest)
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile/batchRemove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.FileController.remove(java.lang.Long[])
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile/update]}" onto public com.admin.common.utils.R com.admin.common.controller.FileController.update(com.admin.common.domain.FileDO)
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile/list],methods=[GET]}" onto public com.admin.common.utils.PageUtils com.admin.common.controller.FileController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile/save],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.FileController.save(com.admin.common.domain.FileDO)
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile/info/{id}]}" onto public com.admin.common.utils.R com.admin.common.controller.FileController.info(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile/edit],methods=[GET]}" onto java.lang.String com.admin.common.controller.FileController.edit(java.lang.Long,org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile/upload],methods=[POST]}" onto com.admin.common.utils.R com.admin.common.controller.FileController.upload(org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest)
+2018-07-05 19:47:20 -Mapped "{[/common/sysFile],methods=[GET]}" onto java.lang.String com.admin.common.controller.FileController.sysFile(org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/common/generator/update],methods=[POST]}" onto com.admin.common.utils.R com.admin.common.controller.GeneratorController.update(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/common/generator/list],methods=[GET]}" onto java.util.List<java.util.Map<java.lang.String, java.lang.Object>> com.admin.common.controller.GeneratorController.list()
+2018-07-05 19:47:20 -Mapped "{[/common/generator],methods=[GET]}" onto java.lang.String com.admin.common.controller.GeneratorController.generator()
+2018-07-05 19:47:20 -Mapped "{[/common/generator/code/{tableName}]}" onto public void com.admin.common.controller.GeneratorController.code(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String) throws java.io.IOException
+2018-07-05 19:47:20 -Mapped "{[/common/generator/batchCode]}" onto public void com.admin.common.controller.GeneratorController.batchCode(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String) throws java.io.IOException
+2018-07-05 19:47:20 -Mapped "{[/common/generator/edit],methods=[GET]}" onto public java.lang.String com.admin.common.controller.GeneratorController.edit(org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/common/job/add],methods=[GET]}" onto java.lang.String com.admin.common.controller.JobController.add()
+2018-07-05 19:47:20 -Mapped "{[/common/job/remove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.JobController.remove(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/common/job/batchRemove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.JobController.remove(java.lang.Long[])
+2018-07-05 19:47:20 -Mapped "{[/common/job/update],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.JobController.update(com.admin.common.domain.TaskDO)
+2018-07-05 19:47:20 -Mapped "{[/common/job/list],methods=[GET]}" onto public com.admin.common.utils.PageUtils com.admin.common.controller.JobController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/common/job/save],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.JobController.save(com.admin.common.domain.TaskDO)
+2018-07-05 19:47:20 -Mapped "{[/common/job/info/{id}]}" onto public com.admin.common.utils.R com.admin.common.controller.JobController.info(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/common/job/edit/{id}],methods=[GET]}" onto java.lang.String com.admin.common.controller.JobController.edit(java.lang.Long,org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/common/job/changeJobStatus],methods=[POST]}" onto public com.admin.common.utils.R com.admin.common.controller.JobController.changeJobStatus(java.lang.Long,java.lang.String)
+2018-07-05 19:47:20 -Mapped "{[/common/job],methods=[GET]}" onto java.lang.String com.admin.common.controller.JobController.taskScheduleJob()
+2018-07-05 19:47:20 -Mapped "{[/common/log/remove],methods=[POST]}" onto com.admin.common.utils.R com.admin.common.controller.LogController.remove(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/common/log],methods=[GET]}" onto java.lang.String com.admin.common.controller.LogController.log()
+2018-07-05 19:47:20 -Mapped "{[/common/log/list],methods=[GET]}" onto com.admin.common.domain.PageDO<com.admin.common.domain.LogDO> com.admin.common.controller.LogController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/common/log/batchRemove],methods=[POST]}" onto com.admin.common.utils.R com.admin.common.controller.LogController.batchRemove(java.lang.Long[])
+2018-07-05 19:47:20 -Mapped "{[/error]}" onto public com.admin.common.utils.R com.admin.common.exception.MainsiteErrorController.handleError(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-05 19:47:20 -Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView com.admin.common.exception.MainsiteErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept/add/{pId}],methods=[GET]}" onto java.lang.String com.admin.system.controller.DeptController.add(java.lang.Long,org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept/remove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.system.controller.DeptController.remove(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept/batchRemove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.system.controller.DeptController.remove(java.lang.Long[])
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept/update]}" onto public com.admin.common.utils.R com.admin.system.controller.DeptController.update(com.admin.system.domain.DeptDO)
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept/list],methods=[GET]}" onto public java.util.List<com.admin.system.domain.DeptDO> com.admin.system.controller.DeptController.list()
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept/save],methods=[POST]}" onto public com.admin.common.utils.R com.admin.system.controller.DeptController.save(com.admin.system.domain.DeptDO)
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept/tree],methods=[GET]}" onto public com.admin.common.domain.Tree<com.admin.system.domain.DeptDO> com.admin.system.controller.DeptController.tree()
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept],methods=[GET]}" onto java.lang.String com.admin.system.controller.DeptController.dept()
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept/treeView],methods=[GET]}" onto java.lang.String com.admin.system.controller.DeptController.treeView()
+2018-07-05 19:47:20 -Mapped "{[/system/sysDept/edit/{deptId}],methods=[GET]}" onto java.lang.String com.admin.system.controller.DeptController.edit(java.lang.Long,org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/index],methods=[GET]}" onto java.lang.String com.admin.system.controller.LoginController.index(org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/main],methods=[GET]}" onto java.lang.String com.admin.system.controller.LoginController.main()
+2018-07-05 19:47:20 -Mapped "{[/logout],methods=[GET]}" onto java.lang.String com.admin.system.controller.LoginController.logout()
+2018-07-05 19:47:20 -Mapped "{[/ || ],methods=[GET]}" onto java.lang.String com.admin.system.controller.LoginController.welcome(org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/login],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.LoginController.ajaxLogin(java.lang.String,java.lang.String)
+2018-07-05 19:47:20 -Mapped "{[/login],methods=[GET]}" onto java.lang.String com.admin.system.controller.LoginController.login()
+2018-07-05 19:47:20 -Mapped "{[/sys/menu/add/{pId}],methods=[GET]}" onto java.lang.String com.admin.system.controller.MenuController.add(org.springframework.ui.Model,java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/sys/menu/remove],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.MenuController.remove(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/sys/menu/update],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.MenuController.update(com.admin.system.domain.MenuDO)
+2018-07-05 19:47:20 -Mapped "{[/sys/menu/list]}" onto java.util.List<com.admin.system.domain.MenuDO> com.admin.system.controller.MenuController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/sys/menu/save],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.MenuController.save(com.admin.system.domain.MenuDO)
+2018-07-05 19:47:20 -Mapped "{[/sys/menu/tree/{roleId}],methods=[GET]}" onto com.admin.common.domain.Tree<com.admin.system.domain.MenuDO> com.admin.system.controller.MenuController.tree(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/sys/menu/tree],methods=[GET]}" onto com.admin.common.domain.Tree<com.admin.system.domain.MenuDO> com.admin.system.controller.MenuController.tree()
+2018-07-05 19:47:20 -Mapped "{[/sys/menu],methods=[GET]}" onto java.lang.String com.admin.system.controller.MenuController.menu(org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/sys/menu/edit/{id}],methods=[GET]}" onto java.lang.String com.admin.system.controller.MenuController.edit(org.springframework.ui.Model,java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/add],methods=[GET]}" onto java.lang.String com.admin.system.controller.NotifyController.add()
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/remove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.system.controller.NotifyController.remove(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/batchRemove],methods=[POST]}" onto public com.admin.common.utils.R com.admin.system.controller.NotifyController.remove(java.lang.Long[])
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/update]}" onto public com.admin.common.utils.R com.admin.system.controller.NotifyController.update(com.admin.system.domain.NotifyDO)
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/read/{id}],methods=[GET]}" onto java.lang.String com.admin.system.controller.NotifyController.read(java.lang.Long,org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/list],methods=[GET]}" onto public com.admin.common.utils.PageUtils com.admin.system.controller.NotifyController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/save],methods=[POST]}" onto public com.admin.common.utils.R com.admin.system.controller.NotifyController.save(com.admin.system.domain.NotifyDO)
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/message],methods=[GET]}" onto com.admin.common.utils.PageUtils com.admin.system.controller.NotifyController.message()
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/selfList],methods=[GET]}" onto com.admin.common.utils.PageUtils com.admin.system.controller.NotifyController.selfList(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/oa/notify],methods=[GET]}" onto java.lang.String com.admin.system.controller.NotifyController.oaNotify()
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/selfNotify],methods=[GET]}" onto java.lang.String com.admin.system.controller.NotifyController.selefNotify()
+2018-07-05 19:47:20 -Mapped "{[/oa/notify/edit/{id}],methods=[GET]}" onto java.lang.String com.admin.system.controller.NotifyController.edit(java.lang.Long,org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/sys/role/add],methods=[GET]}" onto java.lang.String com.admin.system.controller.RoleController.add()
+2018-07-05 19:47:20 -Mapped "{[/sys/role/update],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.RoleController.update(com.admin.system.domain.RoleDO)
+2018-07-05 19:47:20 -Mapped "{[/sys/role/list],methods=[GET]}" onto java.util.List<com.admin.system.domain.RoleDO> com.admin.system.controller.RoleController.list()
+2018-07-05 19:47:20 -Mapped "{[/sys/role/remove],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.RoleController.save(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/sys/role/save],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.RoleController.save(com.admin.system.domain.RoleDO)
+2018-07-05 19:47:20 -Mapped "{[/sys/role/batchRemove],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.RoleController.batchRemove(java.lang.Long[])
+2018-07-05 19:47:20 -Mapped "{[/sys/role],methods=[GET]}" onto java.lang.String com.admin.system.controller.RoleController.role()
+2018-07-05 19:47:20 -Mapped "{[/sys/role/edit/{id}],methods=[GET]}" onto java.lang.String com.admin.system.controller.RoleController.edit(java.lang.Long,org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/sys/online/list]}" onto public java.util.List<com.admin.system.domain.UserOnline> com.admin.system.controller.SessionController.list()
+2018-07-05 19:47:20 -Mapped "{[/sys/online/sessionList]}" onto public java.util.Collection<org.apache.shiro.session.Session> com.admin.system.controller.SessionController.sessionList()
+2018-07-05 19:47:20 -Mapped "{[/sys/online/forceLogout/{sessionId}]}" onto public com.admin.common.utils.R com.admin.system.controller.SessionController.forceLogout(java.lang.String,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2018-07-05 19:47:20 -Mapped "{[/sys/online],methods=[GET]}" onto public java.lang.String com.admin.system.controller.SessionController.online()
+2018-07-05 19:47:20 -Mapped "{[/sys/user/exit],methods=[POST]}" onto boolean com.admin.system.controller.UserController.exit(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/add],methods=[GET]}" onto java.lang.String com.admin.system.controller.UserController.add(org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/remove],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.UserController.remove(java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/update],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.UserController.update(com.admin.system.domain.UserDO)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/list],methods=[GET]}" onto com.admin.common.utils.PageUtils com.admin.system.controller.UserController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/save],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.UserController.save(com.admin.system.domain.UserDO)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/batchRemove],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.UserController.batchRemove(java.lang.Long[])
+2018-07-05 19:47:20 -Mapped "{[/sys/user/tree],methods=[GET]}" onto public com.admin.common.domain.Tree<com.admin.system.domain.DeptDO> com.admin.system.controller.UserController.tree()
+2018-07-05 19:47:20 -Mapped "{[/sys/user],methods=[GET]}" onto java.lang.String com.admin.system.controller.UserController.user(org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/treeView],methods=[GET]}" onto java.lang.String com.admin.system.controller.UserController.treeView()
+2018-07-05 19:47:20 -Mapped "{[/sys/user/resetPwd],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.UserController.resetPwd(com.admin.system.vo.UserVO)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/resetPwd/{id}],methods=[GET]}" onto java.lang.String com.admin.system.controller.UserController.resetPwd(java.lang.Long,org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/updatePeronal],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.UserController.updatePeronal(com.admin.system.domain.UserDO)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/adminResetPwd],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.UserController.adminResetPwd(com.admin.system.vo.UserVO)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/personal],methods=[GET]}" onto java.lang.String com.admin.system.controller.UserController.personal(org.springframework.ui.Model)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/edit/{id}],methods=[GET]}" onto java.lang.String com.admin.system.controller.UserController.edit(org.springframework.ui.Model,java.lang.Long)
+2018-07-05 19:47:20 -Mapped "{[/sys/user/uploadImg],methods=[POST]}" onto com.admin.common.utils.R com.admin.system.controller.UserController.uploadImg(org.springframework.web.multipart.MultipartFile,java.lang.String,javax.servlet.http.HttpServletRequest)
+2018-07-05 19:47:20 -Mapped "{[/v2/api-docs],methods=[GET],produces=[application/json || application/hal+json]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)
+2018-07-05 19:47:20 -Mapped "{[/swagger-resources/configuration/security]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-07-05 19:47:20 -Mapped "{[/swagger-resources]}" onto org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-07-05 19:47:20 -Mapped "{[/swagger-resources/configuration/ui]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-07-05 19:47:21 -Initializing ExecutorService  'messageBrokerTaskScheduler'
+2018-07-05 19:47:21 -Mapped URL path [/endpointChat/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler]
+2018-07-05 19:47:21 -Initializing ExecutorService  'brokerChannelExecutor'
+2018-07-05 19:47:21 -Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@550dbc7a: startup date [Thu Jul 05 19:47:01 CST 2018]; root of context hierarchy
+2018-07-05 19:47:21 -Mapped URL path [/files/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-05 19:47:21 -Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-05 19:47:21 -Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-05 19:47:21 -Detected @ExceptionHandler methods in BDExceptionHandler
+2018-07-05 19:47:22 -Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-05 19:47:24 -
+
+Using default security password: d5d598ef-909c-4fc1-91ec-e5ea78df15f3
+
+2018-07-05 19:47:25 -Creating filter chain: OrRequestMatcher [requestMatchers=[Ant [pattern='/css/**'], Ant [pattern='/js/**'], Ant [pattern='/images/**'], Ant [pattern='/webjars/**'], Ant [pattern='/**/favicon.ico'], Ant [pattern='/error']]], []
+2018-07-05 19:47:25 -Creating filter chain: org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration$ApplicationNoWebSecurityConfigurerAdapter$1@74eab077, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3063be68, org.springframework.security.web.context.SecurityContextPersistenceFilter@291cbe70, org.springframework.security.web.header.HeaderWriterFilter@4feec184, org.springframework.security.web.csrf.CsrfFilter@50e1f3fc, org.springframework.security.web.authentication.logout.LogoutFilter@1e029a04, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@74badf19, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3cf70afa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3a3bc0da, org.springframework.security.web.session.SessionManagementFilter@5da3f32a, org.springframework.security.web.access.ExceptionTranslationFilter@5b895e76]
+2018-07-05 19:47:26 -Registering beans for JMX exposure on startup
+2018-07-05 19:47:26 -Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-07-05 19:47:26 -Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-07-05 19:47:26 -Starting beans in phase 2147483647
+2018-07-05 19:47:26 -Context refreshed
+2018-07-05 19:47:26 -Found 1 custom documentation plugin(s)
+2018-07-05 19:47:26 -Scanning for api listing references
+2018-07-05 19:47:26 -Generating unique operation named: removeUsingPOST_1
+2018-07-05 19:47:27 -Generating unique operation named: addUsingGET_1
+2018-07-05 19:47:27 -Generating unique operation named: editUsingGET_1
+2018-07-05 19:47:27 -Generating unique operation named: listUsingGET_1
+2018-07-05 19:47:27 -Generating unique operation named: removeUsingPOST_2
+2018-07-05 19:47:27 -Generating unique operation named: removeUsingPOST_3
+2018-07-05 19:47:27 -Generating unique operation named: saveUsingPOST_1
+2018-07-05 19:47:27 -Generating unique operation named: updateUsingGET_1
+2018-07-05 19:47:27 -Generating unique operation named: updateUsingHEAD_1
+2018-07-05 19:47:27 -Generating unique operation named: updateUsingPOST_1
+2018-07-05 19:47:27 -Generating unique operation named: updateUsingPUT_1
+2018-07-05 19:47:27 -Generating unique operation named: updateUsingPATCH_1
+2018-07-05 19:47:27 -Generating unique operation named: updateUsingDELETE_1
+2018-07-05 19:47:27 -Generating unique operation named: updateUsingOPTIONS_1
+2018-07-05 19:47:27 -Generating unique operation named: updateUsingTRACE_1
+2018-07-05 19:47:27 -Generating unique operation named: addUsingGET_2
+2018-07-05 19:47:27 -Generating unique operation named: editUsingGET_2
+2018-07-05 19:47:27 -Generating unique operation named: listUsingGET_2
+2018-07-05 19:47:27 -Generating unique operation named: removeUsingPOST_4
+2018-07-05 19:47:27 -Generating unique operation named: removeUsingPOST_5
+2018-07-05 19:47:28 -Generating unique operation named: saveUsingPOST_2
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingGET_2
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingHEAD_2
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingPOST_2
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingPUT_2
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingPATCH_2
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingDELETE_2
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingOPTIONS_2
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingTRACE_2
+2018-07-05 19:47:28 -Generating unique operation named: editUsingGET_3
+2018-07-05 19:47:28 -Generating unique operation named: listUsingGET_3
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingPOST_3
+2018-07-05 19:47:28 -Generating unique operation named: addUsingGET_3
+2018-07-05 19:47:28 -Generating unique operation named: editUsingGET_4
+2018-07-05 19:47:28 -Generating unique operation named: infoUsingGET_1
+2018-07-05 19:47:28 -Generating unique operation named: infoUsingHEAD_1
+2018-07-05 19:47:28 -Generating unique operation named: infoUsingPOST_1
+2018-07-05 19:47:28 -Generating unique operation named: infoUsingPUT_1
+2018-07-05 19:47:28 -Generating unique operation named: infoUsingPATCH_1
+2018-07-05 19:47:28 -Generating unique operation named: infoUsingDELETE_1
+2018-07-05 19:47:28 -Generating unique operation named: infoUsingOPTIONS_1
+2018-07-05 19:47:28 -Generating unique operation named: infoUsingTRACE_1
+2018-07-05 19:47:28 -Generating unique operation named: listUsingGET_4
+2018-07-05 19:47:28 -Generating unique operation named: removeUsingPOST_6
+2018-07-05 19:47:28 -Generating unique operation named: removeUsingPOST_7
+2018-07-05 19:47:28 -Generating unique operation named: saveUsingPOST_3
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingPOST_4
+2018-07-05 19:47:28 -Generating unique operation named: listUsingGET_5
+2018-07-05 19:47:28 -Generating unique operation named: removeUsingPOST_8
+2018-07-05 19:47:28 -Generating unique operation named: welcomeUsingGET_1
+2018-07-05 19:47:28 -Generating unique operation named: addUsingGET_4
+2018-07-05 19:47:28 -Generating unique operation named: editUsingGET_5
+2018-07-05 19:47:28 -Generating unique operation named: listUsingGET_6
+2018-07-05 19:47:28 -Generating unique operation named: removeUsingPOST_9
+2018-07-05 19:47:28 -Generating unique operation named: saveUsingPOST_4
+2018-07-05 19:47:28 -Generating unique operation named: treeUsingGET_1
+2018-07-05 19:47:28 -Generating unique operation named: treeUsingGET_2
+2018-07-05 19:47:28 -Generating unique operation named: updateUsingPOST_5
+2018-07-05 19:47:28 -Generating unique operation named: addUsingGET_5
+2018-07-05 19:47:28 -Generating unique operation named: editUsingGET_6
+2018-07-05 19:47:28 -Generating unique operation named: listUsingGET_7
+2018-07-05 19:47:29 -Generating unique operation named: removeUsingPOST_10
+2018-07-05 19:47:29 -Generating unique operation named: removeUsingPOST_11
+2018-07-05 19:47:29 -Generating unique operation named: saveUsingPOST_5
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingGET_3
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingHEAD_3
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingPOST_6
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingPUT_3
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingPATCH_3
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingDELETE_3
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingOPTIONS_3
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingTRACE_3
+2018-07-05 19:47:29 -Generating unique operation named: addUsingGET_6
+2018-07-05 19:47:29 -Generating unique operation named: batchRemoveUsingPOST_1
+2018-07-05 19:47:29 -Generating unique operation named: editUsingGET_7
+2018-07-05 19:47:29 -Generating unique operation named: listUsingGET_8
+2018-07-05 19:47:29 -Generating unique operation named: saveUsingPOST_6
+2018-07-05 19:47:29 -Generating unique operation named: saveUsingPOST_7
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingPOST_7
+2018-07-05 19:47:29 -Generating unique operation named: listUsingGET_9
+2018-07-05 19:47:29 -Generating unique operation named: listUsingHEAD_1
+2018-07-05 19:47:29 -Generating unique operation named: listUsingPOST_1
+2018-07-05 19:47:29 -Generating unique operation named: listUsingPUT_1
+2018-07-05 19:47:29 -Generating unique operation named: listUsingPATCH_1
+2018-07-05 19:47:29 -Generating unique operation named: listUsingDELETE_1
+2018-07-05 19:47:29 -Generating unique operation named: listUsingOPTIONS_1
+2018-07-05 19:47:29 -Generating unique operation named: listUsingTRACE_1
+2018-07-05 19:47:29 -Generating unique operation named: addUsingGET_7
+2018-07-05 19:47:29 -Generating unique operation named: batchRemoveUsingPOST_2
+2018-07-05 19:47:29 -Generating unique operation named: editUsingGET_8
+2018-07-05 19:47:29 -Generating unique operation named: listUsingGET_10
+2018-07-05 19:47:29 -Generating unique operation named: removeUsingPOST_12
+2018-07-05 19:47:29 -Generating unique operation named: saveUsingPOST_8
+2018-07-05 19:47:29 -Generating unique operation named: treeUsingGET_3
+2018-07-05 19:47:29 -Generating unique operation named: treeViewUsingGET_1
+2018-07-05 19:47:29 -Generating unique operation named: updateUsingPOST_8
+2018-07-05 19:47:29 -Starting Quartz Scheduler now
+2018-07-05 19:47:29 -Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+2018-07-05 19:47:29 -Starting...
+2018-07-05 19:47:29 -BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2018-07-05 19:47:29 -Started.
+2018-07-05 19:47:29 -Initializing ProtocolHandler ["http-nio-8088"]
+2018-07-05 19:47:29 -Starting ProtocolHandler ["http-nio-8088"]
+2018-07-05 19:47:29 -Using a shared selector for servlet write/read
+2018-07-05 19:47:29 -Tomcat started on port(s): 8088 (http)
+2018-07-05 19:47:30 -==>  Preparing: select `id`,`cron_expression`,`method_name`,`is_concurrent`,`description`,`update_by`,`bean_class`,`create_date`,`job_status`,`job_group`,`update_date`,`create_by`,`spring_bean`,`job_name` from sys_task order by id desc 
+2018-07-05 19:47:30 -==> Parameters: 
+2018-07-05 19:47:30 -<==      Total: 1
+2018-07-05 19:47:30 -Started AdminWebApplication in 32.0 seconds (JVM running for 33.979)
+2018-07-05 19:48:21 -WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannelpool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2018-07-05 19:50:05 -Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-05 19:50:05 -FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-05 19:50:05 -FrameworkServlet 'dispatcherServlet': initialization completed in 68 ms
+2018-07-05 19:50:05 -Enabling session validation scheduler...
+2018-07-05 19:50:05 -请求地址 : http://localhost:8088/login;JSESSIONID=441ab60a-c36a-4f22-84c2-5fead10f1f32
+2018-07-05 19:50:05 -HTTP METHOD : GET
+2018-07-05 19:50:05 -CLASS_METHOD : com.admin.system.controller.LoginController.login
+2018-07-05 19:50:05 -参数 : []
+2018-07-05 19:50:05 -耗时 : 6
+2018-07-05 19:50:05 -返回值 : login
+2018-07-05 19:50:05 -[THYMELEAF] INITIALIZING TEMPLATE ENGINE
+2018-07-05 19:50:06 -[THYMELEAF] INITIALIZING TEMPLATE RESOLVER: org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+2018-07-05 19:50:06 -[THYMELEAF] TEMPLATE RESOLVER INITIALIZED OK
+2018-07-05 19:50:06 -[THYMELEAF] INITIALIZING MESSAGE RESOLVER: org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+2018-07-05 19:50:06 -[THYMELEAF] MESSAGE RESOLVER INITIALIZED OK
+2018-07-05 19:50:06 -[THYMELEAF] TEMPLATE ENGINE CONFIGURATION:
+[THYMELEAF] * Cache Factory implementation: org.thymeleaf.cache.StandardCacheManager
+[THYMELEAF] * Template modes:
+[THYMELEAF]     * VALIDXHTML
+[THYMELEAF]     * XHTML
+[THYMELEAF]     * XML
+[THYMELEAF]     * LEGACYHTML5
+[THYMELEAF]     * VALIDXML
+[THYMELEAF]     * HTML5
+[THYMELEAF] * Template resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+[THYMELEAF] * Message resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+[THYMELEAF] * Dialect [1 of 3]: org.thymeleaf.spring4.dialect.SpringStandardDialect
+[THYMELEAF]     * Prefix: "th"
+[THYMELEAF] * Dialect [2 of 3]: at.pollux.thymeleaf.shiro.dialect.ShiroDialect
+[THYMELEAF]     * Prefix: "shiro"
+[THYMELEAF] * Dialect [3 of 3]: nz.net.ultraq.thymeleaf.LayoutDialect
+[THYMELEAF]     * Prefix: "layout"
+[THYMELEAF] TEMPLATE ENGINE CONFIGURED OK
+2018-07-05 19:50:06 -[THYMELEAF] TEMPLATE ENGINE INITIALIZED
+2018-07-05 19:50:07 -请求地址 : http://localhost:8088/login
+2018-07-05 19:50:07 -HTTP METHOD : GET
+2018-07-05 19:50:07 -CLASS_METHOD : com.admin.system.controller.LoginController.login
+2018-07-05 19:50:07 -参数 : []
+2018-07-05 19:50:07 -耗时 : 2
+2018-07-05 19:50:07 -返回值 : login
+2018-07-05 19:50:07 -请求地址 : http://localhost:8088/login
+2018-07-05 19:50:07 -HTTP METHOD : GET
+2018-07-05 19:50:07 -CLASS_METHOD : com.admin.system.controller.LoginController.login
+2018-07-05 19:50:07 -参数 : []
+2018-07-05 19:50:07 -耗时 : 5
+2018-07-05 19:50:07 -返回值 : login
+2018-07-05 19:50:15 -==>  Preparing: select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user WHERE username = ? order by user_id desc 
+2018-07-05 19:50:15 -==> Parameters: admin(String)
+2018-07-05 19:50:16 -<==      Total: 1
+2018-07-05 19:50:16 -请求地址 : http://localhost:8088/login
+2018-07-05 19:50:16 -HTTP METHOD : POST
+2018-07-05 19:50:16 -CLASS_METHOD : com.admin.system.controller.LoginController.ajaxLogin
+2018-07-05 19:50:16 -参数 : [admin, 1]
+2018-07-05 19:50:16 -==>  Preparing: select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user WHERE username = ? order by user_id desc 
+2018-07-05 19:50:16 -==> Parameters: admin(String)
+2018-07-05 19:50:16 -<==      Total: 1
+2018-07-05 19:50:16 -耗时 : 111
+2018-07-05 19:50:16 -返回值 : {msg=操作成功, code=0}
+2018-07-05 19:50:16 -More than one TaskExecutor bean found within the context, and none is named 'taskExecutor'. Mark one of them as primary or name it 'taskExecutor' (possibly as an alias) in order to use it for async processing: [clientInboundChannelExecutor, clientOutboundChannelExecutor, brokerChannelExecutor, messageBrokerTaskScheduler]
+2018-07-05 19:50:16 -==>  Preparing: insert into sys_log ( `user_id`, `username`, `operation`, `time`, `method`, `params`, `ip`, `gmt_create` ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-07-05 19:50:16 -==> Parameters: 1(Long), admin(String), 登录(String), 111(Integer), com.admin.system.controller.LoginController.ajaxLogin()(String), null, 127.0.0.1(String), 2018-07-05 19:50:16.372(Timestamp)
+2018-07-05 19:50:16 -请求地址 : http://localhost:8088/index
+2018-07-05 19:50:16 -HTTP METHOD : GET
+2018-07-05 19:50:16 -CLASS_METHOD : com.admin.system.controller.LoginController.index
+2018-07-05 19:50:16 -参数 : [{}]
+2018-07-05 19:50:16 -<==    Updates: 1
+2018-07-05 19:50:16 -==>  Preparing: select distinct m.menu_id , parent_id, name, url, perms,`type`,icon,order_num,gmt_create, gmt_modified from sys_menu m left join sys_role_menu rm on m.menu_id = rm.menu_id left join sys_user_role ur on rm.role_id =ur.role_id where ur.user_id = ? and m.type in(0,1) order by m.order_num 
+2018-07-05 19:50:16 -==> Parameters: 1(Long)
+2018-07-05 19:50:16 -<==      Total: 19
+2018-07-05 19:50:17 -==>  Preparing: select `id`,`type`,`url`,`create_date` from sys_file where id = ? 
+2018-07-05 19:50:17 -==> Parameters: 143(Long)
+2018-07-05 19:50:17 -<==      Total: 0
+2018-07-05 19:50:17 -耗时 : 733
+2018-07-05 19:50:17 -返回值 : index
+2018-07-05 19:50:17 -==>  Preparing: insert into sys_log ( `user_id`, `username`, `operation`, `time`, `method`, `params`, `ip`, `gmt_create` ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-07-05 19:50:17 -==> Parameters: 1(Long), admin(String), 请求访问主页(String), 733(Integer), com.admin.system.controller.LoginController.index()(String), null, 127.0.0.1(String), 2018-07-05 19:50:17.343(Timestamp)
+2018-07-05 19:50:17 -<==    Updates: 1
+2018-07-05 19:50:18 -请求地址 : http://localhost:8088/main
+2018-07-05 19:50:18 -HTTP METHOD : GET
+2018-07-05 19:50:18 -CLASS_METHOD : com.admin.system.controller.LoginController.main
+2018-07-05 19:50:18 -参数 : []
+2018-07-05 19:50:18 -耗时 : 1
+2018-07-05 19:50:18 -返回值 : main
+2018-07-05 19:50:18 -请求地址 : http://localhost:8088/oa/notify/message
+2018-07-05 19:50:18 -HTTP METHOD : GET
+2018-07-05 19:50:18 -CLASS_METHOD : com.admin.system.controller.NotifyController.message
+2018-07-05 19:50:18 -参数 : []
+2018-07-05 19:50:18 -==>  Preparing: select DISTINCT n.id ,`type`,`title`,`content`,`files`,r.is_read,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag` from oa_notify_record r right JOIN oa_notify n on r.notify_id = n.id WHERE r.is_read = ? and r.user_id = ? order by is_read ASC, update_date DESC limit ?, ? 
+2018-07-05 19:50:18 -==> Parameters: 0(String), 1(Long), 0(Integer), 3(Integer)
+2018-07-05 19:50:18 -请求地址 : http://localhost:8088/main
+2018-07-05 19:50:18 -HTTP METHOD : GET
+2018-07-05 19:50:18 -CLASS_METHOD : com.admin.system.controller.LoginController.main
+2018-07-05 19:50:18 -参数 : []
+2018-07-05 19:50:18 -耗时 : 1
+2018-07-05 19:50:18 -返回值 : main
+2018-07-05 19:50:18 -<==      Total: 0
+2018-07-05 19:50:18 -==>  Preparing: select count(*) from oa_notify_record r right JOIN oa_notify n on r.notify_id = n.id where r.user_id =? and r.is_read = ? 
+2018-07-05 19:50:18 -==> Parameters: 1(Long), 0(String)
+2018-07-05 19:50:18 -<==      Total: 1
+2018-07-05 19:50:18 -耗时 : 136
+2018-07-05 19:50:18 -返回值 : com.admin.common.utils.PageUtils@c822398
+2018-07-05 19:50:22 -请求地址 : http://localhost:8088/common/generator
+2018-07-05 19:50:22 -HTTP METHOD : GET
+2018-07-05 19:50:22 -CLASS_METHOD : com.admin.common.controller.GeneratorController.generator
+2018-07-05 19:50:22 -参数 : []
+2018-07-05 19:50:22 -耗时 : 1
+2018-07-05 19:50:22 -返回值 : common/generator/list
+2018-07-05 19:50:23 -请求地址 : http://localhost:8088/common/generator/list
+2018-07-05 19:50:23 -HTTP METHOD : GET
+2018-07-05 19:50:23 -CLASS_METHOD : com.admin.common.controller.GeneratorController.list
+2018-07-05 19:50:23 -参数 : []
+2018-07-05 19:50:23 -==>  Preparing: select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables where table_schema = (select database()) 
+2018-07-05 19:50:23 -==> Parameters: 
+2018-07-05 19:50:23 -<==      Total: 15
+2018-07-05 19:50:23 -耗时 : 70
+2018-07-05 19:50:23 -返回值 : [{engine=InnoDB, createTime=2018-07-05 10:32:41.0, tableComment=通知通告, tableName=oa_notify}, {engine=InnoDB, createTime=2018-07-05 10:32:42.0, tableComment=通知通告发送记录, tableName=oa_notify_record}, {engine=InnoDB, createTime=2018-07-05 10:32:46.0, tableComment=部门管理, tableName=sys_dept}, {engine=InnoDB, createTime=2018-07-05 10:32:48.0, tableComment=字典表, tableName=sys_dict}, {engine=InnoDB, createTime=2018-07-05 10:33:08.0, tableComment=文件上传, tableName=sys_file}, {engine=InnoDB, createTime=2018-07-05 10:33:13.0, tableComment=系统日志, tableName=sys_log}, {engine=InnoDB, createTime=2018-07-05 10:33:14.0, tableComment=菜单管理, tableName=sys_menu}, {engine=InnoDB, createTime=2018-07-05 10:33:21.0, tableComment=角色, tableName=sys_role}, {engine=InnoDB, createTime=2018-07-05 10:33:22.0, tableComment=角色与菜单对应关系, tableName=sys_role_menu}, {engine=MyISAM, createTime=2018-07-05 10:45:56.0, tableComment=, tableName=sys_task}, {engine=InnoDB, createTime=2018-07-05 10:33:56.0, tableComment=, tableName=sys_user}, {engine=InnoDB, createTime=2018-07-05 10:33:58.0, tableComment=, tableName=sys_user_plus}, {engine=InnoDB, createTime=2018-07-05 10:33:59.0, tableComment=用户与角色对应关系, tableName=sys_user_role}, {engine=InnoDB, createTime=2018-07-05 14:38:24.0, tableComment=, tableName=yunh_qc_pay_record}, {engine=InnoDB, createTime=2018-07-03 14:39:46.0, tableComment=, tableName=yunh_qc_user_info}]
+2018-07-05 19:50:36 -请求地址 : http://localhost:8088/common/generator/code/sys_file
+2018-07-05 19:50:36 -HTTP METHOD : GET
+2018-07-05 19:50:36 -CLASS_METHOD : com.admin.common.controller.GeneratorController.code
+2018-07-05 19:50:36 -参数 : [org.apache.shiro.web.servlet.ShiroHttpServletRequest@6591794b, org.apache.shiro.web.servlet.ShiroHttpServletResponse@10ae3871, sys_file]
+2018-07-05 19:50:36 -==>  Preparing: select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables where table_schema = (select database()) and table_name = ? 
+2018-07-05 19:50:36 -==> Parameters: sys_file(String)
+2018-07-05 19:50:36 -<==      Total: 1
+2018-07-05 19:50:36 -==>  Preparing: select column_name columnName, data_type dataType, column_comment columnComment, column_key columnKey, extra from information_schema.columns where table_name = ? and table_schema = (select database()) order by ordinal_position 
+2018-07-05 19:50:36 -==> Parameters: sys_file(String)
+2018-07-05 19:50:36 -<==      Total: 4
+2018-07-05 19:50:37 -耗时 : 625
+2018-07-05 19:50:37 -返回值 : null
+2018-07-05 19:51:08 -请求地址 : http://localhost:8088/oa/notify/selfNotify
+2018-07-05 19:51:08 -HTTP METHOD : GET
+2018-07-05 19:51:08 -CLASS_METHOD : com.admin.system.controller.NotifyController.selefNotify
+2018-07-05 19:51:08 -参数 : []
+2018-07-05 19:51:08 -耗时 : 3
+2018-07-05 19:51:08 -返回值 : oa/notify/selfNotify
+2018-07-05 19:51:08 -==>  Preparing: select distinct m.perms from sys_menu m left join sys_role_menu rm on m.menu_id = rm.menu_id left join sys_user_role ur on rm.role_id = ur.role_id where ur.user_id = ? 
+2018-07-05 19:51:08 -==> Parameters: 1(Long)
+2018-07-05 19:51:08 -<==      Total: 40
+2018-07-05 19:51:09 -请求地址 : http://localhost:8088/oa/notify/selfList
+2018-07-05 19:51:09 -HTTP METHOD : GET
+2018-07-05 19:51:09 -CLASS_METHOD : com.admin.system.controller.NotifyController.selfList
+2018-07-05 19:51:09 -参数 : [{limit=10, offset=0}]
+2018-07-05 19:51:09 -==>  Preparing: select DISTINCT n.id ,`type`,`title`,`content`,`files`,r.is_read,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag` from oa_notify_record r right JOIN oa_notify n on r.notify_id = n.id WHERE r.user_id = ? order by is_read ASC, update_date DESC limit ?, ? 
+2018-07-05 19:51:09 -==> Parameters: 1(Long), 0(Integer), 10(Integer)
+2018-07-05 19:51:09 -<==      Total: 0
+2018-07-05 19:51:09 -==>  Preparing: select count(*) from oa_notify_record r right JOIN oa_notify n on r.notify_id = n.id where r.user_id =? and r.is_read = ? 
+2018-07-05 19:51:09 -==> Parameters: 1(Long), null
+2018-07-05 19:51:09 -<==      Total: 1
+2018-07-05 19:51:09 -耗时 : 133
+2018-07-05 19:51:09 -返回值 : com.admin.common.utils.PageUtils@542ab715
+2018-07-05 19:51:12 -请求地址 : http://localhost:8088/oa/notify
+2018-07-05 19:51:12 -HTTP METHOD : GET
+2018-07-05 19:51:12 -CLASS_METHOD : com.admin.system.controller.NotifyController.oaNotify
+2018-07-05 19:51:12 -参数 : []
+2018-07-05 19:51:12 -耗时 : 0
+2018-07-05 19:51:12 -返回值 : oa/notify/notify
+2018-07-05 19:51:13 -请求地址 : http://localhost:8088/oa/notify/list
+2018-07-05 19:51:13 -HTTP METHOD : GET
+2018-07-05 19:51:13 -CLASS_METHOD : com.admin.system.controller.NotifyController.list
+2018-07-05 19:51:13 -参数 : [{limit=10, offset=0}]
+2018-07-05 19:51:13 -==>  Preparing: select `id`,`type`,`title`,`content`,`files`,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag` from oa_notify order by id desc limit ?, ? 
+2018-07-05 19:51:13 -==> Parameters: 0(Integer), 10(Integer)
+2018-07-05 19:51:13 -<==      Total: 0
+2018-07-05 19:51:13 -==>  Preparing: select count(*) from oa_notify 
+2018-07-05 19:51:13 -==> Parameters: 
+2018-07-05 19:51:13 -<==      Total: 1
+2018-07-05 19:51:13 -耗时 : 148
+2018-07-05 19:51:13 -返回值 : com.admin.common.utils.PageUtils@45951270
+2018-07-05 19:51:15 -请求地址 : http://localhost:8088/oa/notify/add
+2018-07-05 19:51:15 -HTTP METHOD : GET
+2018-07-05 19:51:15 -CLASS_METHOD : com.admin.system.controller.NotifyController.add
+2018-07-05 19:51:15 -参数 : []
+2018-07-05 19:51:15 -耗时 : 3
+2018-07-05 19:51:15 -返回值 : oa/notify/add
+2018-07-05 19:51:16 -请求地址 : http://localhost:8088/common/dict/list/oa_notify_type
+2018-07-05 19:51:16 -HTTP METHOD : GET
+2018-07-05 19:51:16 -CLASS_METHOD : com.admin.common.controller.DictController.listByType
+2018-07-05 19:51:16 -参数 : [oa_notify_type]
+2018-07-05 19:51:16 -==>  Preparing: select `id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag` from sys_dict WHERE type = ? order by id desc 
+2018-07-05 19:51:16 -==> Parameters: oa_notify_type(String)
+2018-07-05 19:51:16 -<==      Total: 3
+2018-07-05 19:51:16 -耗时 : 87
+2018-07-05 19:51:16 -返回值 : [DictDO{id=107, name='活动通告', value='3', type='oa_notify_type', description='通知通告类型', sort=30, parentId=0, createBy=1, createDate=null, updateBy=1, updateDate=null, remarks='null', delFlag='0'}, DictDO{id=106, name='奖惩通告', value='2', type='oa_notify_type', description='通知通告类型', sort=20, parentId=0, createBy=1, createDate=null, updateBy=1, updateDate=null, remarks='null', delFlag='0'}, DictDO{id=105, name='会议通告', value='1', type='oa_notify_type', description='通知通告类型', sort=10, parentId=0, createBy=1, createDate=null, updateBy=1, updateDate=null, remarks='null', delFlag='0'}]
+2018-07-05 19:51:25 -请求地址 : http://localhost:8088/sys/user/treeView
+2018-07-05 19:51:25 -HTTP METHOD : GET
+2018-07-05 19:51:25 -CLASS_METHOD : com.admin.system.controller.UserController.treeView
+2018-07-05 19:51:25 -参数 : []
+2018-07-05 19:51:25 -耗时 : 1
+2018-07-05 19:51:25 -返回值 : system/user/userTree
+2018-07-05 19:51:25 -请求地址 : http://localhost:8088/sys/user/tree
+2018-07-05 19:51:25 -HTTP METHOD : GET
+2018-07-05 19:51:25 -CLASS_METHOD : com.admin.system.controller.UserController.tree
+2018-07-05 19:51:25 -参数 : []
+2018-07-05 19:51:25 -==>  Preparing: select `dept_id`,`parent_id`,`name`,`order_num`,`del_flag` from sys_dept order by dept_id desc 
+2018-07-05 19:51:25 -==> Parameters: 
+2018-07-05 19:51:26 -<==      Total: 10
+2018-07-05 19:51:26 -==>  Preparing: select DISTINCT parent_id from sys_dept 
+2018-07-05 19:51:26 -==> Parameters: 
+2018-07-05 19:51:26 -<==      Total: 5
+2018-07-05 19:51:26 -==>  Preparing: select DISTINCT dept_id from sys_user 
+2018-07-05 19:51:26 -==> Parameters: 
+2018-07-05 19:51:26 -<==      Total: 1
+2018-07-05 19:51:26 -==>  Preparing: select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user order by user_id desc 
+2018-07-05 19:51:26 -==> Parameters: 
+2018-07-05 19:51:26 -<==      Total: 2
+2018-07-05 19:51:26 -耗时 : 529
+2018-07-05 19:51:26 -返回值 : {"checked":true,"children":[{"checked":false,"children":[],"hasChildren":false,"hasParent":false,"id":"13","parentId":"0","state":{"opened":true,"mType":"dept"},"text":"测试部"},{"checked":false,"children":[],"hasChildren":false,"hasParent":false,"id":"11","parentId":"0","state":{"opened":true,"mType":"dept"},"text":"产品部"},{"checked":false,"children":[],"hasChildren":false,"hasParent":false,"id":"9","parentId":"0","state":{"opened":true,"mType":"dept"},"text":"销售部"},{"checked":false,"children":[{"checked":false,"children":[],"hasChildren":false,"hasParent":true,"id":"2","parentId":"6","state":{"opened":true,"mType":"user"},"text":"临时用户"},{"checked":false,"children":[],"hasChildren":false,"hasParent":true,"id":"1","parentId":"6","state":{"opened":true,"mType":"user"},"text":"超级管理员"}],"hasChildren":true,"hasParent":false,"id":"6","parentId":"0","state":{"opened":true,"mType":"dept"},"text":"研发部"}],"hasChildren":true,"hasParent":false,"id":"-1","parentId":"","state":{"opened":true},"text":"顶级节点"}
+2018-07-05 19:51:34 -请求地址 : http://localhost:8088/oa/notify/save
+2018-07-05 19:51:34 -HTTP METHOD : POST
+2018-07-05 19:51:34 -CLASS_METHOD : com.admin.system.controller.NotifyController.save
+2018-07-05 19:51:34 -参数 : [NotifyDO{id=null, type='3', title='test', content='test', files='null', status='1', createBy=null, createDate=null, updateBy='null', updateDate=null, remarks='234', delFlag='null', userIds=[2, 1, 13, 11, 9]}]
+2018-07-05 19:51:34 -==>  Preparing: insert into oa_notify ( `type`, `title`, `content`, `files`, `status`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`, `del_flag` ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-07-05 19:51:34 -==> Parameters: 3(String), test(String), test(String), null, 1(String), 1(Long), null, null, 2018-07-05 19:51:34.268(Timestamp), 234(String), null
+2018-07-05 19:51:34 -<==    Updates: 1
+2018-07-05 19:51:34 -==>  Preparing: insert into oa_notify_record ( `notify_id`, `user_id`, `is_read`, `read_date` ) values ( ?, ?, ?, ? ) , ( ?, ?, ?, ? ) , ( ?, ?, ?, ? ) , ( ?, ?, ?, ? ) , ( ?, ?, ?, ? ) 
+2018-07-05 19:51:34 -==> Parameters: 48(Long), 2(Long), 0(Integer), null, 48(Long), 1(Long), 0(Integer), null, 48(Long), 13(Long), 0(Integer), null, 48(Long), 11(Long), 0(Integer), null, 48(Long), 9(Long), 0(Integer), null
+2018-07-05 19:51:34 -<==    Updates: 5
+2018-07-05 19:51:34 -请求地址 : http://localhost:8088/oa/notify/message
+2018-07-05 19:51:34 -HTTP METHOD : GET
+2018-07-05 19:51:34 -CLASS_METHOD : com.admin.system.controller.NotifyController.message
+2018-07-05 19:51:34 -参数 : []
+2018-07-05 19:51:34 -==>  Preparing: select DISTINCT n.id ,`type`,`title`,`content`,`files`,r.is_read,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag` from oa_notify_record r right JOIN oa_notify n on r.notify_id = n.id WHERE r.is_read = ? and r.user_id = ? order by is_read ASC, update_date DESC limit ?, ? 
+2018-07-05 19:51:34 -==> Parameters: 0(String), 1(Long), 0(Integer), 3(Integer)
+2018-07-05 19:51:34 -<==      Total: 0
+2018-07-05 19:51:34 -==>  Preparing: select count(*) from oa_notify_record r right JOIN oa_notify n on r.notify_id = n.id where r.user_id =? and r.is_read = ? 
+2018-07-05 19:51:34 -==> Parameters: 1(Long), 0(String)
+2018-07-05 19:51:34 -<==      Total: 1
+2018-07-05 19:51:34 -耗时 : 35
+2018-07-05 19:51:34 -返回值 : com.admin.common.utils.PageUtils@6ea07004
+2018-07-05 19:51:34 -耗时 : 604
+2018-07-05 19:51:34 -返回值 : {msg=操作成功, code=0}
+2018-07-05 19:51:34 -请求地址 : http://localhost:8088/oa/notify/list
+2018-07-05 19:51:34 -HTTP METHOD : GET
+2018-07-05 19:51:34 -CLASS_METHOD : com.admin.system.controller.NotifyController.list
+2018-07-05 19:51:34 -参数 : [{limit=10, offset=0}]
+2018-07-05 19:51:34 -==>  Preparing: select `id`,`type`,`title`,`content`,`files`,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag` from oa_notify order by id desc limit ?, ? 
+2018-07-05 19:51:34 -==> Parameters: 0(Integer), 10(Integer)
+2018-07-05 19:51:34 -<==      Total: 1
+2018-07-05 19:51:34 -==>  Preparing: select `id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag` from sys_dict WHERE value = ? and type = ? order by id desc 
+2018-07-05 19:51:34 -==> Parameters: 3(String), oa_notify_type(String)
+2018-07-05 19:51:34 -<==      Total: 1
+2018-07-05 19:51:34 -==>  Preparing: select count(*) from oa_notify 
+2018-07-05 19:51:34 -==> Parameters: 
+2018-07-05 19:51:35 -<==      Total: 1
+2018-07-05 19:51:35 -耗时 : 193
+2018-07-05 19:51:35 -返回值 : com.admin.common.utils.PageUtils@393de76a
+2018-07-05 19:51:50 -请求地址 : http://localhost:8088/common/dict
+2018-07-05 19:51:50 -HTTP METHOD : GET
+2018-07-05 19:51:50 -CLASS_METHOD : com.admin.common.controller.DictController.dict
+2018-07-05 19:51:50 -参数 : []
+2018-07-05 19:51:50 -耗时 : 1
+2018-07-05 19:51:50 -返回值 : common/dict/dict
+2018-07-05 19:51:51 -请求地址 : http://localhost:8088/common/dict/type
+2018-07-05 19:51:51 -HTTP METHOD : GET
+2018-07-05 19:51:51 -CLASS_METHOD : com.admin.common.controller.DictController.listType
+2018-07-05 19:51:51 -参数 : []
+2018-07-05 19:51:51 -==>  Preparing: select distinct `type` , description from sys_dict 
+2018-07-05 19:51:51 -==> Parameters: 
+2018-07-05 19:51:51 -请求地址 : http://localhost:8088/common/dict/list
+2018-07-05 19:51:51 -HTTP METHOD : GET
+2018-07-05 19:51:51 -CLASS_METHOD : com.admin.common.controller.DictController.list
+2018-07-05 19:51:51 -参数 : [{limit=10, offset=0}]
+2018-07-05 19:51:51 -==>  Preparing: select `id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag` from sys_dict order by id desc limit ?, ? 
+2018-07-05 19:51:51 -==> Parameters: 0(Integer), 10(Integer)
+2018-07-05 19:51:51 -<==      Total: 29
+2018-07-05 19:51:51 -耗时 : 66
+2018-07-05 19:51:51 -返回值 : [DictDO{id=null, name='null', value='null', type='del_flag', description='删除标记', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='show_hide', description='显示/隐藏', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='yes_no', description='是/否', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='color', description='颜色值', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='theme', description='主题方案', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='sys_area_type', description='区域类型', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='sys_office_type', description='机构类型', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='sys_office_common', description='快捷通用部门', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='sys_office_grade', description='机构等级', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='sys_data_scope', description='数据范围', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='sys_user_type', description='用户类型', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='cms_theme', description='站点主题', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='cms_module', description='栏目模型', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='cms_show_modes', description='展现方式', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='cms_del_flag', description='内容状态', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='cms_posid', description='推荐位', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='cms_guestbook', description='留言板分类', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='oa_leave_type', description='请假类型', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='sys_log_type', description='日志类型', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='act_type', description='流程类型', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='gen_category', description='代码生成分类', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='gen_query_type', description='查询方式', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='gen_show_type', description='字段生成方案', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='gen_java_type', description='Java类型', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='sex', description='性别', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='oa_notify_type', description='通知通告类型', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='oa_notify_status', description='通知通告状态', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='oa_notify_read', description='通知通告状态', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}, DictDO{id=null, name='null', value='null', type='hobby', description='爱好', sort=null, parentId=null, createBy=null, createDate=null, updateBy=null, updateDate=null, remarks='null', delFlag='null'}]
+2018-07-05 19:51:51 -<==      Total: 10
+2018-07-05 19:51:51 -==>  Preparing: select count(*) from sys_dict 
+2018-07-05 19:51:51 -==> Parameters: 
+2018-07-05 19:51:51 -<==      Total: 1
+2018-07-05 19:51:51 -耗时 : 58
+2018-07-05 19:51:51 -返回值 : com.admin.common.utils.PageUtils@573e6e7
+2018-07-05 19:52:02 -请求地址 : http://localhost:8088/common/sysFile
+2018-07-05 19:52:02 -HTTP METHOD : GET
+2018-07-05 19:52:02 -CLASS_METHOD : com.admin.common.controller.FileController.sysFile
+2018-07-05 19:52:02 -参数 : [{}]
+2018-07-05 19:52:02 -耗时 : 0
+2018-07-05 19:52:02 -返回值 : common/file/file
+2018-07-05 19:52:03 -请求地址 : http://localhost:8088/common/sysFile/list
+2018-07-05 19:52:03 -HTTP METHOD : GET
+2018-07-05 19:52:03 -CLASS_METHOD : com.admin.common.controller.FileController.list
+2018-07-05 19:52:03 -参数 : [{limit=12, offset=0, type=}]
+2018-07-05 19:52:03 -==>  Preparing: select `id`,`type`,`url`,`create_date` from sys_file order by id desc limit ?, ? 
+2018-07-05 19:52:03 -==> Parameters: 0(Integer), 12(Integer)
+2018-07-05 19:52:03 -<==      Total: 0
+2018-07-05 19:52:03 -==>  Preparing: select count(*) from sys_file 
+2018-07-05 19:52:03 -==> Parameters: 
+2018-07-05 19:52:03 -<==      Total: 1
+2018-07-05 19:52:03 -耗时 : 42
+2018-07-05 19:52:03 -返回值 : com.admin.common.utils.PageUtils@1c198614
+2018-07-05 19:52:05 -请求地址 : http://localhost:8088/common/sysFile/list
+2018-07-05 19:52:05 -HTTP METHOD : GET
+2018-07-05 19:52:05 -CLASS_METHOD : com.admin.common.controller.FileController.list
+2018-07-05 19:52:05 -参数 : [{limit=12, offset=0, type=0}]
+2018-07-05 19:52:05 -==>  Preparing: select `id`,`type`,`url`,`create_date` from sys_file WHERE type = ? order by id desc limit ?, ? 
+2018-07-05 19:52:05 -==> Parameters: 0(String), 0(Integer), 12(Integer)
+2018-07-05 19:52:05 -<==      Total: 0
+2018-07-05 19:52:05 -==>  Preparing: select count(*) from sys_file WHERE type = ? 
+2018-07-05 19:52:05 -==> Parameters: 0(String)
+2018-07-05 19:52:05 -<==      Total: 1
+2018-07-05 19:52:05 -耗时 : 38
+2018-07-05 19:52:05 -返回值 : com.admin.common.utils.PageUtils@4ad3500e
+2018-07-05 19:52:12 -请求地址 : http://localhost:8088/common/log
+2018-07-05 19:52:12 -HTTP METHOD : GET
+2018-07-05 19:52:12 -CLASS_METHOD : com.admin.common.controller.LogController.log
+2018-07-05 19:52:12 -参数 : []
+2018-07-05 19:52:12 -耗时 : 0
+2018-07-05 19:52:12 -返回值 : common/log/log
+2018-07-05 19:52:12 -请求地址 : http://localhost:8088/common/log/list
+2018-07-05 19:52:12 -HTTP METHOD : GET
+2018-07-05 19:52:12 -CLASS_METHOD : com.admin.common.controller.LogController.list
+2018-07-05 19:52:12 -参数 : [{limit=10, offset=0, sort=gmt_create, order=desc, operation=, username=}]
+2018-07-05 19:52:12 -==>  Preparing: select count(*) from sys_log 
+2018-07-05 19:52:12 -==> Parameters: 
+2018-07-05 19:52:12 -<==      Total: 1
+2018-07-05 19:52:12 -==>  Preparing: select `id`,`user_id`,`username`,`operation`,`time`,`method`,`params`,`ip`,`gmt_create` from sys_log order by gmt_create desc limit ?, ? 
+2018-07-05 19:52:12 -==> Parameters: 0(Integer), 10(Integer)
+2018-07-05 19:52:12 -<==      Total: 8
+2018-07-05 19:52:12 -耗时 : 41
+2018-07-05 19:52:12 -返回值 : PageDO{offset=0, limit=10, total=8, params={}, param='', rows=[LogDO{id=777, userId=1, username='admin', operation='请求访问主页', time=733, method='com.admin.system.controller.LoginController.index()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 19:50:17 CST 2018}, LogDO{id=776, userId=1, username='admin', operation='登录', time=111, method='com.admin.system.controller.LoginController.ajaxLogin()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 19:50:16 CST 2018}, LogDO{id=774, userId=1, username='admin', operation='登录', time=19, method='com.admin.system.controller.LoginController.ajaxLogin()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:34 CST 2018}, LogDO{id=775, userId=1, username='admin', operation='请求访问主页', time=105, method='com.admin.system.controller.LoginController.index()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:34 CST 2018}, LogDO{id=773, userId=1, username='admin', operation='请求访问主页', time=18978, method='com.admin.system.controller.LoginController.index()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:21 CST 2018}, LogDO{id=771, userId=1, username='admin', operation='登录', time=19, method='com.admin.system.controller.LoginController.ajaxLogin()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:19 CST 2018}, LogDO{id=772, userId=1, username='admin', operation='请求访问主页', time=253, method='com.admin.system.controller.LoginController.index()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:19 CST 2018}, LogDO{id=770, userId=1, username='admin', operation='登录', time=19, method='com.admin.system.controller.LoginController.ajaxLogin()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:02 CST 2018}]}
+2018-07-05 19:52:23 -请求地址 : http://localhost:8088/sys/online
+2018-07-05 19:52:23 -HTTP METHOD : GET
+2018-07-05 19:52:23 -CLASS_METHOD : com.admin.system.controller.SessionController.online
+2018-07-05 19:52:23 -参数 : []
+2018-07-05 19:52:23 -耗时 : 14
+2018-07-05 19:52:23 -返回值 : system/online/online
+2018-07-05 19:52:24 -请求地址 : http://localhost:8088/sys/online/list
+2018-07-05 19:52:24 -HTTP METHOD : GET
+2018-07-05 19:52:24 -CLASS_METHOD : com.admin.system.controller.SessionController.list
+2018-07-05 19:52:24 -参数 : []
+2018-07-05 19:52:24 -耗时 : 1
+2018-07-05 19:52:24 -返回值 : [com.admin.system.domain.UserOnline@79a64555]
+2018-07-05 19:52:31 -请求地址 : http://localhost:8088/sys/user/
+2018-07-05 19:52:31 -HTTP METHOD : GET
+2018-07-05 19:52:31 -CLASS_METHOD : com.admin.system.controller.UserController.user
+2018-07-05 19:52:31 -参数 : [{}]
+2018-07-05 19:52:31 -耗时 : 0
+2018-07-05 19:52:31 -返回值 : system/user/user
+2018-07-05 19:52:32 -请求地址 : http://localhost:8088/system/sysDept/tree
+2018-07-05 19:52:32 -HTTP METHOD : GET
+2018-07-05 19:52:32 -CLASS_METHOD : com.admin.system.controller.DeptController.tree
+2018-07-05 19:52:32 -参数 : []
+2018-07-05 19:52:32 -==>  Preparing: select `dept_id`,`parent_id`,`name`,`order_num`,`del_flag` from sys_dept order by dept_id desc 
+2018-07-05 19:52:32 -==> Parameters: 
+2018-07-05 19:52:32 -<==      Total: 10
+2018-07-05 19:52:32 -耗时 : 27
+2018-07-05 19:52:32 -返回值 : {"checked":true,"children":[{"checked":false,"children":[{"checked":false,"children":[],"hasChildren":false,"hasParent":true,"id":"15","parentId":"13","state":{"opened":true},"text":"测试二部"},{"checked":false,"children":[],"hasChildren":false,"hasParent":true,"id":"14","parentId":"13","state":{"opened":true},"text":"测试一部"}],"hasChildren":true,"hasParent":false,"id":"13","parentId":"0","state":{"opened":true},"text":"测试部"},{"checked":false,"children":[{"checked":false,"children":[],"hasChildren":false,"hasParent":true,"id":"12","parentId":"11","state":{"opened":true},"text":"产品一部"}],"hasChildren":true,"hasParent":false,"id":"11","parentId":"0","state":{"opened":true},"text":"产品部"},{"checked":false,"children":[{"checked":false,"children":[],"hasChildren":false,"hasParent":true,"id":"10","parentId":"9","state":{"opened":true},"text":"销售一部"}],"hasChildren":true,"hasParent":false,"id":"9","parentId":"0","state":{"opened":true},"text":"销售部"},{"checked":false,"children":[{"checked":false,"children":[],"hasChildren":false,"hasParent":true,"id":"8","parentId":"6","state":{"opened":true},"text":"研发二部"},{"checked":false,"children":[],"hasChildren":false,"hasParent":true,"id":"7","parentId":"6","state":{"opened":true},"text":"研發一部"}],"hasChildren":true,"hasParent":false,"id":"6","parentId":"0","state":{"opened":true},"text":"研发部"}],"hasChildren":true,"hasParent":false,"id":"-1","parentId":"","state":{"opened":true},"text":"顶级节点"}
+2018-07-05 19:52:32 -请求地址 : http://localhost:8088/sys/user/list
+2018-07-05 19:52:32 -HTTP METHOD : GET
+2018-07-05 19:52:32 -CLASS_METHOD : com.admin.system.controller.UserController.list
+2018-07-05 19:52:32 -参数 : [{limit=10, offset=0, name=, deptId=}]
+2018-07-05 19:52:32 -==>  Preparing: select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user order by user_id desc limit ?, ? 
+2018-07-05 19:52:32 -==> Parameters: 0(Integer), 10(Integer)
+2018-07-05 19:52:32 -<==      Total: 2
+2018-07-05 19:52:32 -==>  Preparing: select count(*) from sys_user 
+2018-07-05 19:52:32 -==> Parameters: 
+2018-07-05 19:52:32 -<==      Total: 1
+2018-07-05 19:52:32 -耗时 : 96
+2018-07-05 19:52:32 -返回值 : com.admin.common.utils.PageUtils@47fdd847
+2018-07-05 19:52:45 -请求地址 : http://localhost:8088/sys/user/list
+2018-07-05 19:52:45 -HTTP METHOD : GET
+2018-07-05 19:52:45 -CLASS_METHOD : com.admin.system.controller.UserController.list
+2018-07-05 19:52:45 -参数 : [{limit=10, offset=0, name=, deptId=13}]
+2018-07-05 19:52:45 -==>  Preparing: select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user WHERE dept_id = ? order by user_id desc limit ?, ? 
+2018-07-05 19:52:45 -==> Parameters: 13(String), 0(Integer), 10(Integer)
+2018-07-05 19:52:45 -<==      Total: 0
+2018-07-05 19:52:45 -==>  Preparing: select count(*) from sys_user WHERE dept_id = ? 
+2018-07-05 19:52:45 -==> Parameters: 13(String)
+2018-07-05 19:52:45 -<==      Total: 1
+2018-07-05 19:52:45 -耗时 : 104
+2018-07-05 19:52:45 -返回值 : com.admin.common.utils.PageUtils@397ed309
+2018-07-05 19:52:46 -请求地址 : http://localhost:8088/sys/user/list
+2018-07-05 19:52:46 -HTTP METHOD : GET
+2018-07-05 19:52:46 -CLASS_METHOD : com.admin.system.controller.UserController.list
+2018-07-05 19:52:46 -参数 : [{limit=10, offset=0, name=, deptId=}]
+2018-07-05 19:52:46 -==>  Preparing: select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user order by user_id desc limit ?, ? 
+2018-07-05 19:52:46 -==> Parameters: 0(Integer), 10(Integer)
+2018-07-05 19:52:46 -<==      Total: 2
+2018-07-05 19:52:46 -==>  Preparing: select count(*) from sys_user 
+2018-07-05 19:52:46 -==> Parameters: 
+2018-07-05 19:52:46 -<==      Total: 1
+2018-07-05 19:52:46 -耗时 : 87
+2018-07-05 19:52:46 -返回值 : com.admin.common.utils.PageUtils@6c769bee
+2018-07-05 19:52:51 -请求地址 : http://localhost:8088/sys/user/edit/2
+2018-07-05 19:52:51 -HTTP METHOD : GET
+2018-07-05 19:52:51 -CLASS_METHOD : com.admin.system.controller.UserController.edit
+2018-07-05 19:52:51 -参数 : [{}, 2]
+2018-07-05 19:52:51 -==>  Preparing: select role_id from sys_user_role where user_id=? 
+2018-07-05 19:52:51 -==> Parameters: 2(Long)
+2018-07-05 19:52:51 -<==      Total: 1
+2018-07-05 19:52:51 -==>  Preparing: select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user where user_id = ? 
+2018-07-05 19:52:51 -==> Parameters: 2(Long)
+2018-07-05 19:52:51 -<==      Total: 1
+2018-07-05 19:52:51 -==>  Preparing: select `dept_id`,`parent_id`,`name`,`order_num`,`del_flag` from sys_dept where dept_id = ? 
+2018-07-05 19:52:51 -==> Parameters: 6(Long)
+2018-07-05 19:52:51 -<==      Total: 1
+2018-07-05 19:52:51 -==>  Preparing: select role_id from sys_user_role where user_id=? 
+2018-07-05 19:52:51 -==> Parameters: 2(Long)
+2018-07-05 19:52:51 -<==      Total: 1
+2018-07-05 19:52:51 -==>  Preparing: select `role_id`,`role_name`,`role_sign`,`remark`,`user_id_create`,`gmt_create`,`gmt_modified` from sys_role order by role_id desc 
+2018-07-05 19:52:51 -==> Parameters: 
+2018-07-05 19:52:51 -<==      Total: 2
+2018-07-05 19:52:51 -耗时 : 117
+2018-07-05 19:52:51 -返回值 : system/user/edit
+2018-07-05 19:52:51 -==>  Preparing: insert into sys_log ( `user_id`, `username`, `operation`, `time`, `method`, `params`, `ip`, `gmt_create` ) values ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+2018-07-05 19:52:51 -==> Parameters: 1(Long), admin(String), 编辑用户(String), 117(Integer), com.admin.system.controller.UserController.edit()(String), null, 127.0.0.1(String), 2018-07-05 19:52:51.6(Timestamp)
+2018-07-05 19:52:51 -<==    Updates: 1
+2018-07-05 19:52:56 -请求地址 : http://localhost:8088/sys/user/list
+2018-07-05 19:52:56 -HTTP METHOD : GET
+2018-07-05 19:52:56 -CLASS_METHOD : com.admin.system.controller.UserController.list
+2018-07-05 19:52:56 -参数 : [{limit=10, offset=0, name=, deptId=6}]
+2018-07-05 19:52:56 -==>  Preparing: select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user WHERE dept_id = ? order by user_id desc limit ?, ? 
+2018-07-05 19:52:56 -==> Parameters: 6(String), 0(Integer), 10(Integer)
+2018-07-05 19:52:56 -<==      Total: 2
+2018-07-05 19:52:56 -==>  Preparing: select count(*) from sys_user WHERE dept_id = ? 
+2018-07-05 19:52:56 -==> Parameters: 6(String)
+2018-07-05 19:52:56 -<==      Total: 1
+2018-07-05 19:52:56 -耗时 : 96
+2018-07-05 19:52:56 -返回值 : com.admin.common.utils.PageUtils@7e53313
+2018-07-05 20:00:08 -请求地址 : http://localhost:8088/common/log
+2018-07-05 20:00:08 -HTTP METHOD : GET
+2018-07-05 20:00:08 -CLASS_METHOD : com.admin.common.controller.LogController.log
+2018-07-05 20:00:08 -参数 : []
+2018-07-05 20:00:08 -耗时 : 1
+2018-07-05 20:00:08 -返回值 : common/log/log
+2018-07-05 20:00:09 -请求地址 : http://localhost:8088/common/log/list
+2018-07-05 20:00:09 -HTTP METHOD : GET
+2018-07-05 20:00:09 -CLASS_METHOD : com.admin.common.controller.LogController.list
+2018-07-05 20:00:09 -参数 : [{limit=10, offset=0, sort=gmt_create, order=desc, operation=, username=}]
+2018-07-05 20:00:09 -==>  Preparing: select count(*) from sys_log 
+2018-07-05 20:00:09 -==> Parameters: 
+2018-07-05 20:00:09 -<==      Total: 1
+2018-07-05 20:00:09 -==>  Preparing: select `id`,`user_id`,`username`,`operation`,`time`,`method`,`params`,`ip`,`gmt_create` from sys_log order by gmt_create desc limit ?, ? 
+2018-07-05 20:00:09 -==> Parameters: 0(Integer), 10(Integer)
+2018-07-05 20:00:09 -<==      Total: 9
+2018-07-05 20:00:09 -耗时 : 40
+2018-07-05 20:00:09 -返回值 : PageDO{offset=0, limit=10, total=9, params={}, param='', rows=[LogDO{id=778, userId=1, username='admin', operation='编辑用户', time=117, method='com.admin.system.controller.UserController.edit()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 19:52:52 CST 2018}, LogDO{id=777, userId=1, username='admin', operation='请求访问主页', time=733, method='com.admin.system.controller.LoginController.index()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 19:50:17 CST 2018}, LogDO{id=776, userId=1, username='admin', operation='登录', time=111, method='com.admin.system.controller.LoginController.ajaxLogin()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 19:50:16 CST 2018}, LogDO{id=774, userId=1, username='admin', operation='登录', time=19, method='com.admin.system.controller.LoginController.ajaxLogin()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:34 CST 2018}, LogDO{id=775, userId=1, username='admin', operation='请求访问主页', time=105, method='com.admin.system.controller.LoginController.index()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:34 CST 2018}, LogDO{id=773, userId=1, username='admin', operation='请求访问主页', time=18978, method='com.admin.system.controller.LoginController.index()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:21 CST 2018}, LogDO{id=771, userId=1, username='admin', operation='登录', time=19, method='com.admin.system.controller.LoginController.ajaxLogin()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:19 CST 2018}, LogDO{id=772, userId=1, username='admin', operation='请求访问主页', time=253, method='com.admin.system.controller.LoginController.index()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:19 CST 2018}, LogDO{id=770, userId=1, username='admin', operation='登录', time=19, method='com.admin.system.controller.LoginController.ajaxLogin()', params='null', ip='127.0.0.1', gmtCreate=Thu Jul 05 18:07:02 CST 2018}]}
+2018-07-05 20:00:11 -请求地址 : http://localhost:8088/sys/online
+2018-07-05 20:00:11 -HTTP METHOD : GET
+2018-07-05 20:00:11 -CLASS_METHOD : com.admin.system.controller.SessionController.online
+2018-07-05 20:00:11 -参数 : []
+2018-07-05 20:00:11 -耗时 : 2
+2018-07-05 20:00:11 -返回值 : system/online/online
+2018-07-05 20:00:11 -请求地址 : http://localhost:8088/sys/online/list
+2018-07-05 20:00:11 -HTTP METHOD : GET
+2018-07-05 20:00:11 -CLASS_METHOD : com.admin.system.controller.SessionController.list
+2018-07-05 20:00:11 -参数 : []
+2018-07-05 20:00:11 -耗时 : 0
+2018-07-05 20:00:11 -返回值 : [com.admin.system.domain.UserOnline@6fbea1b9]
+2018-07-05 20:18:21 -WebSocketSession[1 current WS(1)-HttpStream(0)-HttpPoll(0), 1 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(1)-CONNECTED(1)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 9], outboundChannelpool size = 0, active threads = 0, queued tasks = 0, completed tasks = 2], sockJsScheduler[pool size = 4, active threads = 1, queued tasks = 2, completed tasks = 405]
