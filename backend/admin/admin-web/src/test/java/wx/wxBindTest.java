@@ -11,8 +11,8 @@ import com.admin.wxapi.controller.WxApiController;
 public class wxBindTest {
 	@Test
 	public void wxtest() {
-		WxApiController wac = new WxApiController();
-		wac.goReadCardAnniu2();
+		/*WxApiController wac = new WxApiController();
+		wac.goReadCardAnniu2();*/
 		String token = "11_E8M2F2f0_SYcRnPuvCFTEB3Hm7KnDm_Ye5aOHq2jdHa8GtDVg628DenMCyOIBM-5W2LAxWQzXy4ilnuM6kUVu44OU8nRMQAcrmdzsI9RNqIBAS-iQjawv292EFdUcdJ-MLvJ0wrL4CFD2BKsGORiAHAVDG";
 		// String appId = "wx3d7f7c26f2369785";// 应用id
 		// String appsecret = "c34fde54dfac1f9c2870ee8edf467ebf";// 应用秘钥

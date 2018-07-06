@@ -39,12 +39,11 @@ public class WxApiServiceImpl implements IWxApiService{
 							+ "&secret=" + appsecret + "");
 			// 2,获取调用微信jsapi的凭证
 			String ticket = this.getJsapiTicket(tokenObject.getString("access_token"));
-			JSONObject map = this.sign(ticket, "wx/ble/bindPage");
-			System.out.println(map.get("timestamp"));
+			JSONObject map = this.sign(ticket, "bindPage");
 //			request.setAttribute("timestamp", map.get("timestamp"));
 //			request.setAttribute("nonceStr", map.get("nonceStr"));
 //			request.setAttribute("signature", map.get("signature"));
-//			request.setAttribute("appId", appId);
+			map.put("appId", appId);
 			return map;
 		} catch (Exception e) {
 			// TODO 打印输出日志

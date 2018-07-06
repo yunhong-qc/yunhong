@@ -15,7 +15,10 @@
 			data:{},
 			success:function(res){
 				if(res.code=='000000'){
-					alert(res.data);
+					jQuery("#appId").text(res.data.appId);
+					jQuery("#timestamp").text(res.data.timestamp);
+					jQuery("#nonceStr").text(res.data.nonceStr);
+					jQuery("#signature").text(res.data.signature);
 				}
 			}
 		});
@@ -120,16 +123,16 @@
 		//获取初始化数据
 		getTicktData();
 		//初始化库   
-		//loadXMLDoc();
+		loadXMLDoc();
 		//初始化库结束  
 		//点击获取设备按钮的函数 开始  
-		/* $("#CallGetWXrefresh").on("click", function(e) {
+		$("#CallGetWXrefresh").on("click", function(e) {
 
 			//1. 打开微信设备   
 			my_openWXDeviceLib();
 			//2. 获取设备信息  
 			my_getWXDeviceInfos();
-		}); */
+		});
 		//点击获取设备按钮的函数 结束   
 
 	});
