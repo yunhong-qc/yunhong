@@ -15,10 +15,12 @@
 			data:{},
 			success:function(res){
 				if(res.code=='000000'){
+					
 					jQuery("#appId").text(res.data.appId);
 					jQuery("#timestamp").text(res.data.timestamp);
 					jQuery("#nonceStr").text(res.data.nonceStr);
 					jQuery("#signature").text(res.data.signature);
+					
 				}
 			}
 		});
@@ -45,7 +47,6 @@
 					'onScanWXDeviceResult', 'onReceiveDataFromWXDevice',
 					'onWXDeviceBluetoothStateChange', ]
 		});
-		alert("初始化库结束");
 	}
 	function my_openWXDeviceLib() {
 		var x = 0;
@@ -262,7 +263,7 @@
 		<!--END dialog2-->
 	</div>
 
-	<div id="myparams" style="display: none">
+	<div id="myparams" style="display: block">
 		<span id="timestamp">11032148231</span> <span id="nonceStr">444</span>
 		<span id="signature">555</span> <span id="appId">wxead55502e6287ecb</span>
 

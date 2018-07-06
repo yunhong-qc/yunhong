@@ -51,7 +51,7 @@ public class WxApiController {
 	@ApiOperation(value = "初始化", notes = "")
 	@GetMapping("/initJsApi")
 	@ResponseBody
-	public BaseResultModel goReadCardAnniu2() {
+	public BaseResultModel goReadCardAnniu2(HttpServletRequest request) {
 		BaseResultModel bm=new BaseResultModel("100001","获取异常");
 		try {
 			JSONObject result= wxApiService.goReadCardAnniu2();
