@@ -1,7 +1,7 @@
-171.221.221.50:8870
-PC,1878000
+211.149.210.122:33790
+administrator， qckj,./0709
 
-域名：study.cdqckj.com
+域名：app.cdqckj.com
 
 端口范围：8870-8880
 
