@@ -55,7 +55,7 @@ public class PayRecordController {
 	@GetMapping("/add")
 	@RequiresPermissions("wx:payRecord:add")
 	String add(){
-	    return "/wx/payRecord/add";
+	    return "wx/payRecord/add";
 	}
 
 	@GetMapping("/edit/{payId}")
@@ -63,7 +63,7 @@ public class PayRecordController {
 	String edit(@PathVariable("payId") Long payId,Model model){
 		PayRecordDO payRecord = payRecordService.get(payId);
 		model.addAttribute("payRecord", payRecord);
-	    return "/wx/payRecord/edit";
+	    return "wx/payRecord/edit";
 	}
 	
 	/**
