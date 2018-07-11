@@ -7,6 +7,54 @@
             <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
+    <!-- 错误日志 -->
+    <appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss}-5level -%msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>/home/yunhong/log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}-error.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!-- 普通日志 -->
+    <appender name="infoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss}-5level -%msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>/home/yunhong/log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}-info.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!-- debug日志 -->
+    <appender name="debugLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss}-5level -%msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>/home/yunhong/log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}-debug.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
 
     <!--按天生成日志-->
     <appender name="logFile"  class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -25,12 +73,16 @@
 
     <logger name="com.admin" additivity="false">
         <appender-ref ref="console"/>
-        <appender-ref ref="logFile" />
+        <appender-ref ref="errorLog" />
+        <appender-ref ref="debugLog" />
+        <appender-ref ref="infoLog" />
     </logger>
 
     <root level="error">
         <appender-ref ref="console"/>
-        <appender-ref ref="logFile" />
+        <appender-ref ref="errorLog" />
+        <appender-ref ref="debugLog" />
+        <appender-ref ref="infoLog" />
     </root>
 
 </configuration>
