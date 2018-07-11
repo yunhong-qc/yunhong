@@ -1,29 +1,23 @@
 package com.admin.wxapi.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Formatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+
+import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.activiti.engine.impl.util.json.XML;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.admin.system.service.DeptService;
+import com.admin.common.aspect.WebLogAspect;
 import com.admin.utils.BaseResultModel;
-import com.admin.utils.HttpUtils;
+import com.admin.utils.WxUtils;
 import com.admin.wxapi.service.IWxApiService;
 import com.alibaba.fastjson.JSONObject;
 
@@ -36,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/wx/ble")
 public class WxApiController {
 
-
+	private static final Logger logger = LoggerFactory.getLogger(WxApiController.class);
 	@Autowired
 	private IWxApiService wxApiService;
 	
@@ -47,7 +41,7 @@ public class WxApiController {
 
 		return prefix + "/bind";
 	}
-
+	
 	@ApiOperation(value = "初始化", notes = "")
 	@GetMapping("/initJsApi")
 	@ResponseBody
@@ -64,6 +58,45 @@ public class WxApiController {
 		}
 
 		return bm;
+	}
+	@ApiOperation(value = "微信对接服务器验证", notes = "")
+	@GetMapping("/wxServiceGet")
+	@ResponseBody
+	public String wxServiceGet(HttpServletRequest request) {
+		try {
+			String msgSignature = request.getParameter("signature");
+	        String msgTimestamp = request.getParameter("timestamp");
+	        String msgNonce = request.getParameter("nonce");
+	        String echostr = request.getParameter("echostr");
+	     // 这里的 WXPublicConstants.TOKEN 填写你自己设置的Token就可以了
+	        if (WxUtils.verifyUrl(msgSignature, msgTimestamp, msgNonce)) {
+	            return echostr;
+	        }
+		} catch (Exception e) {
+			// TODO 打印输出日志
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@ApiOperation(value = "接受微信发送的消息", notes = "")
+	@RequestMapping("/wxService")
+	@ResponseBody
+	public String wxServicePost(HttpServletRequest request) {
+		try {
+			InputStream is=request.getInputStream();
+			if(is==null) {
+				logger.error("未获取到任何xml信息");
+			}
+			String xml=IOUtils.toString(is);
+			org.json.JSONObject j= org.json.XML.toJSONObject(xml);
+			
+			logger.debug("接收到微信消息。"+xml);
+	        
+		} catch (Exception e) {
+			// TODO 打印输出日志
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 

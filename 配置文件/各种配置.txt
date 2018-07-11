@@ -5,13 +5,14 @@ administrator， qckj,./0709
 
 端口范围：8870-8880
 
-mysql：8871
+mysql：3307
 tomcat：8872
 svn:8873
 spring-boot:8874
 
 数据库：171.221.221.50:8871,root,qaz123
-
+token: qinchuan
+key: MQaCz7zLq212FwHJjGXlJ5WApZQ4yhc5DdYp5D88sov
 
 
 公众号：421709591@qq.com 421709591@qq.com
