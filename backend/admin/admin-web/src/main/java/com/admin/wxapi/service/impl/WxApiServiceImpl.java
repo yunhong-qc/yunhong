@@ -3,15 +3,18 @@ package com.admin.wxapi.service.impl;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.Formatter;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.admin.utils.FileLog;
 import com.admin.utils.HttpUtils;
+import com.admin.utils.wx.WxUtils;
+import com.admin.wxapi.dao.QcWxTokenDao;
+import com.admin.wxapi.domain.QcWxTokenDO;
 import com.admin.wxapi.service.IWxApiService;
 import com.alibaba.fastjson.JSONObject;
 
@@ -24,24 +27,48 @@ import com.alibaba.fastjson.JSONObject;
 @Service("wxApiService")
 public class WxApiServiceImpl implements IWxApiService{
 
+	@Autowired
+	public QcWxTokenDao qcWxTokenDao;
+	
 	@Override
 	public JSONObject goReadCardAnniu2(String url) {
 
 		try {
-			String appId = "wx3d7f7c26f2369785";// 应用id
-			String appsecret = "c34fde54dfac1f9c2870ee8edf467ebf";// 应用秘钥
-			// 1,获取access_token
-			JSONObject params = new JSONObject();
-			params.put("appid", appId);
-			params.put("secret", appsecret);
-
-			JSONObject tokenObject = HttpUtils
-					.getReObject("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appId
-							+ "&secret=" + appsecret + "");
-			// 2,获取调用微信jsapi的凭证
-			String ticket = this.getJsapiTicket(tokenObject.getString("access_token"));
-			JSONObject map = this.sign(ticket, url);
-			map.put("appId", appId);
+			url=java.net.URLDecoder.decode(url,"UTF-8");
+			//从数据库获取token数据
+			QcWxTokenDO tokenDo= qcWxTokenDao.getByAppId(WxUtils.appId);
+			/**
+			 * 开始验证token是否超时
+			 */
+			if(!WxUtils.validTokenOut(tokenDo)) {
+				System.out.println("token超时..");
+				//表示超时,需要重新获取token和ticket
+				//1.重新获取token
+				JSONObject tokenObject = WxUtils.geWxtAccessToken();
+				//2.重新获取ticket
+				String ticket = this.getJsapiTicket(tokenObject.getString("access_token"));
+				if(tokenDo!=null) {
+					//更新
+					tokenDo.setAcessToken(tokenObject.getString("access_token"));
+					tokenDo.setTicket(ticket);
+					tokenDo.setCreateTime(new Date());
+					qcWxTokenDao.update(tokenDo);
+				}else {
+					//新增
+					tokenDo=new QcWxTokenDO();
+					tokenDo.setAcessToken(tokenObject.getString("access_token"));
+					tokenDo.setOutTime(WxUtils.token_out_time);
+					tokenDo.setAppid(WxUtils.appId);
+					tokenDo.setCreateTime(new Date());
+					tokenDo.setTicket(ticket);
+					qcWxTokenDao.save(tokenDo);
+				}
+			}
+			System.out.println("token:"+tokenDo.getAcessToken());
+			System.out.println("ticket:"+tokenDo.getTicket());
+			//获取调用微信jsapi的凭证
+			JSONObject map = this.sign(tokenDo.getTicket(), url);
+			map.put("appId", WxUtils.appId);
 			return map;
 		} catch (Exception e) {
 			// TODO 打印输出日志
@@ -50,24 +77,13 @@ public class WxApiServiceImpl implements IWxApiService{
 		}
 		return null;
 	}
-	
-	private JSONObject geWxtAccessToken(String appId,String appsecret) {
-		try {
-			return HttpUtils
-			.getReObject("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appId
-					+ "&secret=" + appsecret + "");
-		} catch (Exception e) {
-			// TODO 打印输出日志
-			e.printStackTrace();
-		}
-		return new JSONObject();
-	}
 
 	public String getJsapiTicket(String access_token) throws Exception {
 		String getticket_url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=";// 接口凭据
 
 		String jsonData = HttpUtils.getReString(getticket_url + access_token + "&type=jsapi");
 		JSONObject jsonObj = JSONObject.parseObject(jsonData);
+		System.out.println("ticket:"+jsonObj.toString());
 		String errcode = jsonObj.getString("errcode");
 		String ticket = null;
 		if (errcode.equals("0")) {

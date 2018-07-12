@@ -1,7 +1,11 @@
 package com.admin.wxapi.controller;
 
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,11 +15,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.admin.common.utils.DateUtils;
 import com.admin.utils.BaseResultModel;
-import com.admin.utils.WxUtils;
+import com.admin.utils.wx.StrXmlToMap;
+import com.admin.utils.wx.WXBizMsgCrypt;
+import com.admin.utils.wx.WxUtils;
+import com.admin.utils.wx.XMLParse;
 import com.admin.wxapi.service.IWxApiService;
 import com.alibaba.fastjson.JSONObject;
 
@@ -35,7 +44,7 @@ public class WxApiController {
 	private String prefix = "wx";
 
 	@GetMapping("/bindPage")
-	String add() {
+	String bindPage() {
 
 		return prefix + "/bind";
 	}
@@ -43,11 +52,10 @@ public class WxApiController {
 	@ApiOperation(value = "初始化", notes = "")
 	@GetMapping("/initJsApi")
 	@ResponseBody
-	public BaseResultModel goReadCardAnniu2(HttpServletRequest request) {
+	public BaseResultModel initJsApi(HttpServletRequest request) {
 		BaseResultModel bm=new BaseResultModel("100001","获取异常");
 		try {
 			String url=request.getParameter("url");
-			System.out.println("url:"+url);
 			JSONObject result= wxApiService.goReadCardAnniu2(url);
 			bm.setCode("000000");
 			bm.setMsg("获取成功");
@@ -60,7 +68,7 @@ public class WxApiController {
 		return bm;
 	}
 	@ApiOperation(value = "微信对接服务器验证", notes = "")
-	@GetMapping("/wxServiceGet")
+	@GetMapping("/wxService")
 	@ResponseBody
 	public String wxServiceGet(HttpServletRequest request) {
 		try {
@@ -79,19 +87,26 @@ public class WxApiController {
 		return null;
 	}
 	@ApiOperation(value = "接受微信发送的消息", notes = "")
-	@RequestMapping("/wxService")
+	@PostMapping("/wxService")
 	@ResponseBody
 	public String wxServicePost(HttpServletRequest request) {
 		try {
-			InputStream is=request.getInputStream();
-			if(is==null) {
-				logger.error("未获取到任何xml信息");
-			}
-			String xml=IOUtils.toString(is);
-			org.json.JSONObject j= org.json.XML.toJSONObject(xml);
-			
-			logger.debug("接收到微信消息。"+xml);
-	        return "好的";
+			WXBizMsgCrypt wx=WXBizMsgCrypt.getWxCrypt();
+			// 从request中取得输入流  
+	        InputStream inputStream = request.getInputStream();  
+	        //转为String
+	        String xml=StrXmlToMap.ISXmlToString(inputStream);
+	        //解密
+	        String res=wx.decryptMsg(xml);
+	        //转为map
+	        Map<String,String> map=StrXmlToMap.strXmltoMap(res);
+	        String fromUserName = map.get("FromUserName");//公众号
+	        String toUserName = map.get("ToUserName");//粉丝号
+	        String msgType = map.get("MsgType");//发送的消息类型[比如 文字,图片,语音。。。]
+	        String content = map.get("Content");//发送的消息内容
+	        System.out.println("类型："+msgType+"消息："+content);
+	        return StrXmlToMap.initText(toUserName, fromUserName, "已收到你的消息，马上前往支援。"); 
+//			return wx.encryptMsg("已收到你的消息，马上前往支援。", DateUtils.format(new Date(), DateUtils.DATE_TIME_STAMP), WxUtils.getRandomStr());
 		} catch (Exception e) {
 			// TODO 打印输出日志
 			e.printStackTrace();

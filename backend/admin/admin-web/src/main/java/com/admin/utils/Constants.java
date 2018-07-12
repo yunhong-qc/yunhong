@@ -6,7 +6,7 @@ package com.admin.utils;
 项目：admin-web
 */
 public class Constants {
-	public static final String WXTOKEN="qinchuan";
+	
 
 }
 

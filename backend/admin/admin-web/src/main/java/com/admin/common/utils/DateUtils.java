@@ -1,5 +1,6 @@
 package com.admin.common.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,6 +12,10 @@ public class DateUtils {
      * 时间格式(yyyy-MM-dd)
      */
     public final static String DATE_PATTERN = "yyyy-MM-dd";
+    /**
+     * 时间戳格式
+     */
+    public final static String DATE_TIME_STAMP = "yyyyMMddHHmmss";
     /**
      * 时间格式(yyyy-MM-dd HH:mm:ss)
      */
@@ -26,6 +31,17 @@ public class DateUtils {
             return df.format(date);
         }
         return null;
+    }
+    
+    public static Date stringToDate(String sdate) {
+    	SimpleDateFormat df = new SimpleDateFormat(DATE_TIME_PATTERN);
+    	try {
+			return df.parse(sdate);
+		} catch (ParseException e) {
+			// TODO 打印输出日志
+			e.printStackTrace();
+		}
+    	return null;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.admin.utils;
+package com.admin.utils.wx;
 /**
 作者：fengchase
 时间：2018年7月11日
