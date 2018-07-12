@@ -9,10 +9,11 @@
 	//初始化 微信硬件jsapi库 V型知识库 www.vxzsk.com  
 	
 	function getTicktData(){
+		var url=location.href.split('#')[0];
 		jQuery.ajax({
 			url:'initJsApi',
 			async:false,
-			data:{},
+			data:{'url':url},
 			success:function(res){
 				if(res.code=='000000'){
 					
@@ -31,6 +32,7 @@
 		var timestamp = jQuery("#timestamp").text();
 		var nonceStr = jQuery("#nonceStr").text();
 		var signature = jQuery("#signature").text();
+		alert(appId+"--"+timestamp+"---"+nonceStr+"--"+signature);
 		wx.config({
 			beta : true,
 			debug : true,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
@@ -123,6 +125,7 @@
 	jQuery(document).ready(function() {
 		//获取初始化数据
 		getTicktData();
+		alert(location.href.split('#')[0]);
 		//初始化库   
 		loadXMLDoc();
 		//初始化库结束  

@@ -5,7 +5,6 @@ import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.activiti.engine.impl.util.json.XML;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.admin.common.aspect.WebLogAspect;
 import com.admin.utils.BaseResultModel;
 import com.admin.utils.WxUtils;
 import com.admin.wxapi.service.IWxApiService;
@@ -48,7 +46,9 @@ public class WxApiController {
 	public BaseResultModel goReadCardAnniu2(HttpServletRequest request) {
 		BaseResultModel bm=new BaseResultModel("100001","获取异常");
 		try {
-			JSONObject result= wxApiService.goReadCardAnniu2();
+			String url=request.getParameter("url");
+			System.out.println("url:"+url);
+			JSONObject result= wxApiService.goReadCardAnniu2(url);
 			bm.setCode("000000");
 			bm.setMsg("获取成功");
 			bm.setData(result);
@@ -91,7 +91,7 @@ public class WxApiController {
 			org.json.JSONObject j= org.json.XML.toJSONObject(xml);
 			
 			logger.debug("接收到微信消息。"+xml);
-	        
+	        return "好的";
 		} catch (Exception e) {
 			// TODO 打印输出日志
 			e.printStackTrace();

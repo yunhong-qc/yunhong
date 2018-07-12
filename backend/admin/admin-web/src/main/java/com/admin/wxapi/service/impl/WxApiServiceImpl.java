@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.admin.utils.FileLog;
 import com.admin.utils.HttpUtils;
 import com.admin.wxapi.service.IWxApiService;
 import com.alibaba.fastjson.JSONObject;
@@ -24,7 +25,7 @@ import com.alibaba.fastjson.JSONObject;
 public class WxApiServiceImpl implements IWxApiService{
 
 	@Override
-	public JSONObject goReadCardAnniu2() {
+	public JSONObject goReadCardAnniu2(String url) {
 
 		try {
 			String appId = "wx3d7f7c26f2369785";// 应用id
@@ -39,10 +40,7 @@ public class WxApiServiceImpl implements IWxApiService{
 							+ "&secret=" + appsecret + "");
 			// 2,获取调用微信jsapi的凭证
 			String ticket = this.getJsapiTicket(tokenObject.getString("access_token"));
-			JSONObject map = this.sign(ticket, "http://app.cdqckj.com/wx/ble/bindPage");
-//			request.setAttribute("timestamp", map.get("timestamp"));
-//			request.setAttribute("nonceStr", map.get("nonceStr"));
-//			request.setAttribute("signature", map.get("signature"));
+			JSONObject map = this.sign(ticket, url);
 			map.put("appId", appId);
 			return map;
 		} catch (Exception e) {
@@ -108,7 +106,9 @@ public class WxApiServiceImpl implements IWxApiService{
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-
+		FileLog.debugLog("jsapi_ticket:"+jsapi_ticket);
+		FileLog.debugLog("nonce_str:"+nonce_str);
+		FileLog.debugLog("timestamp:"+timestamp);
 		ret.put("url", url);
 		ret.put("jsapi_ticket", jsapi_ticket);
 		ret.put("nonceStr", nonce_str);

@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 */
 public interface IWxApiService {
 
-	public JSONObject goReadCardAnniu2();
+	public JSONObject goReadCardAnniu2(String url);
 
 
 }
