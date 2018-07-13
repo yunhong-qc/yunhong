@@ -40,11 +40,11 @@ public class FileLog {
 	 * 
 	 */
 	static void loadLogger() {
-		debugLogger = LoggerFactory.getLogger("debug");
-		infoLogger = LoggerFactory.getLogger("");// info级已配置为log4j.rootLogger
-		errorLogger = LoggerFactory.getLogger("error");
+		debugLogger = LoggerFactory.getLogger("debugLog");
+		infoLogger = LoggerFactory.getLogger("infoLog");// info级已配置为log4j.rootLogger
+		errorLogger = LoggerFactory.getLogger("errorLog");
 	}
-
+	
 	/**
 	 * 记录操作过程中的错误信息记录，对应log4j中的error级别的log
 	 * 

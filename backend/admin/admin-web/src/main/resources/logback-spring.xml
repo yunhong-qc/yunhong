@@ -14,13 +14,14 @@
         </filter>
         <encoder>
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss}-5level -%msg%n
+               %d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
             </pattern>
         </encoder>
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
             <fileNamePattern>/home/yunhong/log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}-error.log</fileNamePattern>
+             <maxHistory>7</maxHistory>
         </rollingPolicy>
     </appender>
     <!-- 普通日志 -->
@@ -30,13 +31,14 @@
         </filter>
         <encoder>
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss}-5level -%msg%n
+               %d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
             </pattern>
         </encoder>
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
             <fileNamePattern>/home/yunhong/log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}-info.log</fileNamePattern>
+             <maxHistory>7</maxHistory>
         </rollingPolicy>
     </appender>
     <!-- debug日志 -->
@@ -46,43 +48,30 @@
         </filter>
         <encoder>
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss}-5level -%msg%n
+                %d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
             </pattern>
         </encoder>
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
             <fileNamePattern>/home/yunhong/log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}-debug.log</fileNamePattern>
+             <maxHistory>7</maxHistory>
         </rollingPolicy>
     </appender>
 
-    <!--按天生成日志-->
-    <appender name="logFile"  class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <Prudent>true</Prudent>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>
-                /home/yunhong/log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}.log
-            </FileNamePattern>
-        </rollingPolicy>
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} -%msg%n
-            </Pattern>
-        </layout>
-    </appender>
-
-    <logger name="com.admin" additivity="false">
+<!-- 
+    <logger name="com.admin" level="info" additivity="false">
         <appender-ref ref="console"/>
-        <appender-ref ref="errorLog" />
-        <appender-ref ref="debugLog" />
         <appender-ref ref="infoLog" />
-    </logger>
+        <appender-ref ref="debugLog" />
+        <appender-ref ref="errorLog" />
+    </logger>  -->
 
-    <root level="error">
-        <appender-ref ref="console"/>
-        <appender-ref ref="errorLog" />
-        <appender-ref ref="debugLog" />
+    <root level="info">
         <appender-ref ref="infoLog" />
+        <appender-ref ref="debugLog" />
+        <appender-ref ref="errorLog" />
+        <appender-ref ref="console"/>
     </root>
 
 </configuration>

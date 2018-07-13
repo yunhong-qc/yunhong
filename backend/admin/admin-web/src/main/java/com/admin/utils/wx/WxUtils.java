@@ -68,7 +68,7 @@ public class WxUtils {
 	 */
 	public static Boolean validTokenOut(QcWxTokenDO tokenDo) {
 		try{
-			if(tokenDo==null) {
+			if(tokenDo==null || tokenDo.getAcessToken()==null) {
 				return false;
 			}
 			//起始时间

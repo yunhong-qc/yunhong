@@ -52,7 +52,7 @@
 	}
 	function my_openWXDeviceLib() {
 		var x = 0;
-		WeixinJSBridge.invoke('openWXDeviceLib', {}, function(res) {
+		WeixinJSBridge.invoke('openWXDeviceLib', {'brandUserName':'gh_05fc6bc0923c'}, function(res) {
 			mlog("打开设备返回：" + res.err_msg);
 			if (res.err_msg == 'openWXDeviceLib:ok') {
 				if (res.bluetoothState == 'off') {
@@ -115,6 +115,14 @@
 		});
 		return;
 	}
+	//测试扫描设备
+	function my_startScanWXDevice() {
+		wx.invoke('startScanWXDevice', {'connType':'blue','btVersion':'ble'}, function(res) {
+			mlog("扫描设备返回：" + JSON.stringify(res));
+			console.log('startScanWXDevice',res);
+		});
+		return;
+	}
 	//打印日志  
 	function mlog(m) {
 		var log = $('#logtext').val();
@@ -136,6 +144,10 @@
 			//2. 获取设备信息  
 			my_getWXDeviceInfos();
 		});
+		$("#ScanWXDevice").on("click", function(e) {
+			my_startScanWXDevice();
+		});
+		
 		//点击获取设备按钮的函数 结束   
 
 	});
@@ -180,6 +192,8 @@
 
 				<button class="weui_btn weui_btn weui_btn_warn"
 					id="CallGetWXrefresh">获取设备</button>
+				<button class="weui_btn weui_btn weui_btn_warn"
+					id="ScanWXDevice">扫描设备</button>
 				<br>
 
 			</div>

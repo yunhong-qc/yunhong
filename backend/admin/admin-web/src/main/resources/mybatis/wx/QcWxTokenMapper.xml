@@ -70,7 +70,7 @@
 			<if test="acessToken != null">`acess_token` = #{acessToken}, </if>
 			<if test="outTime != null">`out_time` = #{outTime}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="appid != null">`appId` = #{appid}</if>
+			<if test="appid != null">`appId` = #{appid},</if>
 			<if test="ticket != null">`ticket` = #{ticket}</if>
 		</set>
 		where id = #{id}

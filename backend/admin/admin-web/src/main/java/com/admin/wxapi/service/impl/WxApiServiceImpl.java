@@ -45,6 +45,7 @@ public class WxApiServiceImpl implements IWxApiService{
 				//表示超时,需要重新获取token和ticket
 				//1.重新获取token
 				JSONObject tokenObject = WxUtils.geWxtAccessToken();
+				System.out.println(tokenObject.toString());
 				//2.重新获取ticket
 				String ticket = this.getJsapiTicket(tokenObject.getString("access_token"));
 				if(tokenDo!=null) {

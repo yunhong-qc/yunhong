@@ -9,7 +9,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.admin.common.utils.DateUtils;
 import com.admin.utils.BaseResultModel;
+import com.admin.utils.FileLog;
 import com.admin.utils.wx.StrXmlToMap;
 import com.admin.utils.wx.WXBizMsgCrypt;
+import com.admin.utils.wx.WxMessageUtil;
 import com.admin.utils.wx.WxUtils;
-import com.admin.utils.wx.XMLParse;
 import com.admin.wxapi.service.IWxApiService;
 import com.alibaba.fastjson.JSONObject;
 
@@ -45,7 +44,10 @@ public class WxApiController {
 
 	@GetMapping("/bindPage")
 	String bindPage() {
-
+		FileLog.debugLog("filelog信息："+13212313);
+		FileLog.errorLog("test1");
+		FileLog.debugLog("test2");
+		FileLog.systemLog("test3");
 		return prefix + "/bind";
 	}
 	
@@ -98,14 +100,7 @@ public class WxApiController {
 	        String xml=StrXmlToMap.ISXmlToString(inputStream);
 	        //解密
 	        String res=wx.decryptMsg(xml);
-	        //转为map
-	        Map<String,String> map=StrXmlToMap.strXmltoMap(res);
-	        String fromUserName = map.get("FromUserName");//公众号
-	        String toUserName = map.get("ToUserName");//粉丝号
-	        String msgType = map.get("MsgType");//发送的消息类型[比如 文字,图片,语音。。。]
-	        String content = map.get("Content");//发送的消息内容
-	        System.out.println("类型："+msgType+"消息："+content);
-	        return StrXmlToMap.initText(toUserName, fromUserName, "已收到你的消息，马上前往支援。"); 
+	        WxMessageUtil.responseMessage(res);
 //			return wx.encryptMsg("已收到你的消息，马上前往支援。", DateUtils.format(new Date(), DateUtils.DATE_TIME_STAMP), WxUtils.getRandomStr());
 		} catch (Exception e) {
 			// TODO 打印输出日志
