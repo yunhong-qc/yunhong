@@ -34,7 +34,6 @@ public class FileLog {
 	public FileLog() {
 		super();
 	}
-	private static final Logger logger = LoggerFactory.getLogger(WxApiController.class);
 	/**
 	 * 装载系统使用的 loger
 	 * 

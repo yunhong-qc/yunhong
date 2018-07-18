@@ -17,10 +17,10 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import com.admin.common.config.ApplicationContextRegister;
-import com.admin.common.utils.ShiroUtils;
 import com.admin.system.dao.UserDao;
 import com.admin.system.domain.UserDO;
 import com.admin.system.service.MenuService;
+import com.admin.utils.ShiroUtils;
 
 public class UserRealm extends AuthorizingRealm {
 /*	@Autowired

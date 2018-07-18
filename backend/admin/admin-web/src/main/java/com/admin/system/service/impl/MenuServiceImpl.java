@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.admin.common.domain.Tree;
-import com.admin.common.utils.BuildTree;
 import com.admin.system.dao.MenuDao;
 import com.admin.system.dao.RoleMenuDao;
 import com.admin.system.domain.MenuDO;
 import com.admin.system.service.MenuService;
+import com.admin.utils.BuildTree;
 
 @Service
 @Transactional(readOnly = true,rollbackFor = Exception.class)

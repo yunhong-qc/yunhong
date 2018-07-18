@@ -2,8 +2,8 @@ package com.admin.common.controller;
 
 import org.springframework.stereotype.Controller;
 
-import com.admin.common.utils.ShiroUtils;
 import com.admin.system.domain.UserDO;
+import com.admin.utils.ShiroUtils;
 
 @Controller
 public class BaseController {

@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.admin.common.config.Constant;
 import com.admin.common.domain.DictDO;
 import com.admin.common.service.DictService;
-import com.admin.common.utils.PageUtils;
-import com.admin.common.utils.Query;
-import com.admin.common.utils.R;
+import com.admin.utils.PageUtils;
+import com.admin.utils.Query;
+import com.admin.utils.R;
 
 /**
  * 字典表

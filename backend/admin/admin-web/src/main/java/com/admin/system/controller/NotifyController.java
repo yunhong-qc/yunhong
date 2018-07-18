@@ -20,13 +20,13 @@ import com.admin.common.config.Constant;
 import com.admin.common.controller.BaseController;
 import com.admin.common.domain.DictDO;
 import com.admin.common.service.DictService;
-import com.admin.common.utils.PageUtils;
-import com.admin.common.utils.Query;
-import com.admin.common.utils.R;
 import com.admin.system.domain.NotifyDO;
 import com.admin.system.domain.NotifyRecordDO;
 import com.admin.system.service.NotifyRecordService;
 import com.admin.system.service.NotifyService;
+import com.admin.utils.PageUtils;
+import com.admin.utils.Query;
+import com.admin.utils.R;
 
 /**
  * 通知通告

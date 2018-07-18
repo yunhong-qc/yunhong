@@ -14,7 +14,7 @@ import com.admin.common.domain.ScheduleJob;
 import com.admin.common.domain.TaskDO;
 import com.admin.common.quartz.utils.QuartzManager;
 import com.admin.common.service.JobService;
-import com.admin.common.utils.ScheduleJobUtils;
+import com.admin.utils.ScheduleJobUtils;
 
 @Service
 public class JobServiceImpl implements JobService {

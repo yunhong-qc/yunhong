@@ -18,11 +18,11 @@ import com.admin.common.controller.BaseController;
 import com.admin.common.domain.FileDO;
 import com.admin.common.domain.Tree;
 import com.admin.common.service.FileService;
-import com.admin.common.utils.MD5Utils;
-import com.admin.common.utils.R;
-import com.admin.common.utils.ShiroUtils;
 import com.admin.system.domain.MenuDO;
 import com.admin.system.service.MenuService;
+import com.admin.utils.MD5Utils;
+import com.admin.utils.R;
+import com.admin.utils.ShiroUtils;
 
 @Controller
 public class LoginController extends BaseController {

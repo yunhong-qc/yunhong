@@ -24,11 +24,6 @@ import com.admin.common.config.AdminConfig;
 import com.admin.common.domain.FileDO;
 import com.admin.common.domain.Tree;
 import com.admin.common.service.FileService;
-import com.admin.common.utils.BuildTree;
-import com.admin.common.utils.FileType;
-import com.admin.common.utils.FileUtil;
-import com.admin.common.utils.ImageUtils;
-import com.admin.common.utils.MD5Utils;
 import com.admin.system.dao.DeptDao;
 import com.admin.system.dao.UserDao;
 import com.admin.system.dao.UserRoleDao;
@@ -37,6 +32,12 @@ import com.admin.system.domain.UserDO;
 import com.admin.system.domain.UserRoleDO;
 import com.admin.system.service.UserService;
 import com.admin.system.vo.UserVO;
+import com.admin.utils.BuildTree;
+import com.admin.utils.FileType;
+import com.admin.utils.FileUtil;
+import com.admin.utils.ImageUtils;
+import com.admin.utils.MD5Utils;
+
 
 //@CacheConfig(cacheNames = "user")
 @Transactional

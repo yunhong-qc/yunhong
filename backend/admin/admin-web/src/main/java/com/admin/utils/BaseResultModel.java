@@ -34,6 +34,47 @@ public class BaseResultModel {
 		this.code=code;
 		this.msg=msg;
 	}
+	public BaseResultModel(String code,String msg,Object data) {
+		this.code=code;
+		this.msg=msg;
+		this.data=data;
+	}
+	/**
+	 * 通用的成功返回
+	 * @return
+	 * 2018年7月17日
+	 * 作者：fengchase
+	 */
+	public static BaseResultModel success() {
+		return new BaseResultModel(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG);
+	}
+	/**
+	 * 通用的成功返回
+	 * @return
+	 * 2018年7月17日
+	 * 作者：fengchase
+	 */
+	public static BaseResultModel success(Object data) {
+		return new BaseResultModel(ResultCode.SUCCESS_CODE,ResultCode.SUCCESS_MSG,data);
+	}
+	/**
+	 * 通用的失败返回
+	 * @return
+	 * 2018年7月17日
+	 * 作者：fengchase
+	 */
+	public static BaseResultModel error() {
+		return new BaseResultModel(ResultCode.ERROR_CODE,ResultCode.ERROR_MSG);
+	}
+	/**
+	 * 定制的失败返回
+	 * @return
+	 * 2018年7月17日
+	 * 作者：fengchase
+	 */
+	public static BaseResultModel Tailor(String code,String msg) {
+		return new BaseResultModel(code,msg);
+	}
 
 }
 

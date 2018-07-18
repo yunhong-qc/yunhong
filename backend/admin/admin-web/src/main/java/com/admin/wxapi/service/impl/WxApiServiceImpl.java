@@ -69,7 +69,7 @@ public class WxApiServiceImpl implements IWxApiService{
 			System.out.println("ticket:"+tokenDo.getTicket());
 			//获取调用微信jsapi的凭证
 			JSONObject map = this.sign(tokenDo.getTicket(), url);
-			map.put("appId", WxUtils.appId);
+			map.put("appid", WxUtils.appId);
 			return map;
 		} catch (Exception e) {
 			// TODO 打印输出日志
@@ -126,9 +126,9 @@ public class WxApiServiceImpl implements IWxApiService{
 		FileLog.debugLog("jsapi_ticket:"+jsapi_ticket);
 		FileLog.debugLog("nonce_str:"+nonce_str);
 		FileLog.debugLog("timestamp:"+timestamp);
-		ret.put("url", url);
-		ret.put("jsapi_ticket", jsapi_ticket);
-		ret.put("nonceStr", nonce_str);
+//		ret.put("url", url);
+//		ret.put("jsapi_ticket", jsapi_ticket);
+		ret.put("noncestr", nonce_str);
 		ret.put("timestamp", timestamp);
 		ret.put("signature", signature);
 

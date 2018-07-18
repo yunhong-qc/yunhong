@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import com.admin.common.dao.DictDao;
 import com.admin.common.domain.DictDO;
 import com.admin.common.service.DictService;
-import com.admin.common.utils.StringUtils;
 import com.admin.system.domain.UserDO;
+import com.admin.utils.StringUtils;
 
 
 @Service

@@ -16,11 +16,11 @@ import org.springframework.stereotype.Component;
 import com.admin.common.annotation.Log;
 import com.admin.common.domain.LogDO;
 import com.admin.common.service.LogService;
-import com.admin.common.utils.HttpContextUtils;
-import com.admin.common.utils.IPUtils;
-import com.admin.common.utils.JSONUtils;
-import com.admin.common.utils.ShiroUtils;
 import com.admin.system.domain.UserDO;
+import com.admin.utils.HttpContextUtils;
+import com.admin.utils.IPUtils;
+import com.admin.utils.JSONUtils;
+import com.admin.utils.ShiroUtils;
 
 @Aspect
 @Component

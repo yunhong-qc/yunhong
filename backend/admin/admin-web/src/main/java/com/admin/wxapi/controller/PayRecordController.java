@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.admin.common.utils.PageUtils;
-import com.admin.common.utils.Query;
-import com.admin.common.utils.R;
+import com.admin.utils.PageUtils;
+import com.admin.utils.Query;
+import com.admin.utils.R;
 import com.admin.wxapi.domain.PayRecordDO;
 import com.admin.wxapi.service.PayRecordService;
 

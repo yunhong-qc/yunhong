@@ -23,16 +23,16 @@ import com.admin.common.config.Constant;
 import com.admin.common.controller.BaseController;
 import com.admin.common.domain.Tree;
 import com.admin.common.service.DictService;
-import com.admin.common.utils.MD5Utils;
-import com.admin.common.utils.PageUtils;
-import com.admin.common.utils.Query;
-import com.admin.common.utils.R;
 import com.admin.system.domain.DeptDO;
 import com.admin.system.domain.RoleDO;
 import com.admin.system.domain.UserDO;
 import com.admin.system.service.RoleService;
 import com.admin.system.service.UserService;
 import com.admin.system.vo.UserVO;
+import com.admin.utils.MD5Utils;
+import com.admin.utils.PageUtils;
+import com.admin.utils.Query;
+import com.admin.utils.R;
 
 @RequestMapping("/sys/user")
 @Controller

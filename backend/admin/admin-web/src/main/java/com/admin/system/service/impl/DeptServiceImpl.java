@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.admin.common.domain.Tree;
-import com.admin.common.utils.BuildTree;
 import com.admin.system.dao.DeptDao;
 import com.admin.system.domain.DeptDO;
 import com.admin.system.service.DeptService;
+import com.admin.utils.BuildTree;
 
 
 

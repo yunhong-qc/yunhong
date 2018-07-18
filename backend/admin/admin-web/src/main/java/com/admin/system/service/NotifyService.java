@@ -3,8 +3,8 @@ package com.admin.system.service;
 import java.util.List;
 import java.util.Map;
 
-import com.admin.common.utils.PageUtils;
 import com.admin.system.domain.NotifyDO;
+import com.admin.utils.PageUtils;
 
 /**
  * 通知通告

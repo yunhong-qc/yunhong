@@ -10,7 +10,7 @@ import com.admin.common.dao.LogDao;
 import com.admin.common.domain.LogDO;
 import com.admin.common.domain.PageDO;
 import com.admin.common.service.LogService;
-import com.admin.common.utils.Query;
+import com.admin.utils.Query;
 
 @Service
 public class LogServiceImpl implements LogService {

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.admin.common.annotation.Log;
 import com.admin.common.config.Constant;
 import com.admin.common.controller.BaseController;
-import com.admin.common.utils.R;
 import com.admin.system.domain.RoleDO;
 import com.admin.system.service.RoleService;
+import com.admin.utils.R;
 
 @RequestMapping("/sys/role")
 @Controller

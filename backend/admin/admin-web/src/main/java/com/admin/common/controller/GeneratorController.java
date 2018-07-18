@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.admin.common.service.GeneratorService;
-import com.admin.common.utils.GenUtils;
-import com.admin.common.utils.R;
+import com.admin.utils.GenUtils;
+import com.admin.utils.R;
 import com.alibaba.fastjson.JSON;
 
 @RequestMapping("/common/generator")

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.admin.pay.dao.QcPayOrderDao">
+
+	<select id="get" resultType="com.admin.pay.domain.QcPayOrderDO">
+		select
+		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`
+		from yunh_qc_pay_order where order_id = #{value}
+	</select>
+	<select id="getOrderByOrderNumber" resultType="com.admin.pay.domain.QcPayOrderDO">
+		select
+		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`
+		from yunh_qc_pay_order where order_no = #{value}
+	</select>
+	<select id="list" resultType="com.admin.pay.domain.QcPayOrderDO">
+		select
+		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`
+		from yunh_qc_pay_order
+		<where>
+			<if test="orderId != null and orderId != ''"> and order_id = #{orderId} </if>
+			<if test="orderNo != null and orderNo != ''"> and order_no = #{orderNo} </if>
+			<if test="payPrice != null and payPrice != ''"> and pay_price = #{payPrice} </if>
+			<if test="payUser != null and payUser != ''"> and pay_user = #{payUser} </if>
+			<if test="orderState != null and orderState != ''"> and order_state = #{orderState} </if>
+			<if test="isDel != null and isDel != ''"> and is_del = #{isDel} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="modTime != null and modTime != ''"> and mod_time = #{modTime} </if>
+			<if test="orderRemark != null and orderRemark != ''"> and order_remark = #{orderRemark} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by order_id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from yunh_qc_pay_order
+		<where>
+			<if test="orderId != null and orderId != ''"> and order_id = #{orderId} </if>
+			<if test="orderNo != null and orderNo != ''"> and order_no = #{orderNo} </if>
+			<if test="payPrice != null and payPrice != ''"> and pay_price = #{payPrice} </if>
+			<if test="payUser != null and payUser != ''"> and pay_user = #{payUser} </if>
+			<if test="orderState != null and orderState != ''"> and order_state = #{orderState} </if>
+			<if test="isDel != null and isDel != ''"> and is_del = #{isDel} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="modTime != null and modTime != ''"> and mod_time = #{modTime} </if>
+			<if test="orderRemark != null and orderRemark != ''"> and order_remark = #{orderRemark} </if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.admin.pay.domain.QcPayOrderDO"
+		useGeneratedKeys="true" keyProperty="orderId">
+		insert into yunh_qc_pay_order
+		(
+		`order_no`,
+		`pay_price`,
+		`pay_user`,
+		`order_state`,
+		`is_del`,
+		`create_time`,
+		`mod_time`,
+		`order_remark`
+		)
+		values
+		(
+		#{orderNo},
+		#{payPrice},
+		#{payUser},
+		#{orderState},
+		#{isDel},
+		#{createTime},
+		#{modTime},
+		#{orderRemark}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.admin.pay.domain.QcPayOrderDO">
+		update yunh_qc_pay_order
+		<set>
+			<if test="orderNo != null">`order_no` = #{orderNo}, </if>
+			<if test="payPrice != null">`pay_price` = #{payPrice}, </if>
+			<if test="payUser != null">`pay_user` = #{payUser}, </if>
+			<if test="orderState != null">`order_state` = #{orderState}, </if>
+			<if test="isDel != null">`is_del` = #{isDel}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			`mod_time` = now(), 
+			<if test="orderRemark != null">`order_remark` = #{orderRemark}</if>
+		</set>
+		where order_id = #{orderId}
+	</update>
+
+	<delete id="remove">
+		delete from yunh_qc_pay_order where order_id =
+		#{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from yunh_qc_pay_order where order_id in
+		<foreach item="orderId" collection="array" open="(" separator=","
+			close=")">
+			#{orderId}
+		</foreach>
+	</delete>
+
+</mapper>

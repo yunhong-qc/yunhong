@@ -23,11 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.admin.common.config.AdminConfig;
 import com.admin.common.domain.FileDO;
 import com.admin.common.service.FileService;
-import com.admin.common.utils.FileType;
-import com.admin.common.utils.FileUtil;
-import com.admin.common.utils.PageUtils;
-import com.admin.common.utils.Query;
-import com.admin.common.utils.R;
+import com.admin.utils.FileType;
+import com.admin.utils.FileUtil;
+import com.admin.utils.PageUtils;
+import com.admin.utils.Query;
+import com.admin.utils.R;
 
 /**
  * 文件上传

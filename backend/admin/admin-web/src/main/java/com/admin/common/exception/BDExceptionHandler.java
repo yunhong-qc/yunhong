@@ -15,10 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.admin.common.config.Constant;
 import com.admin.common.domain.LogDO;
 import com.admin.common.service.LogService;
-import com.admin.common.utils.HttpServletUtils;
-import com.admin.common.utils.R;
-import com.admin.common.utils.ShiroUtils;
 import com.admin.system.domain.UserDO;
+import com.admin.utils.HttpServletUtils;
+import com.admin.utils.R;
+import com.admin.utils.ShiroUtils;
 
 /**
  * 异常处理器

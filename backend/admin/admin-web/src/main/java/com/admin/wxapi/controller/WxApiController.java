@@ -43,12 +43,12 @@ public class WxApiController {
 	private String prefix = "wx";
 
 	@GetMapping("/bindPage")
-	String bindPage() {
-		FileLog.debugLog("filelog信息："+13212313);
-		FileLog.errorLog("test1");
-		FileLog.debugLog("test2");
-		FileLog.systemLog("test3");
+	String bindpage() {
 		return prefix + "/bind";
+	}
+	@GetMapping("/bindMpos")
+	String bindmpos() {
+		return prefix + "/BleConnectsxlb";
 	}
 	
 	@ApiOperation(value = "初始化", notes = "")
@@ -100,7 +100,7 @@ public class WxApiController {
 	        String xml=StrXmlToMap.ISXmlToString(inputStream);
 	        //解密
 	        String res=wx.decryptMsg(xml);
-	        WxMessageUtil.responseMessage(res);
+	        return WxMessageUtil.responseMessage(res);
 //			return wx.encryptMsg("已收到你的消息，马上前往支援。", DateUtils.format(new Date(), DateUtils.DATE_TIME_STAMP), WxUtils.getRandomStr());
 		} catch (Exception e) {
 			// TODO 打印输出日志

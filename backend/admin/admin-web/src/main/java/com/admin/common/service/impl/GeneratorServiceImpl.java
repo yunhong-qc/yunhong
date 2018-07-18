@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.admin.common.dao.GeneratorMapper;
 import com.admin.common.service.GeneratorService;
-import com.admin.common.utils.GenUtils;
+import com.admin.utils.GenUtils;
 
 
 @Service

@@ -18,9 +18,9 @@ import com.admin.common.annotation.Log;
 import com.admin.common.config.Constant;
 import com.admin.common.controller.BaseController;
 import com.admin.common.domain.Tree;
-import com.admin.common.utils.R;
 import com.admin.system.domain.MenuDO;
 import com.admin.system.service.MenuService;
+import com.admin.utils.R;
 
 /**
  * @author luojing

@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.admin.common.config.Constant;
 import com.admin.common.controller.BaseController;
 import com.admin.common.domain.Tree;
-import com.admin.common.utils.R;
 import com.admin.system.domain.DeptDO;
 import com.admin.system.service.DeptService;
+import com.admin.utils.R;
 
 import io.swagger.annotations.ApiOperation;
 
