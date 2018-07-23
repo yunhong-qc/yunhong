@@ -18,7 +18,7 @@
 			success:function(res){
 				if(res.code=='000000'){
 					
-					jQuery("#appId").text(res.data.appid);
+					jQuery("#appId").text(res.data.app_id);
 					jQuery("#timestamp").text(res.data.timestamp);
 					jQuery("#nonceStr").text(res.data.noncestr);
 					jQuery("#signature").text(res.data.signature);
@@ -182,10 +182,19 @@
 		return;
 	}
 	//发送指令
-	function sendDataToDevice(command) {
-		var _msg=window.bota(String.fromCharCode(command));
+	function sendDataToDevice() {
+		var command=$('#sendCommand').val();
+		var _msg=command;
+		mlog(command);
+		try{
+		 	_msg=window.bota(String.fromCharCode(command));
+			
+		}catch(e){
+			mlog(JSON.stringify(e));
+			
+		}
 		
-		wx.invoke('sendDataToWXDevice', {'deviceId':'gh_05fc6bc0923c_38c8652b9bc08a5a', 'connType':'blue', 'base64Data':_msg}, function(res) {
+		wx.invoke('sendDataToWXDevice', {'deviceId':'gh_05fc6bc0923c_4335cbddacce01e0', 'connType':'blue', 'base64Data':_msg}, function(res) {
 			mlog("发送指令返回：" + JSON.stringify(res));
 			console.log('sendDataToWXDevice',res);
 			});
@@ -194,7 +203,7 @@
 	//接收数据
 	function getDeviceData() {
 		wx.on('onReceiveDataFromWXDevice', function(res) {
-			mlog("发送指令返回：" + JSON.stringify(res));
+			mlog("接收指令返回：" + JSON.stringify(res));
 			});
 		return;
 	}
@@ -222,7 +231,7 @@
 		});
 		getDeviceData();
 		$("#testToBase64").on("click", function(e) {
-			sendDataToDevice($('#logtext').val());
+			sendDataToDevice();
 		});
 		
 		
@@ -259,6 +268,7 @@
 						<label class="weui_label">日志: </label>
 					</div>
 					<div style="width:100%;height:400px;">
+						<input type="text" id="sendCommand" value="11111"/>
 						<textarea id="logtext" class="weui_textarea" placeholder="日志"
 							rows="5"></textarea>
 					</div>
@@ -275,7 +285,7 @@
 				<button class="weui_btn weui_btn weui_btn_warn"
 					id="ConnectWXDevice">链接设备</button>
 				<button class="weui_btn weui_btn weui_btn_warn"
-					id="testToBase64">萨松信息</button>
+					id="testToBase64">发送信息</button>
 				<br>
 
 			</div>
@@ -293,7 +303,7 @@
 		<!--end toast-->
 
 
-	<div id="myparams" style="display: block">
+	<div id="myparams" style="display: none;">
 		<span id="timestamp">11032148231</span> <span id="nonceStr">444</span>
 		<span id="signature">555</span> <span id="appId">wxead55502e6287ecb</span>
 

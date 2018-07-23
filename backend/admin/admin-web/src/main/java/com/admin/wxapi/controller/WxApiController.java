@@ -50,6 +50,10 @@ public class WxApiController {
 	String bindmpos() {
 		return prefix + "/BleConnectsxlb";
 	}
+	@GetMapping("/bindMpos2")
+	String bindmpos2() {
+		return prefix + "/BleConnectsxl_qc";
+	}
 	
 	@ApiOperation(value = "初始化", notes = "")
 	@GetMapping("/initJsApi")

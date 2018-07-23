@@ -12,8 +12,15 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<groupId>JNative</groupId>
+			<artifactId>JNative</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- JNative -->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.10</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
 		<dependency>

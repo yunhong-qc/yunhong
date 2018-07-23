@@ -132,7 +132,7 @@ public class QcPayOrderController {
 	}
 
 	/**
-	 * 支付宝异步通知
+	 * 支付宝异步通知回调
 	 */
 	@RequestMapping(value = "/ali/callBack", method = RequestMethod.POST, consumes = "application/json", produces = "text/html;charset=UTF-8")
 	@ResponseBody
