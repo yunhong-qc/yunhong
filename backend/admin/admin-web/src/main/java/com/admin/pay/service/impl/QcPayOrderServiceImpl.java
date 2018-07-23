@@ -11,11 +11,15 @@ import java.util.Map;
 import com.admin.pay.dao.QcPayOrderDao;
 import com.admin.pay.domain.QcPayOrderDO;
 import com.admin.pay.service.QcPayOrderService;
+import com.admin.utils.BaseResultModel;
 import com.admin.utils.DateUtils;
 import com.admin.utils.FileLog;
 import com.admin.utils.ali.pay.PayException;
+import com.admin.utils.ali.pay.PayUtils;
 import com.admin.wxapi.dao.PayRecordDao;
 import com.admin.wxapi.domain.PayRecordDO;
+import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.AlipayApiException;
 
 
 
@@ -138,6 +142,46 @@ public class QcPayOrderServiceImpl implements QcPayOrderService {
 		}
 		payRecordDao.save(prd);
 		qcPayOrderDao.update(order);
+	}
+
+	@Override
+	@Transactional
+	public String addNewOrderAndSDKRSA(QcPayOrderDO order) throws AlipayApiException {
+		// TODO 此处为方法主题
+		order=this.addNewOrder(order);
+		if (order.getPayType() == 1) {
+			//支付宝
+//			return PayUtils.getAliPayOrderInfos(order);
+			return JSONObject.toJSONString(order);
+		} else {
+//			return PayUtils.getAliPayOrderInfos(order);
+			return JSONObject.toJSONString(order);
+		}
+	}
+
+	@Override
+	public String getPayOrderANDSDKRSA(QcPayOrderDO order) throws PayException, AlipayApiException {
+		// TODO 此处为方法主题
+		QcPayOrderDO resOrder=qcPayOrderDao.getOrderByOrderNumber(order.getOrderNo());
+		if(resOrder==null) {
+			return null;
+		}
+		if(DateUtils.compareTwoTimeDifferMuch(resOrder.getCreateTime(), new Date(), 3600)) {
+			//未失效
+			if (resOrder.getPayType() == 1) {
+				//支付宝
+//				return PayUtils.getAliPayOrderInfos(order);
+				return JSONObject.toJSONString(resOrder);
+			} else {
+//				return PayUtils.getAliPayOrderInfos(order);
+				return JSONObject.toJSONString(resOrder);
+				
+			}
+			
+		}else {
+			FileLog.errorLog("订单已超时："+resOrder.getOrderNo());
+			throw new PayException("订单已超时。");
+		}
 	}
 	
 }

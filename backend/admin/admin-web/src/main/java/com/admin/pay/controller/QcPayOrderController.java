@@ -32,6 +32,7 @@ import com.admin.utils.ali.pay.AlipayConfig;
 import com.admin.utils.ali.pay.PayException;
 import com.admin.utils.ali.pay.PayUtils;
 import com.admin.wxapi.domain.PayRecordDO;
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 
 /**
@@ -83,21 +84,13 @@ public class QcPayOrderController {
 	@PostMapping("/addOrder")
 	public BaseResultModel addNewOrder(QcPayOrderDO qcPayOrder) {
 		try {
-			QcPayOrderDO norder = new QcPayOrderDO();
-			norder = qcPayOrderService.addNewOrder(qcPayOrder);
-			if (norder == null) {
-				// 添加订单失败
-				return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "添加订单失败");
-			}
-			if (norder.getPayType() == 1) {
-				//支付宝
-				return BaseResultModel.success(PayUtils.getAliPayOrderInfos(norder));
-			} else {
-				return BaseResultModel.success(PayUtils.getAliPayOrderInfos(norder));
-
-			}
+			String result=qcPayOrderService.addNewOrderAndSDKRSA(qcPayOrder);
+			return BaseResultModel.success(result);
+		}catch(AlipayApiException pay) {
+			FileLog.errorLog(pay, "支付签名校验失败。");
+			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "添加失败");
 		} catch (Exception e) {
-			FileLog.errorLog(e, "添加订单失败。");
+			FileLog.errorLog(e, "异常");
 			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "添加订单失败");
 		}
 	}
@@ -116,12 +109,36 @@ public class QcPayOrderController {
 				return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "获取订单失败");
 			}
 			if (norder.getPayType() == 1) {
-
-				return BaseResultModel.success(PayUtils.getAliPayOrderInfos(norder));
+				return BaseResultModel.success(norder);
+//				return BaseResultModel.success(PayUtils.getAliPayOrderInfos(norder));
 			} else {
-				return BaseResultModel.success(PayUtils.getAliPayOrderInfos(norder));
+				return BaseResultModel.success(norder);
+//				return BaseResultModel.success(PayUtils.getAliPayOrderInfos(norder));
 
 			}
+		} catch (PayException pe) {
+			FileLog.errorLog(pe, "订单已超时。");
+			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "订单已超时");
+		} catch (Exception e) {
+			FileLog.errorLog(e, "添加订单失败。");
+			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "获取订单失败");
+		}
+	}
+	/**
+	 * 获取预支付订单信息
+	 */
+	@ResponseBody
+	@PostMapping("/getPayPreOrder")
+	public BaseResultModel getPayPreOrder(QcPayOrderDO qcPayOrder) {
+		try {
+			String result=qcPayOrderService.getPayOrderANDSDKRSA(qcPayOrder);
+			if (result == null) {
+				// 获取订单失败
+				return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "获取订单失败");
+			}
+			return BaseResultModel.success(result);
+			
+			
 		} catch (PayException pe) {
 			FileLog.errorLog(pe, "订单已超时。");
 			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "订单已超时");

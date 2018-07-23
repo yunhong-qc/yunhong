@@ -2,6 +2,7 @@ package com.admin.pay.service;
 
 import com.admin.pay.domain.QcPayOrderDO;
 import com.admin.utils.ali.pay.PayException;
+import com.alipay.api.AlipayApiException;
 
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,9 @@ public interface QcPayOrderService {
 	 * 作者：fengchase
 	 */
 	QcPayOrderDO addNewOrder(QcPayOrderDO order);
+	String addNewOrderAndSDKRSA(QcPayOrderDO order) throws AlipayApiException;
 	QcPayOrderDO getPayOrder(QcPayOrderDO order) throws PayException;
+	String getPayOrderANDSDKRSA(QcPayOrderDO order) throws PayException,AlipayApiException;
 	void alipayResultCallBack(Map<String, String> map);
 	
 }

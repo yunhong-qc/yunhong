@@ -5,17 +5,17 @@
 
 	<select id="get" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
-		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`
+		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`
 		from yunh_qc_pay_order where order_id = #{value}
 	</select>
 	<select id="getOrderByOrderNumber" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
-		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`
+		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`
 		from yunh_qc_pay_order where order_no = #{value}
 	</select>
 	<select id="list" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
-		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`
+		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`
 		from yunh_qc_pay_order
 		<where>
 			<if test="orderId != null and orderId != ''"> and order_id = #{orderId} </if>
@@ -26,6 +26,7 @@
 			<if test="isDel != null and isDel != ''"> and is_del = #{isDel} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 			<if test="modTime != null and modTime != ''"> and mod_time = #{modTime} </if>
+			<if test="payType != null and payType != ''"> and pay_type = #{payType} </if>
 			<if test="orderRemark != null and orderRemark != ''"> and order_remark = #{orderRemark} </if>
 		</where>
 		<choose>
@@ -53,6 +54,7 @@
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 			<if test="modTime != null and modTime != ''"> and mod_time = #{modTime} </if>
 			<if test="orderRemark != null and orderRemark != ''"> and order_remark = #{orderRemark} </if>
+			<if test="payType != null and payType != ''"> and pay_type = #{payType} </if>
 		</where>
 	</select>
 
@@ -67,7 +69,8 @@
 		`is_del`,
 		`create_time`,
 		`mod_time`,
-		`order_remark`
+		`order_remark`,
+		`pay_type`
 		)
 		values
 		(
@@ -78,7 +81,8 @@
 		#{isDel},
 		#{createTime},
 		#{modTime},
-		#{orderRemark}
+		#{orderRemark},
+		#{payType}
 		)
 	</insert>
 
