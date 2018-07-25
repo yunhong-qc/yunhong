@@ -121,4 +121,13 @@ public class DateUtils {
     	}
     	return false;
     }
+    /**
+     * 获取当前时间的毫秒书
+     * @return
+     * 2018年7月24日
+     * 作者：fengchase
+     */
+    public static String getNowTimestammp() {
+    	 return String.valueOf(System.currentTimeMillis() / 1000);
+    }
 }

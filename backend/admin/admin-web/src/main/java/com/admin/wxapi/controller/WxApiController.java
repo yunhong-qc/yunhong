@@ -43,7 +43,8 @@ public class WxApiController {
 	private String prefix = "wx";
 
 	@GetMapping("/bindPage")
-	String bindpage() {
+	String bindpage(HttpServletRequest request) {
+		request.setAttribute("test", "54646");
 		return prefix + "/bind";
 	}
 	@GetMapping("/bindMpos")

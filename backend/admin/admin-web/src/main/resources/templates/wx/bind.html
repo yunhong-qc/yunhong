@@ -1,14 +1,13 @@
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"></meta>
+<meta charset="UTF-8"></meta>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js">
-	
 </script>
-<meta charset="UTF-8">
 <script>
 	//初始化 微信硬件jsapi库 V型知识库 www.vxzsk.com  
-	
+
 	function getTicktData(){
 		var url=location.href.split('#')[0];
 		jQuery.ajax({
@@ -223,7 +222,6 @@
 		//初始化库结束  
 		//点击获取设备按钮的函数 开始  
 		$("#CallGetWXrefresh").on("click", function(e) {
-
 			//1. 打开微信设备   
 			my_openWXDeviceLib();
 			//2. 获取设备信息  
@@ -279,7 +277,7 @@
 			<div class="weui_btn_area weui">
 
 				<button class="weui_btn weui_btn weui_btn_warn"
-					id="CallGetWXrefresh">获取设备</button>
+					id="CallGetWXrefresh" >获取设备</button>
 				<button class="weui_btn weui_btn weui_btn_warn"
 					id="ScanWXDevice">扫描设备</button>
 				<button class="weui_btn weui_btn weui_btn_warn"

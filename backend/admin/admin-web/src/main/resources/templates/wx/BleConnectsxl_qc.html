@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
-<head>
-
+<head  th:include="include :: header">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--禁止缩放-->
@@ -33,14 +32,30 @@
     <div class="swiper-wrapper">
 
         <div class="swiper-slide">
+        <!-- 支付 -->
+			<!-- 
+			appid	是	公众号的唯一标识
+			redirect_uri	是	授权后重定向的回调链接地址， 请使用 urlEncode 对链接进行处理
+			response_type	是	返回类型，请填写code
+			scope	是	应用授权作用域，snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且， 即使在未关注的情况下，只要用户授权，也能获取其信息 ）
+			state	否	重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节
+			#wechat_redirect	是	无论直接打开还是做页面302重定向时候，必须带此参数
+			 -->
+			<div class="container" id="container">
+			    <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d7f7c26f2369785&redirect_uri=http%3a%2f%2fapp.cdqckj.com%2fpay%2ftoPayPage&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect" class="weui_btn weui_btn_primary">立即支付</a>
+			</div>
+        </div>
+        
+        <div class="swiper-slide">
             <!--连接设备-->
             <div class="user_zc_body">
-                <ul>
+            	
+               <!--  <ul>
                     <li id="connectedsuccess"> <p class="p_input p_input_yzm"><em class="fa fa-envelope"></em><span style="float:right">设备未连接</span></p> </li>
                 </ul>
                 <div class="user_zc_btn"><p class="p_btn" id="scanbtn"><a onclick="ScanBlus()" class="c_4">扫描</a></p></div>
                 <ul id="connectmodel">
-                </ul>
+                </ul> -->
             </div>
             <!--绑定设备END-->
         </div>
@@ -101,13 +116,19 @@
     </div>
 </div>
 <script>
+
+
+
+
     var mySwiper = new Swiper('.swiper-container',{
         pagination: '.my-pagination-ul',
         paginationClickable: true,
         paginationBulletRender: function (index, className) {
             switch (index) {
-                case 0: name='连接设备';break;
-                case 1: name='功能菜单';break;
+
+            	case 0: name='支付';break;
+                case 1: name='连接设备';break;
+                case 2: name='功能菜单';break;
                 default: name='';
             }
             return '<li class="' + className + '">' + name + '</li>';
@@ -139,7 +160,10 @@
     var smitPosSdkWx = null;
     var openid = null;
     $(document).ready(function() {
-        smitLogPrintWx("<p>http jswei混淆版本2.1.3qc1</p>");
+        /* smitLogPrintWx("<p>http jswei混淆版本2.1.3qc1</p>"); */
+        //验证蓝牙是否打开
+        //验证连接状态。
+        //获取设备链接信息，并展示
         smitPosSdkWx = new SmitPosSdkWx(0x04, 0x00);
         init();
     });
@@ -205,7 +229,9 @@
             var msgJson = JSON.parse(msg);
             if (msgJson.status === '00') {
                 deviceSn = msgJson.device_sn;
-                smitLogPrintWx('----- ' + deviceSn)
+                //获取随机数
+            	getRandom();
+                //smitLogPrintWx('----- ' + deviceSn)
             }
         }.bind(this));
     }
@@ -216,6 +242,8 @@
         smit.exec(smit.MSG_TYPE_MPOS_GET_RAND,RandomJson,function(msg){
             $("#initBle").append("<p>get random:" + msg + "</p>");
             random = JSON.parse(msg).random;
+             //下一步：外部认证，上一步：获取设备信息
+            externalAuth();
         }.bind(this));
     }
     //外部认证
@@ -236,6 +264,8 @@
             var msgJson = JSON.parse(msg);
             if (msgJson.status === '00') {
                 smitLogPrintWx('外部认证成功');
+                //下一步：设备认证，上一步：获取随机数
+                deviceAuth();
             } else {
                 smitLogPrintWx('外部认证失败');
             }
@@ -264,6 +294,7 @@
             smitLogPrintWx('result='+result);
             if (result === 0) {
                 smitLogPrintWx('设备认证成功');
+                //认证流程完成，
             } else {
                 smitLogPrintWx('设备认证失败');
             }
@@ -776,7 +807,42 @@
     //获取设备信息
     function getConnectedDeviceIds() {
         smitPosSdkWx.getDevices(function(msg){
-            $("#initBle").append("<p>send msg:" + JSON.stringify(msg) + "</p>");
+            /* $("#initBle").append("<p>send msg:" + JSON.stringify(msg) + "</p>"); */
+            if(msg.err_msg.indexOf("ok")!=-1){
+            	//获取成功
+            	if(msg.deviceInfos!=[]){
+            		var devIds=[];
+            		for(var i=0;i<msg.deviceInfos.length;i++){
+            			var dev=msg.deviceInfos[i];
+            			if(dev.state=='connected'){
+            				devIds[i]=dev.deviceId;
+            			}
+            		}
+            		if(devIds==[]){
+            			//没有，则提示未连接任何设备。
+            			 smitLogPrintWx('设备状态为未连接')
+            			return;
+            		}
+            		//已经连接
+            		//开始进行设备认证流程
+            		//获取设备信息-》随机数-》外部认证-》设备认证
+            		getDeviceInfo();
+            		//根据设备Id去数据库获取记录
+            		$.ajax({
+            			url:'',
+            			data:{'devIds':devIds},
+            			async:false,
+            			success:function(res){
+            				//展示信息
+            				if(res.code=='000000'){
+            					//
+            				}
+            			}
+            		}) 
+            	}else{
+            		 smitLogPrintWx('没有连接过任何设备。')
+            	}
+            }
         });
     }
 
@@ -854,6 +920,10 @@
          }); */
         smitPosSdkWx.blestate(function(msg){
             $("#initBle").append("<p>get blestate:" + msg + "</p>");
+            layer.confirm("请先打开蓝牙开关。", {
+        		btn : [ '确定' ]
+        	// 按钮
+        	});
         });
 //   		smitPosSdkWx.blestate(function(msg){
 //			$("#initBle").append("<p>get connected11111111:" + msg + "</p>");
@@ -875,6 +945,13 @@
 //		smitPosSdkWx.getconnected();
         smitPosSdkWx.getconnected(function(msg){
             $("#initBle").append("<p>get connected11111111:" + msg + "</p>");
+            if(msg=='disconnected'){
+            	//未连接
+            	layer.confirm("请根据提示，先连接设备", {
+            		btn : [ '确定' ]
+            	// 按钮
+            	});
+            }
         });
     }
 

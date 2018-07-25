@@ -2,8 +2,11 @@ package com.admin.pay.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +20,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import com.admin.pay.domain.QcPayOrderDO;
+import com.admin.pay.domain.RequestHandler;
 import com.admin.pay.service.QcPayOrderService;
 import com.admin.utils.BaseResultModel;
+import com.admin.utils.DateUtils;
 import com.admin.utils.FileLog;
 import com.admin.utils.PageUtils;
 import com.admin.utils.Query;
 import com.admin.utils.R;
 import com.admin.utils.ResultCode;
-import com.admin.utils.ali.pay.AlipayConfig;
-import com.admin.utils.ali.pay.PayException;
-import com.admin.utils.ali.pay.PayUtils;
+import com.admin.utils.pay.ali.AlipayConfig;
+import com.admin.utils.pay.ali.PayException;
+import com.admin.utils.pay.wex.ServiceUtil;
+import com.admin.utils.pay.wex.WeixinUtils;
+import com.admin.utils.pay.wex.WxPayConfig;
+import com.admin.utils.wx.WxUtils;
 import com.admin.wxapi.domain.PayRecordDO;
+import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 
@@ -54,28 +65,7 @@ public class QcPayOrderController {
 		return "pay/qcPayOrder/qcPayOrder";
 	}
 
-	@ResponseBody
-	@RequestMapping("/list")
-	public PageUtils list(@RequestParam Map<String, Object> params) {
-		// 查询列表数据
-		Query query = new Query(params);
-		List<QcPayOrderDO> qcPayOrderList = qcPayOrderService.list(query);
-		int total = qcPayOrderService.count(query);
-		PageUtils pageUtils = new PageUtils(qcPayOrderList, total);
-		return pageUtils;
-	}
 
-	@GetMapping("/add")
-	String add() {
-		return "pay/qcPayOrder/add";
-	}
-
-	@GetMapping("/edit/{orderId}")
-	String edit(@PathVariable("orderId") Integer orderId, Model model) {
-		QcPayOrderDO qcPayOrder = qcPayOrderService.get(orderId);
-		model.addAttribute("qcPayOrder", qcPayOrder);
-		return "pay/qcPayOrder/edit";
-	}
 
 	/**
 	 * 保存新单，并返回订单信息
@@ -84,9 +74,9 @@ public class QcPayOrderController {
 	@PostMapping("/addOrder")
 	public BaseResultModel addNewOrder(QcPayOrderDO qcPayOrder) {
 		try {
-			String result=qcPayOrderService.addNewOrderAndSDKRSA(qcPayOrder);
+			String result = qcPayOrderService.addNewOrderAndSDKRSA(qcPayOrder);
 			return BaseResultModel.success(result);
-		}catch(AlipayApiException pay) {
+		} catch (AlipayApiException pay) {
 			FileLog.errorLog(pay, "支付签名校验失败。");
 			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "添加失败");
 		} catch (Exception e) {
@@ -96,54 +86,24 @@ public class QcPayOrderController {
 	}
 
 	/**
-	 * 获取支付订单信息
-	 */
-	@ResponseBody
-	@PostMapping("/getPayOrder")
-	public BaseResultModel getPayOrder(QcPayOrderDO qcPayOrder) {
-		try {
-			QcPayOrderDO norder = new QcPayOrderDO();
-			norder = qcPayOrderService.getPayOrder(qcPayOrder);
-			if (norder == null) {
-				// 获取订单失败
-				return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "获取订单失败");
-			}
-			if (norder.getPayType() == 1) {
-				return BaseResultModel.success(norder);
-//				return BaseResultModel.success(PayUtils.getAliPayOrderInfos(norder));
-			} else {
-				return BaseResultModel.success(norder);
-//				return BaseResultModel.success(PayUtils.getAliPayOrderInfos(norder));
-
-			}
-		} catch (PayException pe) {
-			FileLog.errorLog(pe, "订单已超时。");
-			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "订单已超时");
-		} catch (Exception e) {
-			FileLog.errorLog(e, "添加订单失败。");
-			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "获取订单失败");
-		}
-	}
-	/**
 	 * 获取预支付订单信息
 	 */
 	@ResponseBody
 	@PostMapping("/getPayPreOrder")
 	public BaseResultModel getPayPreOrder(QcPayOrderDO qcPayOrder) {
 		try {
-			String result=qcPayOrderService.getPayOrderANDSDKRSA(qcPayOrder);
+			String result = qcPayOrderService.getPayOrderANDSDKRSA(qcPayOrder);
 			if (result == null) {
 				// 获取订单失败
 				return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "获取订单失败");
 			}
 			return BaseResultModel.success(result);
-			
-			
+
 		} catch (PayException pe) {
 			FileLog.errorLog(pe, "订单已超时。");
 			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "订单已超时");
 		} catch (Exception e) {
-			FileLog.errorLog(e, "添加订单失败。");
+			FileLog.errorLog(e, "获取订单失败。");
 			return BaseResultModel.Tailor(ResultCode.ERROR_CODE, "获取订单失败");
 		}
 	}
@@ -189,38 +149,31 @@ public class QcPayOrderController {
 			return "error";
 		}
 	}
-
 	/**
-	 * 修改
+	 * 微信回调
+	 * @param request
+	 * @return
+	 * 2018年7月23日
+	 * 作者：fengchase
 	 */
+	@RequestMapping(value = "/wex/callBack", method = RequestMethod.POST, consumes = "application/json", produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	@RequestMapping("/update")
-	public R update(QcPayOrderDO qcPayOrder) {
-		qcPayOrderService.update(qcPayOrder);
-		return R.ok();
+	public String wexCallBack(HttpServletRequest request) {
+		FileLog.debugLog("收到回调。");
+		return "";
 	}
-
-	/**
-	 * 删除
-	 */
-	@PostMapping("/remove")
-	@ResponseBody
-	@RequiresPermissions("pay:qcPayOrder:remove")
-	public R remove(Integer orderId) {
-		if (qcPayOrderService.remove(orderId) > 0) {
-			return R.ok();
-		}
-		return R.error();
+	@RequestMapping("toPayPage")
+	public String toPayPage(HttpServletRequest request) {
+		 /**
+         * 第一步：用户同意授权，根据参数，获取code
+         * 授权成功后返回的授权码，参考：http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html#.E7.AC.AC.E4.B8.80.E6.AD.A5.EF.BC.9A.E7.94.A8.E6.88.B7.E5.90.8C.E6.84.8F.E6.8E.88.E6.9D.83.EF.BC.8C.E8.8E.B7.E5.8F.96code
+         */
+		String code = request.getParameter("code");
+        String state = request.getParameter("state");
+		request.setAttribute("code", code);
+		request.setAttribute("state", state);
+        return "pay/wxPay";
 	}
-
-	/**
-	 * 删除
-	 */
-	@PostMapping("/batchRemove")
-	@ResponseBody
-	public R remove(@RequestParam("ids[]") Integer[] orderIds) {
-		qcPayOrderService.batchRemove(orderIds);
-		return R.ok();
-	}
+ 
 
 }

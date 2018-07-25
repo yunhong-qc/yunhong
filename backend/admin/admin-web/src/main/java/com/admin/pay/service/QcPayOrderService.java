@@ -1,7 +1,7 @@
 package com.admin.pay.service;
 
 import com.admin.pay.domain.QcPayOrderDO;
-import com.admin.utils.ali.pay.PayException;
+import com.admin.utils.pay.ali.PayException;
 import com.alipay.api.AlipayApiException;
 
 import java.util.List;

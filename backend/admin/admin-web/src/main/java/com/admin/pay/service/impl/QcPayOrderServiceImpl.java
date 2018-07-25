@@ -7,15 +7,22 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import com.admin.pay.dao.QcPayOrderDao;
 import com.admin.pay.domain.QcPayOrderDO;
+import com.admin.pay.domain.RequestHandler;
 import com.admin.pay.service.QcPayOrderService;
 import com.admin.utils.BaseResultModel;
 import com.admin.utils.DateUtils;
 import com.admin.utils.FileLog;
-import com.admin.utils.ali.pay.PayException;
-import com.admin.utils.ali.pay.PayUtils;
+import com.admin.utils.pay.ali.PayException;
+import com.admin.utils.pay.ali.PayUtils;
+import com.admin.utils.pay.wex.ServiceUtil;
+import com.admin.utils.pay.wex.WeixinUtils;
+import com.admin.utils.pay.wex.WxPayConfig;
+import com.admin.utils.wx.WxUtils;
 import com.admin.wxapi.dao.PayRecordDao;
 import com.admin.wxapi.domain.PayRecordDO;
 import com.alibaba.fastjson.JSONObject;
@@ -154,8 +161,8 @@ public class QcPayOrderServiceImpl implements QcPayOrderService {
 //			return PayUtils.getAliPayOrderInfos(order);
 			return JSONObject.toJSONString(order);
 		} else {
-//			return PayUtils.getAliPayOrderInfos(order);
 			return JSONObject.toJSONString(order);
+//			return PayUtils.getWexPayOrderInfos(order);
 		}
 	}
 
@@ -183,5 +190,7 @@ public class QcPayOrderServiceImpl implements QcPayOrderService {
 			throw new PayException("订单已超时。");
 		}
 	}
+	
+
 	
 }

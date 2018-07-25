@@ -1,4 +1,4 @@
-package com.admin.utils.ali.pay;
+package com.admin.utils.pay.ali;
 /**
 作者：fengchase
 时间：2018年7月17日

@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"></meta>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script>
+	//初始化 微信硬件jsapi库 V型知识库 www.vxzsk.com  
+	
+	//支付开始
+    function toPay(){
+		//传递code和state去addOrder增加订单
+		var code=$('#code').val();
+		var state=$('#state').val();
+		$.ajax({
+			url:'addOrder',
+			data:{code:code,state:state},
+			async:false,
+			success:function(res){
+				
+			}
+		});
+		
+        if (typeof WeixinJSBridge == "undefined"){
+           if( document.addEventListener ){
+               document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+           }else if (document.attachEvent){
+               document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+               document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+           }
+        }else{
+           onBridgeReady();
+        }
+    }
+    
+    function onBridgeReady(){
+    	$.ajax({
+    		   type: "POST",
+    		   url: "/wxPay/toPayInfo.do",
+    		   success: function(data){
+    	 			 WeixinJSBridge.invoke(
+    	 			           'getBrandWCPayRequest', {
+    	 			               "appId" : data.data.appId, 
+    	 			               "timeStamp": data.data.timeStamp,    
+    	 			               "nonceStr" : data.data.nonceStr,
+    	 			               "package" : data.data.package,
+    	 			               "signType" :  data.data.signType, 
+    	 			               "paySign" : data.data.paySign
+    	 			           },function(res){
+    	 			        	   $("#msgId").html(res.err_msg);
+    	 			            if(res.err_msg == "get_brand_wcpay_request:ok"){
+    	 			            	$("#resId").html("支付成功");
+    	 			            //	location.href="weixinPayResult.html";//支付成功跳转到指定页面
+    	 			            }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
+    	 			            	$("#resId").html("支付取消");
+    	 			            }else{  
+    	 			            	$("#resId").html("支付失败");
+    	 			            }  
+    	 			        }); 
+    	 		   }
+    		});
+    	
+    }
+
+
+//支付借宿
+ 
+</script>
+</head>
+<body>
+<input type="hidden" id="code" th:value=${code} ></input>
+<input type="hidden" id="state" th:value=${state}></input>
+	<div class="content">
+			    <div class="form-area">
+			    	 <div class="inp">
+			            		支付0.01元
+			        </div>
+			    </div>
+			   结果：
+			    <div id="resId"></div>
+			    参数：
+			    <div id="invokeId"></div>
+			    <br/>
+			</div>
+			
+			<div class="container" id="container">
+			    <div style="text-align: center;margin-top: 50px;"><h1><button type="button" style="display:inline-block;width:600px;height:200px;border-radius:30px;font-size:50px" onclick="callpay()">确认支付</button></h1></div>
+			</div>
+</body>
+</html>

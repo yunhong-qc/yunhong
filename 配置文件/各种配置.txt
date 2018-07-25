@@ -5,6 +5,7 @@ administrator， qckj,./0709
 
 端口范围：8870-8880
 
+
 mysql：3307
 tomcat：8872
 svn:8873
@@ -14,6 +15,7 @@ spring-boot:8874
 token: qinchuan
 Aeskey: MQaCz7zLq212FwHJjGXlJ5WApZQ4yhc5DdYp5D88sov
 
+商户号：1510530611@1510530611
 
 公众号：421709591@qq.com 421709591@qq.com
 产品id：   48353
