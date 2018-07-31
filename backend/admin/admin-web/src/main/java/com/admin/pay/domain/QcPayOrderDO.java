@@ -22,6 +22,7 @@ public class QcPayOrderDO implements Serializable {
 	//这两个参数是微信网页授权的参数，用于获取openId
 	private String wxCode;
 	private String wxState;
+	private String openid;
 	//订单号
 	private String orderNo;
 	//金额
@@ -33,8 +34,9 @@ public class QcPayOrderDO implements Serializable {
 	private Integer payType;
 	//手机号
 	private Integer payPhone;
+	private Integer deviceNo;
 	
-	//订单状态。0L:待支付，1：已支付，2，完成,3。失效
+	//订单状态。0:初始，1：支付，2，完成,3。失效
 	private Integer orderState;
 	//逻辑删除，1：删除，0：正常
 	private Integer isDel;
@@ -68,6 +70,13 @@ public class QcPayOrderDO implements Serializable {
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
+	
+	public String getOpenid() {
+		return openid;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
 	/**
 	 * 获取：订单号
 	 */
@@ -99,13 +108,13 @@ public class QcPayOrderDO implements Serializable {
 		return payUser;
 	}
 	/**
-	 * 设置：订单状态。0L:待支付，1：已支付，2，完成,3。失效
+	 * 设置：获取：订单状态。0:初始，1：支付，2，完成,3。失效
 	 */
 	public void setOrderState(Integer orderState) {
 		this.orderState = orderState;
 	}
 	/**
-	 * 获取：订单状态。0L:待支付，1：已支付，2，完成,3。失效
+	 * 获取：订单状态。0:初始，1：支付，2，完成,3。失效
 	 */
 	public Integer getOrderState() {
 		return orderState;
@@ -169,6 +178,18 @@ public class QcPayOrderDO implements Serializable {
 	}
 	public void setWxState(String wxState) {
 		this.wxState = wxState;
+	}
+	public Integer getPayPhone() {
+		return payPhone;
+	}
+	public void setPayPhone(Integer payPhone) {
+		this.payPhone = payPhone;
+	}
+	public Integer getDeviceNo() {
+		return deviceNo;
+	}
+	public void setDeviceNo(Integer deviceNo) {
+		this.deviceNo = deviceNo;
 	}
 	
 	

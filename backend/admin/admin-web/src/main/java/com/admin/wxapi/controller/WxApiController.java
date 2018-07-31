@@ -51,9 +51,13 @@ public class WxApiController {
 	String bindmpos() {
 		return prefix + "/BleConnectsxlb";
 	}
-	@GetMapping("/bindMpos2")
-	String bindmpos2() {
-		return prefix + "/BleConnectsxl_qc";
+	@GetMapping("/pubBind")
+	String bindmpos2(HttpServletRequest request) {
+		String code = request.getParameter("code");
+        String state = request.getParameter("state");
+		request.setAttribute("code", code);
+		request.setAttribute("state", state);
+		return prefix + "/bindpage";
 	}
 	
 	@ApiOperation(value = "初始化", notes = "")

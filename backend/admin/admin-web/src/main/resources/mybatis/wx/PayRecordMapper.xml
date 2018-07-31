@@ -4,11 +4,11 @@
 <mapper namespace="com.admin.wxapi.dao.PayRecordDao">
 
 	<select id="get" resultType="com.admin.wxapi.domain.PayRecordDO">
-		select `pay_id`,`pay_money`,`pay_device_no`,`pay_user_no`,`pay_card_type`,`pay_type`,`pay_result`,`is_del`,`create_time` from yunh_qc_pay_record where pay_id = #{value}
+		select `pay_id`,`pay_money`,`pay_device_no`,`pay_user_no`,`pay_card_type`,`pay_type`,`pay_result`,`is_del`,`create_time`,`order_no` from yunh_qc_pay_record where pay_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.admin.wxapi.domain.PayRecordDO">
-		select `pay_id`,`pay_money`,`pay_device_no`,`pay_user_no`,`pay_card_type`,`pay_type`,`pay_result`,`is_del`,`create_time` from yunh_qc_pay_record
+		select `pay_id`,`pay_money`,`pay_device_no`,`pay_user_no`,`pay_card_type`,`pay_type`,`pay_result`,`is_del`,`create_time`,`order_no` from yunh_qc_pay_record
         <where>  
 		  		  <if test="payId != null and payId != ''"> and pay_id = #{payId} </if>
 		  		  <if test="payMoney != null and payMoney != ''"> and pay_money = #{payMoney} </if>
@@ -64,6 +64,7 @@
 			`pay_type`, 
 			`pay_result`, 
 			`is_del`, 
+			`order_no`,
 			`create_time`
 		)
 		values
@@ -75,6 +76,7 @@
 			#{payType}, 
 			#{payResult}, 
 			#{isDel}, 
+			#{orderNo}, 
 			#{createTime}
 		)
 	</insert>

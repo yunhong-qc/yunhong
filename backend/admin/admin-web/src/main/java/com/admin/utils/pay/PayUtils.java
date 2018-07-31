@@ -1,4 +1,4 @@
-package com.admin.utils.pay.ali;
+package com.admin.utils.pay;
 
 import java.io.UnsupportedEncodingException;
 import java.util.SortedMap;
@@ -8,6 +8,7 @@ import com.admin.pay.domain.QcPayOrderDO;
 import com.admin.pay.domain.RequestHandler;
 import com.admin.utils.DateUtils;
 import com.admin.utils.FileLog;
+import com.admin.utils.pay.ali.AlipayConfig;
 import com.admin.utils.pay.wex.ServiceUtil;
 import com.admin.utils.pay.wex.WeixinUtils;
 import com.admin.utils.pay.wex.WxPayConfig;
@@ -66,12 +67,12 @@ public class PayUtils {
 			 * 第一步：用户同意授权，根据参数，获取code
 			 * 授权成功后返回的授权码，参考：http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html#.E7.AC.AC.E4.B8.80.E6.AD.A5.EF.BC.9A.E7.94.A8.E6.88.B7.E5.90.8C.E6.84.8F.E6.8E.88.E6.9D.83.EF.BC.8C.E8.8E.B7.E5.8F.96code
 			 */
-			String code = order.getWxCode();
-			String state = order.getWxState();
-
-			// state可以为任何含义，根据你前端需求，这里暂时叫商品id
-			// 授权码、商品id
-			System.out.println("code=" + code + ",state=" + state);
+//			String code = order.getWxCode();
+//			String state = order.getWxState();
+//
+//			// state可以为任何含义，根据你前端需求，这里暂时叫商品id
+//			// 授权码、商品id
+//			System.out.println("code=" + code + ",state=" + state);
 
 			/**
 			 * 第二步：通过code换取网页授权access_token
@@ -79,12 +80,14 @@ public class PayUtils {
 			 */
 			// 下面就到了获取openid,这个代表用户id.
 			// 获取openID
-			String openid = ServiceUtil.getOpenId(code);
+//			JSONObject userObj=ServiceUtil.getOpenId(code);
+//			String openid = userObj.getString("openid");
+			String openid = order.getOpenid();
 			// 生成随机字符串
 			String noncestr = WxUtils.getRandomStr();
 			// 生成1970年到现在的秒数.
 			String timestamp = DateUtils.getNowTimestammp();
-			// 订单号，自定义生成规则，只要全局唯一就OK
+			// 订单号，自定义生成规则，
 			String out_trade_no = order.getOrderNo();
 			// 订单金额，应该是根据state（商品id）从数据库中查询出来
 			String order_price = String.valueOf(order.getPayPrice());
@@ -101,9 +104,9 @@ public class PayUtils {
 			// 执行统一下单接口 获得预支付id，一下是必填参数
 
 			// 微信分配的公众账号ID（企业号corpid即为此appId）
-			reqHandler.setParameter("appid", WxUtils.appId);
+			reqHandler.setParameter("appid", WxPayConfig.APP_ID);
 			// 微信支付分配的商户号
-			reqHandler.setParameter("mch_id", "商户号");
+			reqHandler.setParameter("mch_id", WxPayConfig.MCH_ID);
 			// 终端设备号(门店号或收银设备ID)，注意：PC网页或公众号内支付请传"WEB"
 			reqHandler.setParameter("device_info", "WEB");
 			// 随机字符串，不长于32位。推荐随机数生成算法
@@ -146,7 +149,7 @@ public class PayUtils {
 
 			// 生成支付签名,这个签名 给 微信支付的调用使用
 			SortedMap<Object, Object> signMap = new TreeMap<Object, Object>();
-			signMap.put("appId", WxUtils.appId);
+			signMap.put("appId", WxPayConfig.APP_ID);
 			signMap.put("timeStamp", timestamp);
 			signMap.put("nonceStr", noncestr);
 			signMap.put("package", "prepay_id=" + prepay_id);
@@ -165,11 +168,15 @@ public class PayUtils {
 			// 随机字符串
 			res.put("nonceStr", noncestr);
 			// 预支付id ,就这样的格式
-			res.put("package", "prepay_id=" + prepay_id);
+			res.put("pack_age", "prepay_id=" + prepay_id);
 			// 加密格式
 			res.put("signType", WxPayConfig.SIGN_TYPE);
 			// 微信支付签名
 			res.put("paySign", paySign);
+			
+			//调起支付，修改订单状态为支付
+			
+			
 			return res.toString();
 		} catch (UnsupportedEncodingException e1) {
 			// TODO 打印输出日志

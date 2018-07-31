@@ -7,12 +7,12 @@
 	<select id="get" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
 		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`,`pay_phone`
-		from yunh_qc_pay_order where order_id = #{value}
+		,`device_no` from yunh_qc_pay_order where order_id = #{value}
 	</select>
 	<select id="getOrderByOrderNumber" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
 		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`,`pay_phone`
-		from yunh_qc_pay_order where order_no = #{value}
+		`device_no` from yunh_qc_pay_order where order_no = #{value}
 	</select>
 	<select id="list" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
@@ -29,6 +29,7 @@
 			<if test="modTime != null and modTime != ''"> and mod_time = #{modTime} </if>
 			<if test="payType != null and payType != ''"> and pay_type = #{payType} </if>
 			<if test="payPhone != null and payPhone != ''"> and pay_phone = #{payPhone} </if>
+			<if test="deviceNo != null and deviceNo != ''"> and device_no = #{deviceNo} </if>
 			<if test="orderRemark != null and orderRemark != ''"> and order_remark = #{orderRemark} </if>
 		</where>
 		<choose>
@@ -57,6 +58,7 @@
 			<if test="modTime != null and modTime != ''"> and mod_time = #{modTime} </if>
 			<if test="orderRemark != null and orderRemark != ''"> and order_remark = #{orderRemark} </if>
 			<if test="payType != null and payType != ''"> and pay_type = #{payType} </if>
+			<if test="deviceNo != null and deviceNo != ''"> and device_no = #{deviceNo} </if>
 			<if test="payPhone != null and payPhone != ''"> and pay_phone = #{payPhone} </if>
 		</where>
 	</select>
@@ -74,7 +76,8 @@
 		`mod_time`,
 		`order_remark`,
 		`pay_type`,
-		`pay_phone`
+		`pay_phone`,
+		`device_no`
 		)
 		values
 		(
@@ -87,7 +90,8 @@
 		#{modTime},
 		#{orderRemark},
 		#{payType},
-		#{payPhone}
+		#{payPhone},
+		#{deviceNo}
 		)
 	</insert>
 
@@ -100,10 +104,11 @@
 			<if test="orderState != null">`order_state` = #{orderState}, </if>
 			<if test="isDel != null">`is_del` = #{isDel}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			`mod_time` = now(), 
-			<if test="orderRemark != null">`order_remark` = #{orderRemark}</if>
-			<if test="payType != null">`pay_type` = #{payType}</if>
-			<if test="payPhone != null">`pay_phone` = #{payPhone}</if>
+			<if test="modTime != null">`mod_time` = #{modTime}, </if>
+			<if test="orderRemark != null">`order_remark` = #{orderRemark},</if>
+			<if test="payType != null">`pay_type` = #{payType},</if>
+			<if test="payPhone != null">`pay_phone` = #{payPhone},</if>
+			<if test="deviceNo != null">`device_no` = #{deviceNo},</if>
 		</set>
 		where order_id = #{orderId}
 	</update>

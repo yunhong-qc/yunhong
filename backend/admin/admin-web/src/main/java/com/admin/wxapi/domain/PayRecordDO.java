@@ -21,6 +21,8 @@ public class PayRecordDO implements Serializable {
 	private String payMoney;
 	//设备编号
 	private String payDeviceNo;
+	//订单号
+	private String orderNo;
 	//用户编号
 	private String payUserNo;
 	//卡类型，根据具体卡类型来。
@@ -142,4 +144,11 @@ public class PayRecordDO implements Serializable {
 	public Date getCreateTime() {
 		return createTime;
 	}
+	public String getOrderNo() {
+		return orderNo;
+	}
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+	
 }

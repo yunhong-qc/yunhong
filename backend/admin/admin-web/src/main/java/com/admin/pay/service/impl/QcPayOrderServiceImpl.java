@@ -17,8 +17,8 @@ import com.admin.pay.service.QcPayOrderService;
 import com.admin.utils.BaseResultModel;
 import com.admin.utils.DateUtils;
 import com.admin.utils.FileLog;
+import com.admin.utils.pay.PayUtils;
 import com.admin.utils.pay.ali.PayException;
-import com.admin.utils.pay.ali.PayUtils;
 import com.admin.utils.pay.wex.ServiceUtil;
 import com.admin.utils.pay.wex.WeixinUtils;
 import com.admin.utils.pay.wex.WxPayConfig;
@@ -59,6 +59,7 @@ public class QcPayOrderServiceImpl implements QcPayOrderService {
 	
 	@Override
 	public int update(QcPayOrderDO qcPayOrder){
+		qcPayOrder.setModTime(new Date());
 		return qcPayOrderDao.update(qcPayOrder);
 	}
 	
@@ -156,13 +157,20 @@ public class QcPayOrderServiceImpl implements QcPayOrderService {
 	public String addNewOrderAndSDKRSA(QcPayOrderDO order) throws AlipayApiException {
 		// TODO 此处为方法主题
 		order=this.addNewOrder(order);
+		if(order!=null) {
+			order.setOrderState(1);
+			order.setModTime(new Date());
+			qcPayOrderDao.update(order);
+		}else {
+			throw new RuntimeException("创建订单时失败!");
+		}
 		if (order.getPayType() == 1) {
 			//支付宝
 //			return PayUtils.getAliPayOrderInfos(order);
 			return JSONObject.toJSONString(order);
 		} else {
-			return JSONObject.toJSONString(order);
-//			return PayUtils.getWexPayOrderInfos(order);
+//			return JSONObject.toJSONString(order);
+			return PayUtils.getWexPayOrderInfos(order);
 		}
 	}
 
@@ -189,6 +197,12 @@ public class QcPayOrderServiceImpl implements QcPayOrderService {
 			FileLog.errorLog("订单已超时："+resOrder.getOrderNo());
 			throw new PayException("订单已超时。");
 		}
+	}
+
+	@Override
+	public QcPayOrderDO getOrderByOrderNumber(String orderNo) {
+		// TODO 此处为方法主题
+		return qcPayOrderDao.getOrderByOrderNumber(orderNo);
 	}
 	
 

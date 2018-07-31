@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"></meta>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/wx/login.css"></link>
+<link rel="stylesheet" href="/css/wx/swiper.min.css"></link>
+<script>
+	//初始化 微信硬件jsapi库 V型知识库 www.vxzsk.com  
+	
+	/**
+		先验证设备连接，然后前往确认订单界面
+	*/
+	function getParentConnetedDeviceInfo(){
+		//window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d7f7c26f2369785&redirect_uri=http%3a%2f%2fapp.cdqckj.com%2fpay%2ftoPayPage&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
+		/* var devs=window.parent.getSdevicesInfo();
+		for(var i=0;i<devs.length;i++){
+			
+			var dev=devs[i];
+			if(dev.state=='connected'){
+				window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d7f7c26f2369785&redirect_uri=http%3a%2f%2fapp.cdqckj.com%2fpay%2ftoPayPage&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+			}else{
+				alert('请先连接设备。');
+			}
+		}
+		if(devs==[]){
+			//没有，则提示未连接任何设备。
+			alert('请先连接设备。');
+			return;
+		} */
+	}
+	
+//支付借宿
+ 
+</script>
+</head>
+<body>
+	<div class="content">
+			    <div class="form-area">
+			    	 <div class="inp">
+			            		支付0.01元
+			        </div>
+			    </div>
+			</div>
+			<div class="container" id="container">
+					<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d7f7c26f2369785&redirect_uri=http%3a%2f%2fapp.cdqckj.com%2fpay%2ftoPayPage&response_type=code&scope=snsapi_base&state=123#wechat_redirect" onclick="getParentConnetedDeviceInfo()"
+						class="weui_btn weui_btn_primary">立即充值</a>
+				</div>
+</body>
+</html>
