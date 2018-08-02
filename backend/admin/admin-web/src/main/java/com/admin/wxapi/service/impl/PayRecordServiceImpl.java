@@ -1,5 +1,6 @@
 package com.admin.wxapi.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,8 @@ public class PayRecordServiceImpl implements PayRecordService {
 	
 	@Override
 	public int save(PayRecordDO qcPayRecord){
+		qcPayRecord.setIsDel(0);
+		qcPayRecord.setCreateTime(new Date());
 		return qcPayRecordDao.save(qcPayRecord);
 	}
 	

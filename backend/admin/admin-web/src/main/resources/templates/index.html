@@ -40,12 +40,12 @@
                         </a>
                     </div>
                 </li>
-                <li th:each="menu : ${menus}"><a href="#"> <i
+                <li th:each="menu : ${menus}"><a href="#" onclick="toggle_ul(this);"> <i
                         class="fa fa fa-bar-chart-o" th:class="${menu.attributes.icon}"></i>
                     <span class="nav-label" th:text="${menu.text}"></span> <span
                             class="fa arrow"></span>
                 </a>
-                   <ul class="nav nav-second-level">
+                   <ul class="nav nav-second-level" style="display:none;">
                         <li th:each="cmenu : ${menu.children}">
                         	<a class="J_menuItem" href="#" th:text="${cmenu.text}" th:href="${cmenu.attributes.url}"></a>
                         </li>
@@ -214,8 +214,8 @@
 <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/js/plugins/layer/layer.min.js"></script>
-<!-- 自定义js -->
-<script src="/js/app.js?v=4.1.0"></script>
+<!-- 自定义js --><!-- 
+<script src="/js/app.js?v=4.1.0"></script> -->
 <script type="text/javascript" src="/js/contabs.js"></script>
 <!-- 第三方插件 -->
 <script src="/js/plugins/pace/pace.min.js"></script>
@@ -233,7 +233,9 @@
     $(function () {
         connect();
     });
-
+	function toggle_ul(_this){
+		$(_this).siblings('ul').toggle();
+	}
     function connect() {
         var sock = new SockJS("/endpointChat");
         var stomp = Stomp.over(sock);

@@ -84,6 +84,7 @@ public class QcPayOrderServiceImpl implements QcPayOrderService {
 		order.setCreateTime(new Date());
 		order.setOrderState(0);//初始
 		order.setOrderNo(DateUtils.getOrderNo());
+		order.setPayUserPhone(order.getOpenid());
 		//获取订单号
 		if(qcPayOrderDao.save(order)>0) {
 			return order;
@@ -156,22 +157,24 @@ public class QcPayOrderServiceImpl implements QcPayOrderService {
 	@Transactional
 	public String addNewOrderAndSDKRSA(QcPayOrderDO order) throws AlipayApiException {
 		// TODO 此处为方法主题
+		String resultO="";
 		order=this.addNewOrder(order);
 		if(order!=null) {
+			if (order.getPayType() == 1) {
+				//支付宝
+//				return PayUtils.getAliPayOrderInfos(order);
+				resultO= JSONObject.toJSONString(order);
+			} else {
+//				return JSONObject.toJSONString(order);
+				resultO= PayUtils.getWexPayOrderInfos(order);
+			}
 			order.setOrderState(1);
 			order.setModTime(new Date());
 			qcPayOrderDao.update(order);
 		}else {
 			throw new RuntimeException("创建订单时失败!");
 		}
-		if (order.getPayType() == 1) {
-			//支付宝
-//			return PayUtils.getAliPayOrderInfos(order);
-			return JSONObject.toJSONString(order);
-		} else {
-//			return JSONObject.toJSONString(order);
-			return PayUtils.getWexPayOrderInfos(order);
-		}
+		return resultO;
 	}
 
 	@Override
@@ -203,6 +206,12 @@ public class QcPayOrderServiceImpl implements QcPayOrderService {
 	public QcPayOrderDO getOrderByOrderNumber(String orderNo) {
 		// TODO 此处为方法主题
 		return qcPayOrderDao.getOrderByOrderNumber(orderNo);
+	}
+
+	@Override
+	public List<QcPayOrderDO> getOrderBy(QcPayOrderDO order) {
+		// TODO 此处为方法主题
+		return qcPayOrderDao.getOrderBy(order);
 	}
 	
 

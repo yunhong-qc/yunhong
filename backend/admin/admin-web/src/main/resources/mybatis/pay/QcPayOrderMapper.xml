@@ -7,12 +7,32 @@
 	<select id="get" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
 		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`,`pay_phone`
-		,`device_no` from yunh_qc_pay_order where order_id = #{value}
+		,`device_no`,`pay_user_phone` from yunh_qc_pay_order where order_id = #{value}
 	</select>
 	<select id="getOrderByOrderNumber" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
 		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`,`pay_phone`
-		`device_no` from yunh_qc_pay_order where order_no = #{value}
+		`device_no`,`pay_user_phone` from yunh_qc_pay_order where order_no = #{value}
+	</select>
+	<select id="getOrderBy" resultType="com.admin.pay.domain.QcPayOrderDO">
+		select
+		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`,`pay_phone`
+		`device_no`,`pay_user_phone` from yunh_qc_pay_order
+		<where>
+			<if test="orderId != null and orderId != ''"> and order_id = #{orderId} </if>
+			<if test="orderNo != null and orderNo != ''"> and order_no = #{orderNo} </if>
+			<if test="payPrice != null and payPrice != ''"> and pay_price = #{payPrice} </if>
+			<if test="payUser != null and payUser != ''"> and pay_user = #{payUser} </if>
+			<if test="orderState != null and orderState != ''"> and order_state = #{orderState} </if>
+			<if test="isDel != null and isDel != ''"> and is_del = #{isDel} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="modTime != null and modTime != ''"> and mod_time = #{modTime} </if>
+			<if test="payType != null and payType != ''"> and pay_type = #{payType} </if>
+			<if test="payPhone != null and payPhone != ''"> and pay_phone = #{payPhone} </if>
+			<if test="deviceNo != null and deviceNo != ''"> and device_no = #{deviceNo} </if>
+			<if test="orderRemark != null and orderRemark != ''"> and order_remark = #{orderRemark} </if>
+			<if test="payUserPhone != null and payUserPhone != ''"> and pay_user_phone = #{payUserPhone} </if>
+		</where> 
 	</select>
 	<select id="list" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
@@ -31,6 +51,7 @@
 			<if test="payPhone != null and payPhone != ''"> and pay_phone = #{payPhone} </if>
 			<if test="deviceNo != null and deviceNo != ''"> and device_no = #{deviceNo} </if>
 			<if test="orderRemark != null and orderRemark != ''"> and order_remark = #{orderRemark} </if>
+			<if test="payUserPhone != null and payUserPhone != ''"> and pay_user_phone = #{payUserPhone} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -60,6 +81,7 @@
 			<if test="payType != null and payType != ''"> and pay_type = #{payType} </if>
 			<if test="deviceNo != null and deviceNo != ''"> and device_no = #{deviceNo} </if>
 			<if test="payPhone != null and payPhone != ''"> and pay_phone = #{payPhone} </if>
+			<if test="payUserPhone != null and payUserPhone != ''"> and pay_user_phone = #{payUserPhone} </if>
 		</where>
 	</select>
 
@@ -77,7 +99,8 @@
 		`order_remark`,
 		`pay_type`,
 		`pay_phone`,
-		`device_no`
+		`device_no`,
+		`pay_user_phone`
 		)
 		values
 		(
@@ -91,7 +114,8 @@
 		#{orderRemark},
 		#{payType},
 		#{payPhone},
-		#{deviceNo}
+		#{deviceNo},
+		#{payUserPhone}
 		)
 	</insert>
 
@@ -109,6 +133,7 @@
 			<if test="payType != null">`pay_type` = #{payType},</if>
 			<if test="payPhone != null">`pay_phone` = #{payPhone},</if>
 			<if test="deviceNo != null">`device_no` = #{deviceNo},</if>
+			<if test="payUserPhone != null">`pay_user_phone` = #{payUserPhone},</if>
 		</set>
 		where order_id = #{orderId}
 	</update>

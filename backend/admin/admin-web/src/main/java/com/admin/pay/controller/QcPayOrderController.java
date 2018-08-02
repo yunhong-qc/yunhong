@@ -39,6 +39,7 @@ import com.admin.utils.PageUtils;
 import com.admin.utils.Query;
 import com.admin.utils.R;
 import com.admin.utils.ResultCode;
+import com.admin.utils.StringUtils;
 import com.admin.utils.pay.ali.AlipayConfig;
 import com.admin.utils.pay.ali.PayException;
 import com.admin.utils.pay.wex.ServiceUtil;
@@ -202,6 +203,7 @@ public class QcPayOrderController {
 			prd.setOrderNo(orderNo);
 			prd.setPayType(qo.getPayType());
 			prd.setPayDeviceNo(qo.getOrderNo());
+			prd.setPayUserNo(qo.getPayUser());
 			if (return_code.equals("SUCCESS")) {
 				if (result_code.equals("SUCCESS")) {
 					prd.setPayResult(0);
@@ -241,6 +243,12 @@ public class QcPayOrderController {
 		// 授权码、商品id
 		System.out.println("code=" + code + ",state=" + state);
 
+		/**
+		 * 暂时控制。
+		 */
+		if(StringUtils.isNullString(code)) {
+			return "pay/wxPay";
+		}
 		/**
 		 * 第二步：通过code换取网页授权access_token
 		 * 根据授权码code获取access_token，参考：http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html#.E7.AC.AC.E4.BA.8C.E6.AD.A5.EF.BC.9A.E9.80.9A.E8.BF.87code.E6.8D.A2.E5.8F.96.E7.BD.91.E9.A1.B5.E6.8E.88.E6.9D.83access_token

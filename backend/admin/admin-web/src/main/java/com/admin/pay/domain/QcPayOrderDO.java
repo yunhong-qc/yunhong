@@ -23,6 +23,7 @@ public class QcPayOrderDO implements Serializable {
 	private String wxCode;
 	private String wxState;
 	private String openid;
+	private String payUserPhone;
 	//订单号
 	private String orderNo;
 	//金额
@@ -190,6 +191,12 @@ public class QcPayOrderDO implements Serializable {
 	}
 	public void setDeviceNo(Integer deviceNo) {
 		this.deviceNo = deviceNo;
+	}
+	public String getPayUserPhone() {
+		return payUserPhone;
+	}
+	public void setPayUserPhone(String payUserPhone) {
+		this.payUserPhone = payUserPhone;
 	}
 	
 	

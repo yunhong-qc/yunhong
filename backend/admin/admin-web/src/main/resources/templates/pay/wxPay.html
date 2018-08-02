@@ -10,55 +10,67 @@
 <link rel="stylesheet" href="/css/pay/main.css"></link>
 <script type="text/javascript" src="/js/util/loading.js"></script>
 <script>
+	//防止重复点击
+	var submit = true;
 	/**
 	 * 充值金额选择
 	 * @param t
 	 * @returns
 	 */
-	 $(document).ready(function() {
-		 $('.click_li').click(function(t) {
-				$('.click_li').removeClass('selected');
-				$(this).addClass('selected');
-				var price = $(this).children('.am-radio-inline').attr('price');
-				$('.rechnum').html(price + '.00 元');
+	$(document).ready(
+			function() {
+				$('.click_li').click(function(t) {
+					$('.click_li').removeClass('selected');
+					$(this).addClass('selected');
+					var price = $(this).attr('price');
+					$('.rechnum').html(price + '.00 元');
+				});
+				//绑定微信事件
+				if (typeof WeixinJSBridge == "undefined") {
+					if (document.addEventListener) {
+						document.addEventListener('WeixinJSBridgeReady',
+								onBridgeReady, false);
+					} else if (document.attachEvent) {
+						document.attachEvent('WeixinJSBridgeReady',
+								onBridgeReady);
+						document.attachEvent('onWeixinJSBridgeReady',
+								onBridgeReady);
+					}
+				} else {
+					onBridgeReady();
+				}
 			});
-		});
-	//支付开始
+
 	function toPay() {
 		_loading.show();
-		return;
-		if (typeof WeixinJSBridge == "undefined") {
-			if (document.addEventListener) {
-				document.addEventListener('WeixinJSBridgeReady', onBridgeReady,
-						false);
-			} else if (document.attachEvent) {
-				document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-				document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-			}
-		} else {
-			onBridgeReady();
-		}
+		submit = false;
+		onBridgeReady();
 	}
-
 	/**
 		调起支付
 	 */
 	function onBridgeReady() {
+		if (submit) {
+			return;
+		}
+		submit = true;
 		//传递code和state去addOrder增加订单
-		var price=$('.selected').attr('price');
+		var price = $('.selected').attr('price');
 		var order = {};
 		order.payType = 2;
 		order.payPrice = '1';
 		order.orderRemark = '充值燃气费';
-		order.openid=$('#openid').val();
-		order.payUser=$('#nickname').val();
+		order.openid = $('#openid').val();
+		order.payUser = $('#nickname').val();
 		//获取数据后，拉起支付界面
-		$.ajax({
+		$
+				.ajax({
 					type : "POST",
 					url : "addOrder",
 					async : false,
 					data : order,
 					success : function(data) {
+						_loading.hide();
 						if (data.code == "000000") {
 							//转为对象
 							var payd = eval('(' + data.data + ')');
@@ -74,9 +86,11 @@
 												"paySign" : payd.paySign
 											},
 											function(res) {
+												submit = false;
 												if (res.err_msg == "get_brand_wcpay_request:ok") {
 													//调用设备写信息
-													alert("支付成功");
+													_loading.show();
+													window.location.href = 'http://app.cdqckj.com/wx/ble/pubBind';
 												} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
 													alert("用户取消支付");
 												} else {
@@ -92,7 +106,7 @@
 	//支付结束
 </script>
 </head>
-<body>
+<body style="padding:0px 10px 0px 10px;">
 	<input type="hidden" id="openid" th:value=${openid}></input>
 	<input type="hidden" id="headurl" th:value=${headurl}></input>
 	<input type="hidden" id="nickname" th:value=${nickname}></input>
@@ -105,18 +119,24 @@
 		</div>
 		<div class="tr_rechli am-form-group">
 			<ul class="ui-choose am-form-group" id="uc_01">
-				<li class="click_li selected" price="10"><label class="am-radio-inline" > 10￥ </label></li>
-				<li class="click_li" price="20"><label class="am-radio-inline" > 20￥ </label></li>
-				<li class="click_li" price="50"><label class="am-radio-inline" > 50￥ </label></li>
-				<li class="click_li" price="100"><label class="am-radio-inline" > 100￥ </label></li>
-				<li class="click_li" price="200"><label class="am-radio-inline" > 200￥ </label></li>
-				<li class="click_li" price="500"><label class="am-radio-inline" > 500￥ </label></li>
+				<li class="click_li selected" price="10"><label
+					class="am-radio-inline"> 10￥ </label></li>
+				<li class="click_li" price="20"><label class="am-radio-inline">
+						20￥ </label></li>
+				<li class="click_li" price="50"><label class="am-radio-inline">
+						50￥ </label></li>
+				<li class="click_li" price="100"><label class="am-radio-inline">
+						100￥ </label></li>
+				<li class="click_li" price="200"><label class="am-radio-inline">
+						200￥ </label></li>
+				<li class="click_li" price="500"><label class="am-radio-inline">
+						500￥ </label></li>
 			</ul>
 			<!--<span>1招兵币=1元 10元起充</span>-->
 		</div>
 		<div class="tr_rechnum">
 			<span>应付金额：</span>
-			<p class="rechnum">0.00元</p>
+			<p class="rechnum">10.00元</p>
 		</div>
 	</div>
 	<div id="container">

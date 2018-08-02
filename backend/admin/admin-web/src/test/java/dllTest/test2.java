@@ -36,13 +36,14 @@ public class test2 {
 			e.printStackTrace();
 		}
 	}
-	@Test
+
 	public void test44() {
-		System.out.println(0.01*100);
+		System.out.println(0.01 * 100);
 	}
+
 	public void test33() {
 		try {
-			String result="\"token\":123123123,\"rspCode\":123213}";
+			String result = "\"token\":123123123,\"rspCode\":123213}";
 			String token = null;
 			String respCode = null;
 			String tokenRegex = "\"token\":(.*?),";// 使用非贪婪模式
@@ -52,7 +53,7 @@ public class test2 {
 			//
 			if (tokenmatcher.find()) {
 				token = tokenmatcher.group(1).replace("\"", "");
-			}else {
+			} else {
 				tokenRegex = "\"token\":(.*?)}";
 				tokenmatcher = Pattern.compile(tokenRegex).matcher(result);
 				if (tokenmatcher.find()) {
@@ -61,22 +62,48 @@ public class test2 {
 			}
 			if (codematcher.find()) {
 				respCode = codematcher.group(1).replace("\"", "");
-			}else {
+			} else {
 				rspCodeRegex = "\"rspCode\":(.*?)}";// 使用非贪婪模式
 				codematcher = Pattern.compile(rspCodeRegex).matcher(result);
 				if (codematcher.find()) {
 					respCode = codematcher.group(1).replace("\"", "");
 				}
 			}
-			if(token!=null) {
-				token=token.replace("}", "");
-				respCode=respCode.replace(",", "");
+			if (token != null) {
+				token = token.replace("}", "");
+				respCode = respCode.replace(",", "");
 			}
-			System.out.println(token+"--"+respCode);
-		}catch(Exception e) {
+			System.out.println(token + "--" + respCode);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	@Test
+	public void test3334() {
+		Thread test1 = new Thread(new Runnable() {
+			public void run() {
+				test13334("第一个");
+			}
+		}, "test1");
+		Thread test2 = new Thread(new Runnable() {
+			public void run() {
+				test13334("第二个");
+			}
+		}, "test2");
+		test1.start();
+		;
+		test2.start();
+	}
+
+	public void test13334(String str) {
+		synchronized (this) {
+			for (int i = 0; i < 5; i++) {
+				System.out.println(str + ":" + i);
+
+			}
+		}
 	}
 
 }

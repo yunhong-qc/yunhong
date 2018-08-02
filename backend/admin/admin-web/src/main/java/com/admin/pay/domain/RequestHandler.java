@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import com.admin.utils.FileLog;
 import com.admin.utils.MD5Utils;
 import com.admin.utils.pay.wex.WxPayConfig;
 
@@ -172,7 +173,7 @@ public class RequestHandler {
            }
        }
        sb.append("key=" + WxPayConfig.KEY);
-        
+       FileLog.debugLog(sb.toString());
        String sign = MD5Utils.MD5Encode(sb.toString(), WxPayConfig.CHARTSET).toUpperCase();
         
        this.setParameter("sign", sign);

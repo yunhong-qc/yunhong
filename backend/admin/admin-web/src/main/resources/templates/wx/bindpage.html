@@ -48,9 +48,7 @@
                     <li id="connectedsuccess"> <p class="p_input p_input_yzm"><em class="fa fa-envelope"></em><span style="float:right">设备未连接</span></p> </li>
                 </ul> -->
 					<div class="user_zc_btn">
-						<p class="p_btn" id="scanbtn">
-							<a onclick="ScanBlus()" class="c_4">设备连接</a>
-						</p>
+						<p class="p_btn" id="scanbtn">请按以下提示进行连接操作..</p>
 					</div>
 					<ul id="connectmodel">
 					</ul>
@@ -65,25 +63,8 @@
 				<div class="user_zc_body">
 					<div class="user_zc_btn">
 						<p class="p_btn" id="scanbtn">
-							请按以下提示进行连接操作..
+							<a onclick="ScanBlus()" class="c_4">设备认证</a>
 						</p>
-					</div>
-					<div id="activity-detail" class="zh_CN ">
-						<div id='Deviceinfo' tabindex='2'
-							class='weui_btn login-btn weui_btn_primary wdbll4'
-							onclick="getDeviceInfo()">设备信息</div>
-						<div id='getRandom' tabindex='3'
-							class='weui_btn login-btn weui_btn_primary wdbll4'
-							onclick="getRandom()">随机数</div>
-						<div id='externalAuth' tabindex='4'
-							class='weui_btn login-btn weui_btn_primary wdbll4'
-							onclick="externalAuth()">外部认证</div>
-						<div id='deviceAuth' tabindex='5'
-							class='weui_btn login-btn weui_btn_primary wdbll4'
-							onclick="deviceAuth()">设备认证</div>
-						<div id='getTsk' tabindex='6'
-							class='weui_btn login-btn weui_btn_primary wdbll4'
-							onclick="getTsk()">获取TSK</div>
 					</div>
 					<div class="debugging">
 						<h2>
@@ -96,31 +77,192 @@
 								<label id="initBle"></label>
 							</p>
 						</div>
-						<div class="show showbug" id="TxtDebugs"
+						<div class="showbug" id="TxtDebugs"
 							style="display: none; word-break: break-all;">
 							<p>
 								<label id="initBles"></label>
 							</p>
 						</div>
 					</div>
+					<div class="debugging">
+						<h2>订单信息</h2>
+						<div class="showbug" id="TxtDebug"
+							style="display: block; word-break: break-all;">
+							<table role="grid" id="bc_ccsmieon7oqo"
+								class="bc-table table-bordered table-striped table-hover">
+								<thead>
+									<tr role="row">
+										<th data-col="name">订单号</th>
+										<th data-col="name">金额</th>
+										<th data-col="gender">昵称</th>
+										<th data-col="mobile">订单状态</th>
+										<th data-col="age" class="cursor-pointer">支付时间</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="order : ${orders}" id="order_0" role="row" data-rowindex="0">
+										<td class="center" th:text="${order.orderNo}"></td>
+										<td th:text="${order.payPrice}"></td>
+										<td th:text="${order.payUser}"></td>
+										<td th:text="${order.orderState}"></td>
+										<td th:text="${order.createTime}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
 				</div>
 			</div>
-			<div class="swiper-slide">
+			<!-- 充值 -->
+			<div class="swiper-slide" >
+				<!--连接设备-->
 				<div class="user_zc_body">
-
-					<!-- 支付 -->
+					<input type="hidden" id="openid" th:value=${openid}></input> <input
+						type="hidden" id="headurl" th:value=${headurl}></input> <input
+						type="hidden" id="nickname" th:value=${nickname}></input>
+					<div class="tr_rechbox">
+						<div class="tr_rechhead">
+							<img th:src=${headurl}></img>
+							<p>
+								充值帐号： <a th:text=${nickname}></a>
+							</p>
+						</div>
+						<div class="tr_rechli am-form-group">
+							<ul class="ui-choose am-form-group" id="uc_01">
+								<li class="click_li selected" price="10"><label
+									class="am-radio-inline"> 10￥ </label></li>
+								<li class="click_li" price="20"><label
+									class="am-radio-inline"> 20￥ </label></li>
+								<li class="click_li" price="50"><label
+									class="am-radio-inline"> 50￥ </label></li>
+								<li class="click_li" price="100"><label
+									class="am-radio-inline"> 100￥ </label></li>
+								<li class="click_li" price="200"><label
+									class="am-radio-inline"> 200￥ </label></li>
+								<li class="click_li" price="500"><label
+									class="am-radio-inline"> 500￥ </label></li>
+							</ul>
+							<!--<span>1招兵币=1元 10元起充</span>-->
+						</div>
+						<div class="tr_rechnum">
+							<span>应付金额：</span>
+							<p class="rechnum">10.00元</p>
+						</div>
+					</div>
 					<div id="container">
 						<a href="javascript:void(0);" onclick="toPay()"
-							class="weui_btn weui_btn_primary">前往充值</a>
+							class="weui_btn weui_btn_primary">立即支付</a>
 					</div>
 				</div>
+				<!--绑定设备END-->
 			</div>
+
 		</div>
 		<p id="OpenId" style="display: none"></p>
 		<p id="connecteddevice" style="display: none"></p>
 		<p id="unbindsuccess" style="display: none"></p>
 	</div>
 	<script>
+		//防止重复点击
+		var submit = true;
+
+		/**
+		 * 充值金额选择
+		 * @param t
+		 * @returns
+		 */
+		$(document).ready(function() {
+					/* smitLogPrintWx("<p>http jswei混淆版本2.1.3qc1</p>"); */
+					//微信事件初始化
+					$('.click_li').click(function(t) {
+						$('.click_li').removeClass('selected');
+						$(this).addClass('selected');
+						var price = $(this).attr('price');
+						$('.rechnum').html(price + '.00 元');
+					});
+					//绑定微信事件
+					if (typeof WeixinJSBridge == "undefined") {
+						if (document.addEventListener) {
+							document.addEventListener('WeixinJSBridgeReady',
+									onBridgeReady, false);
+						} else if (document.attachEvent) {
+							document.attachEvent('WeixinJSBridgeReady',
+									onBridgeReady);
+							document.attachEvent('onWeixinJSBridgeReady',
+									onBridgeReady);
+						}
+					} else {
+						onBridgeReady();
+					}
+					//设备初始化
+					smitPosSdkWx = new SmitPosSdkWx(0x04, 0x00);
+					init();
+		});
+
+		/**
+		下单，成功后调起支付
+		*/
+		function toPay() {
+			if (submit) {
+				return;
+			}
+			submit = true;
+			//传递code和state去addOrder增加订单
+			var price = $('.selected').attr('price');
+			var order = {};
+			order.payType = 2;
+			order.payPrice = '1';
+			order.orderRemark = '充值燃气费';
+			order.openid = $('#openid').val();
+			order.payUser = $('#nickname').val();
+			//获取数据后，拉起支付界面
+			$.ajax({
+						type : "POST",
+						url : "../../pay/addOrder",
+						async : false,
+						data : order,
+						success : function(data) {
+							_loading.hide();
+							if (data.code == "000000") {
+								onBridgeReady(data.data);
+							}
+						}
+					});
+		}
+		/**
+			调起支付
+		 */
+		function onBridgeReady(data) {
+			//转为对象
+			var payd = eval('(' + data + ')');
+			WeixinJSBridge
+					.invoke(
+							'getBrandWCPayRequest',
+							{
+								"appId" : payd.appId,
+								"timeStamp" : payd.timeStamp,
+								"nonceStr" : payd.nonceStr,
+								"package" : payd.pack_age,
+								"signType" : payd.signType,
+								"paySign" : payd.paySign
+							},
+							function(res) {
+								submit = false;
+								if (res.err_msg == "get_brand_wcpay_request:ok") {
+									//调用设备写信息
+									_loading.show();
+									window.location.href = 'http://app.cdqckj.com/wx/ble/pubBind';
+								} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+									alert("用户取消支付");
+								} else {
+									alert("支付失败");
+								}
+							});
+
+		}
+
+		//支付结束
 		var httpurl = "http://119.29.162.110:1345"
 		var smit = null;
 		var smitPosSdkWx = null;
@@ -138,10 +280,10 @@
 					name = '设备连接';
 					break;
 				case 1:
-					name = '功能菜单';
+					name = '我的订单';
 					break;
 				case 2:
-					name = '费用充值';
+					name = '充值中心';
 					break;
 				default:
 					name = '';
@@ -149,13 +291,6 @@
 				return '<li class="' + className + '">' + name + '</li>';
 			}
 		});
-		/**
-		跳转到支付界面
-		 */
-		function toPay() {
-			_loading.show();
-			window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d7f7c26f2369785&redirect_uri=http%3a%2f%2fapp.cdqckj.com%2fpay%2ftoPayPage&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect';
-		}
 		function strToJson(str) {
 			var json = eval('(' + str + ')');
 			return json;
@@ -184,12 +319,6 @@
 		function getSdevicesInfo() {
 			return sdevicesInfo;
 		}
-		$(document).ready(function() {
-			/* smitLogPrintWx("<p>http jswei混淆版本2.1.3qc1</p>"); */
-			smitPosSdkWx = new SmitPosSdkWx(0x04, 0x00);
-			init();
-
-		});
 		function init() {
 			var typeWx = 0x04;
 			var company = 0x00;

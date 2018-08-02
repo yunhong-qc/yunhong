@@ -30,6 +30,6 @@ public interface QcPayOrderDao {
 	int remove(Integer order_id);
 	
 	int batchRemove(Integer[] orderIds);
-	
+	List<QcPayOrderDO> getOrderBy(QcPayOrderDO order);
 	
 }

@@ -42,6 +42,7 @@ public interface QcPayOrderService {
 	String getPayOrderANDSDKRSA(QcPayOrderDO order) throws PayException,AlipayApiException;
 	void alipayResultCallBack(Map<String, String> map);
 	QcPayOrderDO getOrderByOrderNumber(String orderNo);
+	List<QcPayOrderDO> getOrderBy(QcPayOrderDO order);
 	
 	
 }
