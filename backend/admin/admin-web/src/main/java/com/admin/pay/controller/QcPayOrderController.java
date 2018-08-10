@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import com.admin.pay.domain.QcPayOrderDO;
+import com.admin.pay.domain.QcWexUserDO;
 import com.admin.pay.domain.RequestHandler;
 import com.admin.pay.service.QcPayOrderService;
+import com.admin.pay.service.QcWexUserService;
 import com.admin.utils.BaseResultModel;
 import com.admin.utils.DateUtils;
 import com.admin.utils.FileLog;
@@ -70,7 +74,8 @@ public class QcPayOrderController {
 	private QcPayOrderService qcPayOrderService;
 	@Autowired
 	private PayRecordService PpayRecordService;
-
+	@Autowired
+	private QcWexUserService qcWexUserService;
 	@GetMapping()
 	String QcPayOrder() {
 		return "pay/qcPayOrder/qcPayOrder";
@@ -207,8 +212,11 @@ public class QcPayOrderController {
 			if (return_code.equals("SUCCESS")) {
 				if (result_code.equals("SUCCESS")) {
 					prd.setPayResult(0);
+					qo.setOrderState(2);
 				} else {
 					prd.setPayResult(1);
+					//失效
+					qo.setOrderState(4);
 				}
 				// 修改数据库支付状态
 			} else {
@@ -216,6 +224,7 @@ public class QcPayOrderController {
 				prd.setPayResult(1);
 			}
 			// 保存交易记录
+			qcPayOrderService.update(qo);
 			PpayRecordService.save(prd);
 			request.setAttribute("out_trade_no", orderNo);
 			// 通知微信.异步确认成功.必写.不然会一直通知后台.八次之后就认为交易失败了.
@@ -232,58 +241,49 @@ public class QcPayOrderController {
 	@RequestMapping("toPayPage")
 	public String toPayPage(HttpServletRequest request) {
 		/**
-		 * 第一步：用户同意授权，根据参数，获取code
-		 * 授权成功后返回的授权码，参考：http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html#.E7.AC.AC.E4.B8.80.E6.AD.A5.EF.BC.9A.E7.94.A8.E6.88.B7.E5.90.8C.E6.84.8F.E6.8E.88.E6.9D.83.EF.BC.8C.E8.8E.B7.E5.8F.96code
+		 * 通过session获取openid
 		 */
-
-		String code = request.getParameter("code");
-		String state = request.getParameter("state");
-
-		// state可以为任何含义，根据你前端需求，这里暂时叫商品id
-		// 授权码、商品id
-		System.out.println("code=" + code + ",state=" + state);
-
-		/**
-		 * 暂时控制。
-		 */
-		if(StringUtils.isNullString(code)) {
-			return "pay/wxPay";
+		HttpSession session= request.getSession();
+		String openId=(String) session.getAttribute(session.getId());
+		System.out.println(openId);
+		if(!StringUtils.isNullString(openId)) {
+			QcWexUserDO wx=qcWexUserService.getByOpenId(openId);
+			if(wx!=null) {
+				request.setAttribute("userhead", wx.getUserHead());
+				request.setAttribute("nickname", wx.getNickName());
+				request.setAttribute("openid", wx.getOpenId());
+			}
 		}
-		/**
-		 * 第二步：通过code换取网页授权access_token
-		 * 根据授权码code获取access_token，参考：http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html#.E7.AC.AC.E4.BA.8C.E6.AD.A5.EF.BC.9A.E9.80.9A.E8.BF.87code.E6.8D.A2.E5.8F.96.E7.BD.91.E9.A1.B5.E6.8E.88.E6.9D.83access_token
-		 */
-		// 下面就到了获取openid,这个代表用户id.
-		// 获取openID
-		JSONObject openJson = ServiceUtil.getOpenId(code);
-		String openid = openJson.getString("openid");
-		String access_token = openJson.getString("access_token");
-		JSONObject userInfo=ServiceUtil.getUserInfo(access_token, openid);
 		
-//		request.setAttribute("code", code);
-//		request.setAttribute("state", state);
-		request.setAttribute("openid", openid);
-		request.setAttribute("nickname", userInfo.get("nickname"));
-		request.setAttribute("headurl", userInfo.get("headimgurl"));
 		return "pay/wxPay";
 	}
 
 	/**
-	 * 前往充值界面
+	 * 前往订单界面
 	 * 
 	 * @param request
 	 * @return 2018年7月26日 作者：fengchase
 	 */
-	@RequestMapping("toCharnagePage")
-	public String toCharnagePage(HttpServletRequest request) {
+	@RequestMapping("toMyOrder")
+	public String toMyOrder(HttpServletRequest request) {
 		/**
-		 * 第一步：用户同意授权，根据参数，获取code
-		 * 授权成功后返回的授权码，参考：http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html#.E7.AC.AC.E4.B8.80.E6.AD.A5.EF.BC.9A.E7.94.A8.E6.88.B7.E5.90.8C.E6.84.8F.E6.8E.88.E6.9D.83.EF.BC.8C.E8.8E.B7.E5.8F.96code
+		 * 通过session获取openid
 		 */
-		String code = request.getParameter("code");
-		String state = request.getParameter("state");
-		request.setAttribute("code", code);
-		request.setAttribute("state", state);
+		List<QcPayOrderDO> lst=new ArrayList<QcPayOrderDO>();
+		//不为空，获取用户订单数据
+		HttpSession session= request.getSession();
+		String openid=(String) session.getAttribute(session.getId());
+		System.out.println(openid);
+		if(!StringUtils.isNullString(openid)) {
+			QcPayOrderDO par=new QcPayOrderDO();
+			par.setPayUserPhone(openid);
+			lst=qcPayOrderService.getOrderBy(par);
+			QcWexUserDO user=qcWexUserService.getByOpenId(openid);
+			request.setAttribute("orders", lst);
+			request.setAttribute("headurl", user.getUserHead());
+			request.setAttribute("nickname", user.getNickName());
+		}
+		
 		return "pay/notifyOrder";
 	}
 

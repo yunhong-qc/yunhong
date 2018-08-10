@@ -59,19 +59,17 @@
         </rollingPolicy>
     </appender>
 
-<!-- 
+ 
     <logger name="com.admin" level="info" additivity="false">
-        <appender-ref ref="console"/>
-        <appender-ref ref="infoLog" />
         <appender-ref ref="debugLog" />
         <appender-ref ref="errorLog" />
-    </logger>  -->
+    </logger>  
 
-    <root level="info">
-        <appender-ref ref="infoLog" />
-        <appender-ref ref="debugLog" />
+    <root level="error">
+        <appender-ref ref="console" />
+         <appender-ref ref="debugLog" />
         <appender-ref ref="errorLog" />
-        <appender-ref ref="console"/>
+        <appender-ref ref="infoLog" />
     </root>
 
 </configuration>

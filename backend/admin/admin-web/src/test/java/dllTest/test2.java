@@ -1,5 +1,6 @@
 package dllTest;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +10,9 @@ import org.xvolks.jnative.JNative;
 import org.xvolks.jnative.Type;
 import org.xvolks.jnative.exceptions.NativeException;
 
+import com.admin.pay.domain.QcPayOrderDO;
 import com.admin.utils.DateUtils;
+import com.admin.utils.FileLog;
 import com.admin.utils.TimeUtils;
 
 /**
@@ -80,29 +83,26 @@ public class test2 {
 
 	}
 
-	@Test
+	
 	public void test3334() {
-		Thread test1 = new Thread(new Runnable() {
-			public void run() {
-				test13334("第一个");
-			}
-		}, "test1");
-		Thread test2 = new Thread(new Runnable() {
-			public void run() {
-				test13334("第二个");
-			}
-		}, "test2");
-		test1.start();
-		;
-		test2.start();
 	}
-
-	public void test13334(String str) {
-		synchronized (this) {
-			for (int i = 0; i < 5; i++) {
-				System.out.println(str + ":" + i);
-
+	@Test
+	public void test13334() {
+		try {
+			String payPrice="100";
+			Integer pr=Integer.parseInt(payPrice);
+			if(pr==null || pr<1) {
+				System.out.println(payPrice);
+			}else {
+				if(pr>=100) {
+					System.out.println(pr/100+"");
+				}else {
+					System.out.println(pr/100.00+"");
+				}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			FileLog.errorLog(e,"465465465");
 		}
 	}
 

@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.admin.utils.Constants;
+import com.admin.utils.DateUtils;
+import com.admin.utils.StringUtils;
+
 
 
 /**
@@ -37,8 +41,11 @@ public class QcPayOrderDO implements Serializable {
 	private Integer payPhone;
 	private Integer deviceNo;
 	
-	//订单状态。0:初始，1：支付，2，完成,3。失效
+	//订单状态。0:初始，1：支付中，2，已支付,3。完成，4，失效
 	private Integer orderState;
+	private String orderStateToSts;
+	private String createTimeToSts;
+	private String priceToSts;
 	//逻辑删除，1：删除，0：正常
 	private Integer isDel;
 	//
@@ -94,7 +101,7 @@ public class QcPayOrderDO implements Serializable {
 	 * 获取：金额
 	 */
 	public String getPayPrice() {
-		return payPrice;
+		return this.payPrice;
 	}
 	/**
 	 * 设置：支付人，即创建人
@@ -109,16 +116,16 @@ public class QcPayOrderDO implements Serializable {
 		return payUser;
 	}
 	/**
-	 * 设置：获取：订单状态。0:初始，1：支付，2，完成,3。失效
+	 * 设置：获取：订单状态。"初始","支付中","待写入","完成","失效"
 	 */
 	public void setOrderState(Integer orderState) {
 		this.orderState = orderState;
 	}
 	/**
-	 * 获取：订单状态。0:初始，1：支付，2，完成,3。失效
+	 * 获取：订单状态。0："初始",1："支付中",2："待写入",3："完成",4："失效"
 	 */
 	public Integer getOrderState() {
-		return orderState;
+		return this.orderState;
 	}
 	/**
 	 * 设置：逻辑删除，1：删除，0：正常
@@ -142,7 +149,7 @@ public class QcPayOrderDO implements Serializable {
 	 * 获取：
 	 */
 	public Date getCreateTime() {
-		return createTime;
+		return this.createTime;
 	}
 	/**
 	 * 设置：
@@ -197,6 +204,34 @@ public class QcPayOrderDO implements Serializable {
 	}
 	public void setPayUserPhone(String payUserPhone) {
 		this.payUserPhone = payUserPhone;
+	}
+	
+	public String getOrderStateToSts() {
+		if(orderState==null) {
+			return "";
+		}
+		return Constants.ORDERSTATE[orderState];
+	}
+	public String getCreateTimeToSts() {
+		if(createTime==null) {
+			return "";
+		}
+		return DateUtils.format(createTime, DateUtils.DATE_TIME_PATTERN);
+	}
+	public String getPriceToSts() {
+		if(StringUtils.isNullString(payPrice)) {
+			return payPrice;
+		}
+		Integer pr=Integer.parseInt(payPrice);
+		if(pr==null || pr<1) {
+			return payPrice;
+		}else {
+			if(pr>=100) {
+				return pr/100+"";
+			}else {
+				return pr/100.00+"";
+			}
+		}
 	}
 	
 	

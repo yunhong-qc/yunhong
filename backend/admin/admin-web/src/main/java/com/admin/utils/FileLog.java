@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.admin.common.aspect.WebLogAspect;
 import com.admin.wxapi.controller.WxApiController;
 
 
@@ -21,9 +22,10 @@ public class FileLog {
 	/**
 	 * 系统使用的loger
 	 */
-	private static Logger debugLogger = null;
-	private static Logger errorLogger = null;
-	private static Logger infoLogger = null;
+//	private static Logger debugLogger = null;
+	private static Logger logger = null;
+//	private static Logger errorLogger = null;
+//	private static Logger infoLogger = null;
 	static {
 		loadLogger();
 	}
@@ -39,9 +41,10 @@ public class FileLog {
 	 * 
 	 */
 	static void loadLogger() {
-		debugLogger = LoggerFactory.getLogger("debugLog");
-		infoLogger = LoggerFactory.getLogger("infoLog");// info级已配置为log4j.rootLogger
-		errorLogger = LoggerFactory.getLogger("errorLog");
+//		debugLogger = LoggerFactory.getLogger("debugLog");
+//		infoLogger = LoggerFactory.getLogger("infoLog");
+//		errorLogger = LoggerFactory.getLogger("errorLog");
+		logger=LoggerFactory.getLogger(FileLog.class);
 	}
 	
 	/**
@@ -51,7 +54,7 @@ public class FileLog {
 	 *            信息
 	 */
 	public static void errorLog(String msg) {
-		errorLogger.error(msg);
+		logger.error(msg);
 	}
 
 	/**
@@ -61,7 +64,7 @@ public class FileLog {
 	 *            要记录的异常信息
 	 */
 	public static void errorLog(Exception e) {
-		errorLogger.error(getExceptionTrace(e));
+		logger.error(getExceptionTrace(e));
 	}
 
 	/**
@@ -73,7 +76,7 @@ public class FileLog {
 	 *            要记录的信息
 	 */
 	public static void errorLog(Exception e, Object msg) {
-		errorLogger.error( msg + "\n" + getExceptionTrace(e));
+		logger.error( msg + "\n" + getExceptionTrace(e));
 	}
 
 	/**
@@ -83,7 +86,7 @@ public class FileLog {
 	 *            要记录信息
 	 */
 	public static void debugLog(String msg) {
-		debugLogger.debug( msg);
+		logger.debug( msg);
 	}
 
 	/**
@@ -93,7 +96,7 @@ public class FileLog {
 	 *            要记录的异常信息
 	 */
 	public static void debugLog(Exception e) {
-		debugLogger.debug(getExceptionTrace(e));
+		logger.debug(getExceptionTrace(e));
 	}
 
 	/**
@@ -105,7 +108,7 @@ public class FileLog {
 	 *            要记录的信息
 	 */
 	public static void debugLog(Exception e, Object msg) {
-		debugLogger.debug( msg + "\n" + getExceptionTrace(e));
+		logger.debug( msg + "\n" + getExceptionTrace(e));
 	}
 
 	/**
@@ -115,7 +118,7 @@ public class FileLog {
 	 *            信息
 	 */
 	public static void systemLog(String msg) {
-		infoLogger.info( msg);
+		logger.info( msg);
 	}
 
 	/**
@@ -125,7 +128,7 @@ public class FileLog {
 	 *            要记录的异常信息
 	 */
 	public static void systemLog(Exception e) {
-		infoLogger.info(getExceptionTrace(e));
+		logger.info(getExceptionTrace(e));
 	}
 
 	/**
@@ -137,7 +140,7 @@ public class FileLog {
 	 *            要记录的信息
 	 */
 	public static void systemLog(Exception e, Object msg) {
-		infoLogger.info( msg + "\n" + getExceptionTrace(e));
+		logger.info( msg + "\n" + getExceptionTrace(e));
 	}
 
 	/**
@@ -148,7 +151,7 @@ public class FileLog {
 	 */
 	public static void exOut(Exception e) {
 		String s = getExceptionTrace(e);
-		errorLogger.error(s);
+		logger.error(s);
 	}
 
 	/**

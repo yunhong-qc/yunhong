@@ -33,23 +33,48 @@ public class ServiceUtil {
 				+ "&grant_type=authorization_code";
 		String openJsonStr = HttpUtils.sendGET("https://api.weixin.qq.com/sns/oauth2/access_token", openParam);
 		System.out.println("openJsonStr:" + openJsonStr);
-
+		
 		// 获取openid
 		JSONObject openJson = JSONObject.parseObject(openJsonStr);
+		String errcode=openJson.getString("errcode");
 		// String openid = openJson.getString("openid");
 		// String access_token = openJson.getString("access_token");
 		return openJson;
 	}
 
 	/**
-	 * 通过access_token，openid获取用户信息
-	 * 根据授权码code获取access_token，参考：http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html#.E7.AC.AC.E4.BA.8C.E6.AD.A5.EF.BC.9A.E9.80.9A.E8.BF.87code.E6.8D.A2.E5.8F.96.E7.BD.91.E9.A1.B5.E6.8E.88.E6.9D.83access_token
+	 * 获取微信u用户信息
+	 * @param acc_token
+	 * @param openid
+	 * @param code 
+	 * @param count 获取的次数，避免多次无效获取
+	 * @return
+	 * 2018年8月6日
+	 * 作者：fengchase
 	 */
-	public static JSONObject getUserInfo(String acc_token, String openid) {
+	public static JSONObject getUserInfo(String acc_token, String openid,String code,int count) {
+		/*if(count>1) {
+			//最多重新获取一次
+			return null;
+		}else {
+			count++;
+		}*/
 		String openParam = "access_token=" + acc_token + "&openid=" + openid + "&lang=zh_CN";
 		String openJsonStr = HttpUtils.sendGET("https://api.weixin.qq.com/sns/userinfo", openParam);
-		System.out.println("openJsonStr:" + openJsonStr);
+		System.out.println("openJsonStr1:" + openJsonStr);
 		JSONObject openJson = JSONObject.parseObject(openJsonStr);
+		String errcode=openJson.getString("errcode");
+		if(errcode!="0" || !"0".equals(errcode)) {
+			return null;
+		}
+		/*if(errcode=="41001" || "41001".equals(errcode)) {
+			//再此获取。
+			JSONObject temp=getOpenId(code);
+			if(temp==null) {
+				return null;
+			}
+			getUserInfo(temp.getString("access_token"),temp.getString("openid"),code,count);
+		}*/
 		return openJson;
 	}
 

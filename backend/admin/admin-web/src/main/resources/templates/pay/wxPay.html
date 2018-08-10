@@ -5,13 +5,11 @@
 	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"></meta>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/css/wx/login.css"></link>
-<link rel="stylesheet" href="/css/wx/swiper.min.css"></link>
 <link rel="stylesheet" href="/css/pay/main.css"></link>
 <script type="text/javascript" src="/js/util/loading.js"></script>
 <script>
 	//防止重复点击
-	var submit = true;
+	var submit = false;
 	/**
 	 * 充值金额选择
 	 * @param t
@@ -19,6 +17,7 @@
 	 */
 	$(document).ready(
 			function() {
+				$('#_loading_feng1').hide();
 				$('.click_li').click(function(t) {
 					$('.click_li').removeClass('selected');
 					$(this).addClass('selected');
@@ -42,14 +41,8 @@
 			});
 
 	function toPay() {
+		$('#container').text('正在支付...');
 		_loading.show();
-		submit = false;
-		onBridgeReady();
-	}
-	/**
-		调起支付
-	 */
-	function onBridgeReady() {
 		if (submit) {
 			return;
 		}
@@ -63,56 +56,57 @@
 		order.openid = $('#openid').val();
 		order.payUser = $('#nickname').val();
 		//获取数据后，拉起支付界面
-		$
-				.ajax({
-					type : "POST",
-					url : "addOrder",
-					async : false,
-					data : order,
-					success : function(data) {
-						_loading.hide();
-						if (data.code == "000000") {
-							//转为对象
-							var payd = eval('(' + data.data + ')');
-							WeixinJSBridge
-									.invoke(
-											'getBrandWCPayRequest',
-											{
-												"appId" : payd.appId,
-												"timeStamp" : payd.timeStamp,
-												"nonceStr" : payd.nonceStr,
-												"package" : payd.pack_age,
-												"signType" : payd.signType,
-												"paySign" : payd.paySign
-											},
-											function(res) {
-												submit = false;
-												if (res.err_msg == "get_brand_wcpay_request:ok") {
-													//调用设备写信息
-													_loading.show();
-													window.location.href = 'http://app.cdqckj.com/wx/ble/pubBind';
-												} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-													alert("用户取消支付");
-												} else {
-													alert("支付失败");
-												}
-											});
-						}
-					}
-				});
+		$.ajax({
+			type : "POST",
+			url : "addOrder",
+			async : true,
+			data : order,
+			success : function(data) {
+				onBridgeReady(data.data);
+			}
+		});
+	}
+	/**
+		调起支付
+	 */
+	function onBridgeReady(data) {
+		/*
+			拉起支付
+		 */
+		var payd = eval('(' + data + ')');
+		WeixinJSBridge.invoke('getBrandWCPayRequest', {
+			"appId" : payd.appId,
+			"timeStamp" : payd.timeStamp,
+			"nonceStr" : payd.nonceStr,
+			"package" : payd.pack_age,
+			"signType" : payd.signType,
+			"paySign" : payd.paySign
+		}, function(res) {
+			$('#container').text('立即支付');
+			submit = false;
+			_loading.hide();
+			if (res.err_msg == "get_brand_wcpay_request:ok") {
+				//调用设备写信息
+				_loading.show();
+				window.location.href = 'http://app.cdqckj.com/wx/ble/pubBind';
+			} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+				alert("用户取消支付");
+			} else {
+				alert("支付失败");
+			}
+		});
 
 	}
 
 	//支付结束
 </script>
 </head>
-<body style="padding:0px 10px 0px 10px;">
-	<input type="hidden" id="openid" th:value=${openid}></input>
-	<input type="hidden" id="headurl" th:value=${headurl}></input>
-	<input type="hidden" id="nickname" th:value=${nickname}></input>
+<body style="padding: 0px 10px 0px 10px;">
+	<input type="hidden" id="openid" th:value="${openid}"></input>
+	<input type="hidden" id="nickname" th:value="${nickname}"></input>
 	<div class="tr_rechbox">
 		<div class="tr_rechhead">
-			<img th:src=${headurl}></img>
+			<img th:src=${userhead}></img>
 			<p>
 				充值帐号： <a th:text=${nickname}></a>
 			</p>
@@ -139,9 +133,9 @@
 			<p class="rechnum">10.00元</p>
 		</div>
 	</div>
-	<div id="container">
-		<a href="javascript:void(0);" onclick="toPay()"
-			class="weui_btn weui_btn_primary">立即支付</a>
-	</div>
+	<div id="container" onclick="toPay()"
+		style="dth: 100%; text-align: center; background-color: rgba(39, 176, 214, .15); border-radius: 20px;">
+		立即支付</div>
+
 </body>
 </html>

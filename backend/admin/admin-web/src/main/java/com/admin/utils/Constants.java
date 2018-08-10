@@ -7,6 +7,8 @@ package com.admin.utils;
 */
 public class Constants {
 	
+	public static String[] ORDERSTATE= {"初始","支付中","已支付","完成","失效"};
+	
 
 }
 

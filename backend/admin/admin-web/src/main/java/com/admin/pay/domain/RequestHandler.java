@@ -173,7 +173,7 @@ public class RequestHandler {
            }
        }
        sb.append("key=" + WxPayConfig.KEY);
-       FileLog.debugLog(sb.toString());
+       System.out.println(sb.toString());
        String sign = MD5Utils.MD5Encode(sb.toString(), WxPayConfig.CHARTSET).toUpperCase();
         
        this.setParameter("sign", sign);

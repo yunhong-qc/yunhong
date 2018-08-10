@@ -7,12 +7,12 @@
 	<select id="get" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
 		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`,`pay_phone`
-		,`device_no`,`pay_user_phone` from yunh_qc_pay_order where order_id = #{value}
+		,`device_no`,`pay_user_phone` from yunh_qc_pay_order where order_id = #{value} order by create_time desc
 	</select>
 	<select id="getOrderByOrderNumber" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
 		`order_id`,`order_no`,`pay_price`,`pay_user`,`order_state`,`is_del`,`create_time`,`mod_time`,`order_remark`,`pay_type`,`pay_phone`
-		`device_no`,`pay_user_phone` from yunh_qc_pay_order where order_no = #{value}
+		`device_no`,`pay_user_phone` from yunh_qc_pay_order where order_no = #{value} order by create_time desc
 	</select>
 	<select id="getOrderBy" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
@@ -33,6 +33,7 @@
 			<if test="orderRemark != null and orderRemark != ''"> and order_remark = #{orderRemark} </if>
 			<if test="payUserPhone != null and payUserPhone != ''"> and pay_user_phone = #{payUserPhone} </if>
 		</where> 
+		order by create_time desc
 	</select>
 	<select id="list" resultType="com.admin.pay.domain.QcPayOrderDO">
 		select
