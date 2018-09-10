@@ -1,0 +1,245 @@
+@charset "UTF-8";
+
+::-webkit-scrollbar {
+	width: 0.05rem;
+	height: 0.05rem;
+}
+
+::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb {
+	border-radius: 9.99rem;
+	border: 0rem solid transparent;
+}
+
+::-webkit-scrollbar-track {
+	box-shadow: 0.01rem 0.1rem 0.5rem rgba(100, 100, 100, .2) inset;
+}
+
+::-webkit-scrollbar-thumb {
+	min-height: 0.20rem;
+	background-clip: content-box;
+	box-shadow: 0 0 0 0.05rem rgba(100, 100, 100, .5) inset;
+}
+
+::-webkit-scrollbar-corner {
+	background:;
+	transparent
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	color: #444;
+}
+
+body {
+	font-size: 0.25rem;
+}
+
+#select {
+	height: 0.80rem;
+	line-height: 0.80rem;
+	padding: 0 0.20rem;
+	background-color: #e8e8e8;
+}
+
+#bluetoothcheck {
+	margin: 0 auto;
+	height: 0.625rem;
+	line-height: 0.625rem;
+	padding: 0 0.20rem;
+	background-color: #FFF;
+}
+
+#bluetooth {
+	margin: 0 auto;
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 0.075rem;
+}
+
+#connectstate {
+	margin: 0 auto;
+	color: red;
+	padding-right: 0.15rem;
+	float: right;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 0.20rem;
+	margin-top: 0.065rem;
+}
+
+#container {
+	margin: 0 auto;
+	float: right;
+	margin-top: 0.16rem;
+}
+
+#container span {
+	position: relative;
+}
+
+#container .input_check {
+	position: absolute;
+	visibility: hidden;
+}
+
+#container .input_check+label {
+	display: inline-block;
+	width: 0.20rem;
+	height: 0.20rem;
+	background: #fd8845;
+	border: 0.08rem solid #fd8845;
+}
+
+#container .input_check:checked+label:after {
+	content: "";
+	position: absolute;
+	left: 0.07rem;
+	bottom: 0.21rem;
+	width: 0.15rem;
+	height: 0.05rem;
+	border: 0.05rem solid white;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	-ms-transform: rotate(-60deg);
+	-moz-transform: rotate(-60deg);
+	-webkit-transform: rotate(-60deg);
+	transform: rotate(-45deg);
+}
+
+#successdevice {
+	clear: both;
+}
+
+#mydevice {
+	height: 0.80rem;
+	line-height: 0.80rem;
+	padding: 0 0.20rem;
+	background-color: #e8e8e8;
+	clear: both;
+}
+
+#connectedname {
+	height: 0.80rem;
+	line-height: 0.80rem;
+	padding-left: 0.40rem;
+	padding-right: 0.40rem;
+	background-color: #FFF;
+	font-size: 0.20rem;
+	color:#666;
+}
+
+.otherdevice {
+	height: 0.80rem;
+	line-height: 0.80rem;
+	padding: 0 0.20rem;
+	background-color: #DDD;
+}
+
+.binddevice .p_other {
+	height: 0.80rem;
+	line-height: 0.80rem;
+	position: relative;
+	margin: 0;
+	font-size: 0.25rem;
+}
+
+.binddevice .p_other_scan .scan_btn {
+	display: inline-block;
+	position: absolute;
+	right: 0rem;
+	top: 0.15rem;
+	z-index: 1;
+	width: 1.2rem;
+	height: 0.50rem;
+	line-height: 0.50rem;
+	text-align: center;
+	background: #6ecb09;
+	color: #fff;
+	border-radius: 0.06rem;
+	font-size: 0.20rem;
+}
+
+#bluetoothdevice {
+	min-height: 1.50rem;
+	max-height: 3.00rem;
+	overflow-y: scroll;
+	margin: 0;
+	clear: both;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+.binddevice li {
+	background: #fff;
+	overflow: hidden;
+	position: relative;
+	padding: 0.10rem 0;
+}
+
+.binddevice li:after {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 1;
+	width: 100%;
+	height: 0.05rem;
+	background: #dcdcdc;
+	-webkit-transform: scaleY(.5);
+}
+
+.binddevice .p_input {
+	font-size: 0.20rem;
+	height: 0.80rem;
+	line-height: 0.80rem;
+	padding-left: 0.40rem;
+	position: relative;
+	margin: 0;
+	color:#666;
+}
+
+.binddevice .p_input_yzm .sp_btn {
+	display: inline-block;
+	position: absolute;
+	right: 0.15rem;
+	top: 0.125rem;
+	z-index: 1;
+	width: 1.2rem;
+	height: 0.50rem;
+	line-height: 0.50rem;
+	text-align: center;
+	background: #288eff;
+	color: #fff;
+	border-radius: 0.06rem;
+	font-size: 0.20rem;
+}
+
+#warming {
+	padding-top: 0.15rem;
+	padding-bottom: 0.50rem;
+	padding-left: 0.20rem;
+	background-color: #e8e8e8;
+	line-height: 0.20rem;
+	font-size: 0.20rem;
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+#debug {
+	padding: 0.20rem;
+	border: 0.01rem dashed grey;
+	width: 93%;
+	max-height: 2.00rem;
+	font-size: 0.20rem;
+	line-height: 0.20rem;
+	overflow-y: scroll;
+	color:#666;
+}

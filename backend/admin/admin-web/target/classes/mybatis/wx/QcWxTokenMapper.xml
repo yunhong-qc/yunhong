@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.admin.wxapi.dao.QcWxTokenDao">
+
+	<select id="get" resultType="com.admin.wxapi.domain.QcWxTokenDO">
+		select `id`,`acess_token`,`out_time`,`create_time`,`appId`,`ticket` from yunh_qc_wx_token where id = #{value}
+	</select>
+	<select id="getByAppId" resultType="com.admin.wxapi.domain.QcWxTokenDO">
+		select `id`,`acess_token`,`out_time`,`create_time`,`appId`,`ticket` from yunh_qc_wx_token where appId = #{value}
+	</select>
+
+	<select id="list" resultType="com.admin.wxapi.domain.QcWxTokenDO">
+		select `id`,`acess_token`,`out_time`,`create_time`,`appId` from yunh_qc_wx_token
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="acessToken != null and acessToken != ''"> and acess_token = #{acessToken} </if>
+		  		  <if test="outTime != null and outTime != ''"> and out_time = #{outTime} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="appid != null and appid != ''"> and appId = #{appid} </if>
+		  		  <if test="ticket != null and ticket != ''"> and ticket = #{ticket} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from yunh_qc_wx_token
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="acessToken != null and acessToken != ''"> and acess_token = #{acessToken} </if>
+		  		  <if test="outTime != null and outTime != ''"> and out_time = #{outTime} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="appid != null and appid != ''"> and appId = #{appid} </if>
+		  		  <if test="ticket != null and ticket != ''"> and ticket = #{ticket} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.admin.wxapi.domain.QcWxTokenDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yunh_qc_wx_token
+		(
+			`acess_token`, 
+			`out_time`, 
+			`create_time`, 
+			`appId`,
+			`ticket`
+		)
+		values
+		(
+			#{acessToken}, 
+			#{outTime}, 
+			#{createTime}, 
+			#{appid},
+			#{ticket}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.admin.wxapi.domain.QcWxTokenDO">
+		update yunh_qc_wx_token 
+		<set>
+			<if test="acessToken != null">`acess_token` = #{acessToken}, </if>
+			<if test="outTime != null">`out_time` = #{outTime}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="appid != null">`appId` = #{appid},</if>
+			<if test="ticket != null">`ticket` = #{ticket}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from yunh_qc_wx_token where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from yunh_qc_wx_token where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

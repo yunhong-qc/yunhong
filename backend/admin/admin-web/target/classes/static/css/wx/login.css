@@ -1,0 +1,284 @@
+/*!
+ * WeUI v0.4.2 (https://github.com/weui/weui)
+ * Copyright 2016 Tencent, Inc.
+ * Licensed under the MIT license
+ */
+* {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font-family: Arial,"Microsoft Yahei"
+}
+
+i,span {
+    display: inline-block;
+    vertical-align: middle
+}
+
+label {
+    vertical-align: middle
+}
+
+html,body {
+    height: 100%
+}
+
+.input-box,.row,.titlebar {
+    position: relative;
+    display: flex;
+    display: -webkit-flex;
+    display: box;
+    display: -webkit-box;
+    box-align: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.titlebar {
+    background-color: #1da02b;
+    border-color: #ddd;
+    min-height: 44px;
+    border-bottom: 1px solid;
+    box-sizing: border-box
+}
+
+.titlebar,.titlebar a,.titlebar h1 {
+    position: relative
+}
+
+.titlebar h1 {
+    font-size: 17px;
+    font-weight: normal;
+    -webkit-box-flex: 1;
+    box-flex: 1
+}
+
+.titlebar h1:first-child {
+    margin-left: 8px
+}
+
+.titlebar h1:only-child {
+    margin-right: 8px
+}
+
+.titlebar a,.titlebar button {
+    margin: 0 8px
+}
+
+.titlebar.reverse h1 {
+    color: #fff
+}
+
+.titlebar.reverse a,.titlebar.reverse .button {
+    color: #fff;
+    border-color: rgba(255,255,255,0.5)
+}
+
+
+
+.weui_btn{
+		position:relative;
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		padding-left:14px;
+		padding-right:14px;
+		box-sizing:border-box;
+		text-align:center;
+		font-size:16px;
+		text-decoration:none;
+		color:#fff;
+		line-height:2.33333333;
+		border-radius:5px;
+		-webkit-tap-highlight-color:rgba(0,0,0,0);
+		overflow:hidden
+}
+
+.weui_btn_primary{
+	background-color:#0498a1
+}
+
+.header{
+	border-top: 0.35rem solid #0498a1;
+	text-align: center;
+	padding-top: 1.8rem;
+}
+
+::-webkit-input-placeholder,:-moz-placeholder,::-moz-placeholder,:-ms-input-placeholder{
+	font-size: 0.6rem;
+	color: #c5c5c5;
+}
+
+.header h2{
+	margin-top: 2.125rem;
+	font-size: 0.9rem;
+	font-weight: normal;
+	margin-bottom: 1.0rem;
+}
+
+
+
+.login-box{
+	padding: 2px 0;
+	border:1px solid #afafaf;
+	border-radius: 3px;
+	box-sizing: border-box;
+}
+
+.login-box *{
+	box-sizing: border-box;
+}
+
+.login-wrap{
+	padding: 0 0.75rem;
+}
+
+.login-box input{
+	outline: none;
+	border:none;
+	width: 100%;
+	height: 2.0rem;
+	line-height: 2.0rem;
+	padding: 0 0.95rem;
+	border-top: 1px solid #cfcfcf;
+}
+
+.login-box .input-wrap{
+	position: relative;
+
+}
+
+.login-box .input-wrap .validate-code{
+	position: absolute;
+	right: 0.5rem;
+	top: 0.126rem;
+	height: 1.88rem;
+	width: 3.0rem;
+}
+
+.login-box .input-wrap:first-child input{
+	border-top: none;
+}
+
+.btns{
+	overflow: hidden;
+	margin-top:0.725rem;
+	margin-bottom: 1.125rem;
+}
+
+.btns a:last-child{
+	border-radius: 0 3px 3px 0;
+	border-left: none;
+}
+
+.login-btn{
+	margin-bottom: 2.8rem;
+}
+
+
+.titlebar.reverse {
+    background-color: #0498a1;
+    border-color: #0498a1;
+}
+
+.time-line{padding:5px;padding-right:15px}.time-line .time-item{position:relative;padding-left:120px}.time-line .time-item.date{height:44px;line-height:44px}.time-line .time-item.date .content-left>span{color:#0498a1;font-size:0.7rem;font-weight:bold}.time-line .time-item.date .content-left>label>i{position:absolute;top:0;bottom:0;left:12px;width:1px;background-color:#b5b5b5}.time-line .time-item.last{height:44px;line-height:44px}.time-line .time-item.last .content-left>label>i{position:absolute;top:0;bottom:0;left:12px;width:1px;background-color:#b5b5b5}.time-line .time-item.last .content-left>label>span{width:10px;height:10px;background:url(../images/timeline/down.png);left:7px;top:34px}.time-line .time-item.time.important .content-left>label>span{background-position:0 -10px}.time-line .time-item.time.important .content-right .left-arrow{background:url(../images/timeline/arrow.png) no-repeat;background-position:0 -13px}.time-line .time-item.time.important .content-right .detail-outer .detail{border-left:3px solid #f45438}.time-line .time-item.time .content-left>span{position:absolute;top:50%;height:20px;margin-top:-10px;line-height:20px;color:#000;font-size:0.6rem;text-align:right}.time-line .time-item.time .content-left>label>span{position:absolute;width:10px;height:10px;top:50%;margin-top:-5px;left:7px;background:url(../images/timeline/dot.png) no-repeat}.time-line .time-item.time .content-left>label>i{position:absolute;top:0;bottom:0;left:12px;width:1px;background-color:#b5b5b5}.time-line .time-item .content-left{position:absolute;top:0;left:0;bottom:0;width:120px}.time-line .time-item .content-left>span{position:absolute;right:24px;top:0;bottom:0;width:96px;text-align:center}.time-line .time-item .content-left>label{position:absolute;top:0;right:0;width:24px;bottom:0}.time-line .time-item .content-left>label>span{position:absolute;width:16px;height:16px;top:14px;left:4px;background:url(../images/timeline/blank.png) no-repeat;z-index:1}.time-line .time-item .content-left>label>i{position:absolute;top:0;left:12px;width:1px;background-color:#b5b5b5;z-index:0}.time-line .time-item .content-left.first>label>i{position:absolute;height:14px;top:30px}.time-line .time-item .content-right{position:relative;padding-left:11px}.time-line .time-item .content-right .left-arrow{position:absolute;width:11px;height:13px;top:50%;margin-top:-7px;left:0;background:url(../images/timeline/arrow.png) no-repeat}.time-line .time-item .content-right .detail-outer{padding:10px 0}.time-line .time-item .content-right .detail-outer .detail{padding:5px;border:1px solid #cacaca;border-left:3px solid #0498a1;box-shadow:2px 3px #ededed;line-height:20px}.time-line .time-item .content-right .detail-outer .detail>div .name{font-size:0.7rem;font-weight:bold;color:#000;margin-right:2px}.time-line .time-item .content-right .detail-outer .detail>div label{color:#939393;font-size:0.55rem;margin-right:10px}.time-line .time-item .content-right .detail-outer .detail>div .status{color:#000;font-size:0.55rem;line-height:20px}.time-line .time-item .content-right .detail-outer .detail>div .status .order{color:#0498a1;font-size:12px}
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1464141859'); /* IE9*/
+  src: url('iconfont.eot?t=1464141859#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1464141859') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1464141859') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1464141859#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wdbll4 {
+	margin-top: 15px;
+	width:30%;
+	float:left;
+	margin:1%;
+}
+
+.debugging{
+	clear:both;
+}
+
+.grxx_top_biaoge td {
+	text-align: center;
+}
+
+.bind{
+	background-color: #137cb7;
+}
+
+.btns{
+	background-color: #d73d32;
+    border-color: #d73d32;
+    margin: 0;
+    color: #fff;
+    box-shadow: 0 1px 0 #ccc;
+    transition: all .15s ease;
+    background-clip: padding-box;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    float:right;
+}
+
+h2{
+	font-size:24px;
+	letter-spacing:1px;
+	text-indent:20px;
+	height:40px;
+	line-height:40px;
+	border-bottom:1px dashed #999;
+	margin:0 0 15px 0;
+	font-weight:normal;
+	color:#666;
+	background-color:#fafafa;
+	}
+	
+.show{
+	overflow-y:scroll;
+	overflow-x:scroll;
+	height:200px;
+}	
+
+.showbug{
+	height:205px;
+	border-bottom:1px dashed #999;
+}
+
+a:hover {
+	color:red;
+}
+
+#ExternalAuthentic:focus,#DeviceAuthentic:focus{
+	background:#165f7f;
+}
+#ScanBlu:focus,#StopScanBlu:focus,#Deviceinfo:focus,#FirmwareInfo:focus,#UpdateMainKey:focus,#UpdateWorkKey:focus,#ReadAllCard:focus,#EncryPassword:focus,#SendText:focus,#StopScanBlu:focus,#ConnectedDeviceId:focus {
+background:#165f7f;
+}
+

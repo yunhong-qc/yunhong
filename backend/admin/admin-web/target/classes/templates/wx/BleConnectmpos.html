@@ -1,0 +1,680 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--禁止缩放-->
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>MPOS</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/wx/login.css">
+    <link href="/css/wx/public.css" rel="stylesheet" type="text/css"><!--默认共用样式-->
+
+    <script src="/js/wx/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/wx/login.css">
+    <link rel="stylesheet" href="/css/wx/swiper.min.css">
+    <script src="/js/wx/swiper.min.js"></script>
+    <script src="/js/wx/jweixin-1.2.0.js"></script>
+    <script src="/js/wx/cryptico.js"></script>
+    <script src="/js/wx/jsrsasign-all-min.js"></script>
+    <script src="/js/wx/smit-sdk-js-v2.1.0.min.js"></script>
+</head>
+
+<body>
+
+
+
+<div class="swiper-container">
+    <div class="my-pagination"><ul class="my-pagination-ul"></ul></div>
+    <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+            <!--连接设备-->
+            <div class="user_zc_body">
+                <ul>
+                    <li id="connectedsuccess"> <p class="p_input p_input_yzm"><em class="fa fa-envelope"></em><span style="float:right">设备未连接</span></p> </li>
+                </ul>
+                <div class="user_zc_btn"><p class="p_btn" id="scanbtn"><a onclick="ScanBlus()" class="c_4">扫描</a></p></div>
+                <ul id="connectmodel">
+                </ul>
+            </div>
+            <!--绑定设备END-->
+        </div>
+
+        <!--功能菜单-->
+        <div class="swiper-slide">
+
+            <!--固话绑定GO-->
+            <div class="user_zc_body">
+                <div id="activity-detail" class="zh_CN ">
+                    <!-- <div id='Wxinit' tabindex='12' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="Wxinit()">初始化</div> -->
+                    <!-- <div id='ScanBlu' tabindex='1' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="ScanBlu()">扫描蓝牙</div>
+                    <div id='StopScanBlu' tabindex='10' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="StopScanBlu()">停止扫描</div> -->
+                    <div id='Deviceinfo' tabindex='2' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getDeviceInfo()">设备信息</div>
+                    <div id='FirmwareInfo' tabindex='3' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getFirmwareInfo()">固件信息</div>
+                    <!-- <div id='ExternalAuthentic' tabindex='12' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getExternalAuthentic()">外部认证</div> -->
+                    <div id='UpdateMainKey' tabindex='4' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getUpdateMainKey()">主密钥</div>
+                    <div id='UpdateWorkKey' tabindex='5' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getUpdateWorkKey()">工作密钥</div>
+                    <div id='ReadAllCard' tabindex='6' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getReadAllCards()">读卡</div>
+                    <div id='EncryPassword' tabindex='7' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getEncryPassword()">加密密码</div>
+                    <div id='ScanBlu' tabindex='1' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="pbocSetSecondAuth()">二次认证</div>
+                    <div id='Blestate' tabindex='10' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="Blestate()">蓝牙状态</div>
+                    <div id='bleStopConn' tabindex='9' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="bleStopConn()">连接状态</div>
+                    <!--<div id='ScanBlu' tabindex='1' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="readFlash()">读flash</div>-->
+                    <div id='getConnectedDeviceIds' tabindex='11' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getConnectedDeviceIds()">已连接设备</div>
+                    <div id='readCards' tabindex='11' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="readCards()">循环读卡</div>
+                    <div id='cancelReadCard' tabindex='11' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="cancelReadCard()">取消读卡</div>
+                    <div id='unBindDevices' tabindex='11' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="unBindDevices()">解绑</div>
+                    <div style="float:left;width:95%;">
+                        <input class='wdbll4' type ="text" id="texts" name="texts" value ="" style="width:60%;height:35px"></input>
+                        <div id='SendText' tabindex='8' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="encrySendData()">发送数据</div>
+                    </div>
+                    <div style="float:left;width:100%;">
+                        <input class='wdbll4' value ="成功次数:0"  id="successStep" type="text" disabled="disabled" style="font-size:17px;width:40%;height:35px"></input>
+                        <input class='wdbll4' value ="失败次数:0"  id="failStep" type="text" disabled="disabled" style="font-size:17px;width:40%;height:35px;float:right"></input>
+                        <!-- <p>成功次数 : <label id="stepSuccess"></label></p>
+                        <p style="float:right">失败次数 : <label id="stepFail"></label></p> -->
+                    </div>
+                    <div class="debugging" id="debuggingTxt">
+                        <h2>调试信息<input id="LOGS" type="button" value="错误日志" onclick="getLog()" class="btns" style="display:none;background-color:#a69cd0!important"/><input id="clears" type="button" value="清空打印" onclick="LogClear()" class="btns"/></h2>
+                        <div class="show showbug" id="TxtDebug" style="display:block;word-break:break-all;">
+                            <p><label id="initBle"></label></p>
+                        </div>
+                        <div class="show showbug" id="TxtDebugs" style="display:none;word-break:break-all;">
+                            <p><label id="initBles"></label></p>
+                        </div>
+                    </div>
+                    <div class="debugging" id="debuggingLog" style="display:none;">
+                        <h2>错误日志<input type="button" value="返回" onclick="cancelLog()" class="btns" style="background-color:#a69cd0!important"/></h2>
+                        <div class="show showbug" id="TxtLog" style="word-break:break-all;">
+                            <p><label id="initBleLog"></label></p>
+                        </div>
+                        <div class="show showbug" id="Txt" style="display:none;word-break:break-all;">
+                            <p><label id="TxtLogs"></label></p>
+                        </div>
+                    </div>
+                    <!-- <div class="debugging">
+                        <h2>调试信息<input id="clears" type="button" value="清空打印" onclick="LogClear()" class="btns"/></h2>
+                        <div class="show showbug" id="TxtDebug" style="display:block">
+                            <p><label id="initBle"></label></p>
+                        </div>
+                        <div class="show showbug" id="TxtDebugs" style="display:none">
+                            <p><label id="initBles"></label></p>
+                        </div>
+                    </div> -->
+                    <!-- <div id="initBle"></div> -->
+                    <!-- <div class="debugging">
+                        <h2>调试信息<input id="clears" type="button" value="清空打印" onclick="LogClear()" class="btns"/></h2>
+                        <div class="show showbug" id="TxtDebug">
+                            <p><label id="initBle"></label></p>
+                        </div>
+                    </div> -->
+                    <!-- <div>
+                        <h2>设备<a>(点击进行绑定)</a></h2>
+                        <p><label id="Device"></label></p>
+                    </div>
+                    <p><label id="DeviceId"></label></p> -->
+                </div>
+
+                <!--固话绑定END-->
+
+            </div>
+        </div>
+        <p id="OpenId" style="display:none"></p>
+        <p id="connecteddevice" style="display:none"></p>
+        <p id="unbindsuccess" style="display:none"></p>
+    </div>
+</div>
+<script>
+    var mySwiper = new Swiper('.swiper-container',{
+        pagination: '.my-pagination-ul',
+        paginationClickable: true,
+        paginationBulletRender: function (index, className) {
+            switch (index) {
+                case 0: name='连接设备';break;
+                case 1: name='功能菜单';break;
+                default: name='';
+            }
+            return '<li class="' + className + '">' + name + '</li>';
+        }
+    });
+
+    function strToJson(str){
+        var json = eval('(' + str + ')');
+        return json;
+    }
+    //获取动态tickt数据
+    function getTicktData(){
+		var url=location.href.split('#')[0];
+		var str={};
+		jQuery.ajax({
+			url:'initJsApi',
+			async:false,
+			data:{'url':encodeURIComponent(url)},
+			success:function(res){
+				if(res.code=='000000'){
+					/* 
+					jQuery("#appId").text(res.data.appId);
+					jQuery("#timestamp").text(res.data.timestamp);
+					jQuery("#nonceStr").text(res.data.nonceStr);
+					jQuery("#signature").text(res.data.signature); */
+					str=res.data;
+				}
+			}
+		});
+		return str;
+	}
+    var httpurl = "http://119.29.162.110:1345"
+    var isLog = true;
+    var smit = null;
+    var smitPosSdkWx = null;
+    var readCard = 0;
+    var OpenId = null;
+
+    $(document).ready(function() {
+        smitLogPrintWx("mpos2.1.0");
+        init();
+    });
+
+    function init(){
+        var typeWx = 0x04;
+        var company = 0x00;
+        smit = new Smit(typeWx,company,0);
+        var str=getTicktData();
+        str.user_name='gh_05fc6bc0923c';
+        console.log(JSON.stringify(str));
+        OpenId = str.openId;
+        smit.start(str,function(msg){
+        	console.log(JSON.stringify(msg));
+            smitPosSdkWx = new SmitPosSdkWx(0x00,0x04);
+            $("#initBle").append("<p>device and wx init123:" + JSON.stringify(msg) + "</p>");
+            getConnectedDeviceId();
+            Blestate();
+        });
+
+    }
+
+    function readCards(){
+        readCard = 1;
+        var getLogs = document.getElementById('LOGS');
+        getLogs.style.display='block';
+        getDeviceInfo();
+    }
+
+    //读取设备信息
+    function getDeviceInfo(){
+        smit.exec(smit.MSG_TYPE_EX_SR_READ_DEVICE_INFO,null,function(msg){
+            $("#initBle").append("<p>get device info:" + msg + "</p>");
+
+            if(readCard == 1){
+                getFirmwareInfo();
+            }
+        });
+    }
+
+    //外部认证
+    function getExternalAuthentic(){
+        smit.exec(smit.MSG_TYPE_EX_SR_EXTERNAL_AUTH,null,function(msg){
+            $("#initBle").append("<p>get external auth:" + msg + "</p>");
+        });
+    }
+
+    //设备认证
+    function getDeviceAuthentic(){
+        //获取随机数
+        var RandomJson = "{\"num\":8}";
+        smit.exec(smit.MSG_TYPE_EX_SR_GET_RANDOM,RandomJson,function(msg){
+
+            $("#initBle").append("<p>get random:" + msg + "</p>");
+
+            var Random = JSON.parse(msg).random;
+
+            //设备认证
+            var DeviceAuthJson ={};
+            DeviceAuthJson.random_num = Random;// "{\"random_num\":\""+obj.random+"\",\"device_sn\":\"24cf21c00094\"}";
+            DeviceAuthJson.device_sn = "24CF21E216EC";
+
+            $("#initBle").append("<p>get device auth:" + DeviceAuthJson + "</p>");
+
+            smit.exec(smit.MSG_TYPE_EX_SR_DEVICE_AUTH,JSON.stringify(DeviceAuthJson),function(msg){
+                $("#initBle").append("<p>get device auth:" + msg + "</p>");
+            });
+        });
+    }
+
+    // 二次认证
+    function pbocSetSecondAuth(){
+        var Json ={};
+        Json.trade_status = 1;// "{\"random_num\":\""+obj.random+"\",\"device_sn\":\"24cf21c00094\"}";
+        Json.tc_flag = 0;
+        Json.data = new Array();
+
+        smit.exec(smit.MSG_TYPE_EX_PBOC_SET_SECOND_AUTH,JSON.stringify(Json),function(msg){
+            $("#initBle").append("<p>SET SECOND AUTH:" + msg + "</p>");
+        });
+    }
+
+    //读取固件信息
+    function getFirmwareInfo(){
+        smit.exec(smit.MSG_TYPE_EX_TM_GET_FIRMWARE_INFO,null,function(msg){
+            $("#initBle").append("<p>get firmware info:" + msg + "</p>");
+
+            if(readCard == 1){
+                getUpdateMainKey();
+            }
+        });
+    }
+
+    /* function getUpdateMainKey(){
+     smit.exec(smit.MSG_TYPE_UPDATE_MAIN_KEY,null,function(msg){
+     $("#initBle").append("<p>get firmware info:" + msg + "</p>");
+     });
+     } */
+
+    //更新主密钥
+    function getUpdateMainKey(){
+
+        var UpdateMainKeyJson ={};
+        UpdateMainKeyJson.mainKey = "11223344556677881122334455667788";
+        UpdateMainKeyJson.index = 0;
+
+        $("#initBle").append("<p> " + JSON.stringify(UpdateMainKeyJson) + " </p>");
+        smit.exec(smit.MSG_TYPE_UPDATE_MAIN_KEY,JSON.stringify(UpdateMainKeyJson),function(msg){
+            $("#initBle").append("<p>update main key:" + msg + "</p>");
+            var jsonmsg = strToJson(msg);
+            $("#initBle").append("<p>update main key:" + jsonmsg.status + "</p>");
+
+            if(readCard == 1){
+                getUpdateWorkKey();
+            }
+        });
+    }
+
+
+    //更新工作密钥
+    function getUpdateWorkKey(){
+        var UpdateWorkKeyJson ={};
+        UpdateWorkKeyJson.tmk_index = 0;
+        UpdateWorkKeyJson.wkey = "CD09BC4876AC0F2BCD09BC4876AC0F2B";
+        UpdateWorkKeyJson.wkey_checksum = "6FB23EAD";
+        UpdateWorkKeyJson.key_type = 17;
+
+        $("#initBle").append("<p>work key:" + JSON.stringify(UpdateWorkKeyJson) + "</p>");
+        smit.exec(smit.MSG_TYPE_EX_PW_LOAD_WORK_KEY,JSON.stringify(UpdateWorkKeyJson),function(msg){
+            $("#initBle").append("<p>update work key:" + msg + "</p>");
+
+            UpdateWorkKeyJson ={};
+            UpdateWorkKeyJson.tmk_index = 0;
+            UpdateWorkKeyJson.wkey = "CD09BC4876AC0F2BCD09BC4876AC0F2B";
+            UpdateWorkKeyJson.wkey_checksum = "6FB23EAD";
+            UpdateWorkKeyJson.key_type = 18;
+
+            $("#initBle").append("<p>work key:" + JSON.stringify(UpdateWorkKeyJson) + "</p>");
+            smit.exec(smit.MSG_TYPE_EX_PW_LOAD_WORK_KEY,JSON.stringify(UpdateWorkKeyJson),function(msg){
+                $("#initBle").append("<p>update work key:" + msg + "</p>");
+
+                UpdateWorkKeyJson ={};
+                UpdateWorkKeyJson.tmk_index = 0;
+                UpdateWorkKeyJson.wkey = "CD09BC4876AC0F2BCD09BC4876AC0F2B";
+                UpdateWorkKeyJson.wkey_checksum = "6FB23EAD";
+                UpdateWorkKeyJson.key_type = 19;
+
+                $("#initBle").append("<p>work key:" + JSON.stringify(UpdateWorkKeyJson) + "</p>");
+                smit.exec(smit.MSG_TYPE_EX_PW_LOAD_WORK_KEY,JSON.stringify(UpdateWorkKeyJson),function(msg){
+                    $("#initBle").append("<p>update work key:" + msg + "</p>");
+
+                    if(readCard == 1){
+                        getReadAllCard();
+                    }
+                });
+            });
+        });
+    }
+
+    var numbernumber = 1;
+    //读卡
+    function getReadAllCard(){
+        var ReadAllCardJson ={};
+        ReadAllCardJson.trade_id = "1000";
+        ReadAllCardJson.trade_time = "20170205164415";
+        ReadAllCardJson.amount = 20;
+        ReadAllCardJson.timeout = 60;
+        ReadAllCardJson.trade_type = 1;
+        ReadAllCardJson.is_encrypt = 1;
+        ReadAllCardJson.data_format = 1;
+
+        $("#TxtLogs").append("<p>@@</p>");
+        $("#initBle").append("<p>第" + numbernumber++ + " 次读卡</p>");
+        smit.exec(smit.MSG_TYPE_READ_ALL_CARD,JSON.stringify(ReadAllCardJson),function(msg){
+            if(strToJson(msg).status  == 0 || strToJson(msg).status == 0x58){
+                $("#initBle").append("<p>read all card:" + strToJson(msg).PAN + "</p>");
+            }else{
+                $("#initBle").append("<p>读卡失败:" + strToJson(msg).status + "</p>");
+            }
+            updateData(strToJson(msg).status);
+        });
+    }
+
+    function updateData(status){
+        var success = document.getElementById('successStep').value;
+        if(status == 0 || status == 0x58){
+            var i = success.indexOf(":");
+            document.getElementById('successStep').value = success.substring(0,i+1)+(Number(success.substring(i+1))+1);
+        }else{
+            var fail = document.getElementById('failStep').value;
+            var i = fail.indexOf(":");
+            document.getElementById('failStep').value = fail.substring(0,i+1)+(Number(fail.substring(i+1))+1);
+
+            var data = document.getElementById('TxtLogs').innerHTML;
+            var Log =  document.getElementById('initBleLog').innerHTML;
+            var strList = data.split("@@");
+            document.getElementById('initBleLog').innerHTML = Log + strList[strList.length - 1];
+        }
+
+        if(readCard == 1){
+            if(Number(success.substring(i+1)) === 200){
+                LogClear();
+            }
+            getReadAllCard();
+        }else{
+            $("#initBle").append("<p>cancel read all card</p>");
+        }
+    }
+
+    function cancelReadCard(){
+        readCard = 0;
+        numbernumber = 1;
+    }
+
+    //获取加密密码
+    function getEncryPassword(){
+        var EncryPasswordJson ={};
+        EncryPasswordJson.PAN = "1234567890123456";
+        EncryPasswordJson.pin = "123456";
+
+        $("#initBle").append("<p>get encryption password:" + JSON.stringify(EncryPasswordJson) + "</p>");
+        smit.exec(smit.MSG_TYPE_EX_ENCRYPT_PIN_WITH_PAN,JSON.stringify(EncryPasswordJson),function(msg){
+            $("#initBle").append("<p>get encryption password:" + msg + "</p>");
+        });
+    }
+
+    //获取设备信息
+    function getConnectedDeviceId() {
+        smitPosSdkWx.getDevices(function(msg){
+            for(var i=0;i<msg.deviceInfos.length;i++){
+                if(msg.deviceInfos[i].state == "connected"){
+                    document.getElementById('connectedsuccess').innerHTML = "";
+                    document.getElementById('connecteddevice').innerHTML = msg.deviceInfos[i].deviceId;
+                    $("#connectedsuccess").append( "<p class=\"p_input p_input_yzm\"><em class=\"fa fa-envelope\"></em>"+msg.deviceInfos[i].deviceId+"<span style=\"float:right\">已连接</span></p>");
+                    document.getElementById('msg.deviceInfos[i].deviceId').innerHTML = "已连接";
+                }else{
+                    document.getElementById('connecteddevice').innerHTML = "";
+                    document.getElementById('connectedsuccess').innerHTML = "";
+                    $("#connectedsuccess").append( "<p class=\"p_input p_input_yzm\"><em class=\"fa fa-envelope\"></em>"+msg.deviceInfos[i].deviceId+"<span style=\"float:right\">未连接</span></p>");
+                }
+            }
+        });
+    }
+
+    //获取设备信息
+    function getConnectedDeviceIds() {
+        smitPosSdkWx.getDevices(function(msg){
+            $("#initBle").append("<p>send msg:" + JSON.stringify(msg) + "</p>");
+        });
+    }
+
+    //解绑
+    function unBindDevices() {
+        smitPosSdkWx.getDevices(function(msg){
+            var OpenId = document.getElementById('OpenId').innerHTML;
+            $("#initBle").append("<p>send msg:" + msg + "</p>");
+            for(var i=0;i<strToJson(msg).deviceInfos.length;i++){
+                unbindBle(strToJson(msg).deviceInfos[i].deviceId);
+            }
+        });
+    }
+
+    var readFlashJson ={};
+    readFlashJson.addr = 0x0001E000;
+    readFlashJson.len = 0x00000008;
+
+    //读flash
+    function readFlash(){
+        smit.exec(smit.MSG_TYPE_READ_FLASH_DATA,JSON.stringify(readFlashJson),function(msg){
+            $("#initBle").append("<p>get blestate:" + msg + "</p>");
+            readFlashJson.len += 4;
+
+            readFlash();
+        });
+    }
+
+    //发送text指令
+    function encrySendData() {
+        var data = document.getElementById("texts").value;
+        $("#initBle").append( "<p>发送的数据： " + data + "</p>");
+//		bleManage.bleInit_sendData('24cf21c00092',encrydata);
+        smitPosSdkWx.sendMsg(data,function(msg){
+            $("#initBle").append("<p>send msg:" + msg + "</p>");
+        });
+    }
+
+    function LogClear() {
+        document.getElementById('initBle').innerHTML = "";
+    }
+
+    //扫描蓝牙
+    function ScanBlus(){
+        smitPosSdkWx.blestate(function(msg){
+            if(msg == "off"){
+                alert("请先打开蓝牙！");
+            }else{
+                document.getElementById('connectmodel').innerHTML = "";
+                smit.scan(function(msg){
+                    smitLogPrintWx("开始扫描：" + msg);
+                    var macid = "";
+                    $("#initBle").append("<p>scan blu:" + JSON.stringify(msg) + JSON.stringify(msg).length + "</p>");
+                    /* if(msg.length == 12){
+                        macid = msg;
+                    }else if(msg.length == 20){
+                        macid = msg;
+                    } */
+                    if(macid != ""){
+                        if(document.getElementById('connecteddevice').innerHTML == ""){
+                            $("#connectmodel").append( "<li> <p class=\"p_input p_input_yzm\"><em class=\"fa fa-envelope\"></em>"+macid+"<span id="+macid+" class=\"sp_btn\"  onclick=\"getbindDevice('" +
+                                macid + "')\">连接</span></p> </li>");
+                        }else if(document.getElementById('connecteddevice').innerHTML == macid){
+                            $("#connectmodel").append( "<li> <p class=\"p_input p_input_yzm\"><em class=\"fa fa-envelope\"></em>"+macid+"<span id="+macid+" class=\"sp_btn\">已连接</span></p> </li>");
+                        }
+                    }
+                });
+                SetTime();
+            }
+        });
+    }
+
+    //断开连接
+    function getbluebooth(){
+    }
+
+    //连接蓝牙
+    function bleConn(data){
+        smit.connect(data,function(msg){
+            $("#initBle").append("<p>connect blu:" + JSON.stringify(msg) + "</p>");
+        });
+    }
+
+    function Blestate(){
+        /* smit.stopScan(function(msg){
+         $("#initBle").append("<p>stop scan blu:" + msg + "</p>");
+         }); */
+        smitPosSdkWx.blestate(function(msg){
+            $("#initBle").append("<p>get blestate:" + msg + "</p>");
+            if(msg == "off"){
+                alert("请先打开蓝牙！");
+            }
+        });
+//   		smitPosSdkWx.blestate(function(msg){
+//			$("#initBle").append("<p>get connected11111111:" + msg + "</p>");
+//   		});
+    }
+
+    //断开连接
+    function bleStopConn(){
+        /* var data = document.getElementById('DeviceId').innerHTML;
+         if(data.length > 0){
+         smit.disconnect(data,function(msg){
+         $("#initBle").append("<p>disconnect blu:" + msg + "</p>");
+         });
+         }else{
+         $("#initBle").append("<p>not connect blu:</p>");
+         }
+         document.getElementById('Device').innerHTML = ""; */
+//   		alert(smitPosSdkWx.connectstate);
+//		smitPosSdkWx.getconnected();
+        smitPosSdkWx.getconnected(function(msg){
+            $("#initBle").append("<p>get connected11111111:" + msg + "</p>");
+        });
+    }
+
+    //绑定设备
+    function bindBle(deviceid) {
+        //先去后台验证一下当前用户的openid有效
+        $(function(){
+            var url = "/SmitPayWechat/bindDevice";
+            var args = {"url":httpurl,openid:OpenId,deviceid:deviceid,isBind:"0","time":new Date()};
+            $.post(url,args,function(data){
+                if(data != ""){
+                    $("#initBle").append("<p>bind       :" + data + "</p>");
+                    $("#initBle").append("<p>设备：" + deviceid + "已绑定成功，正在连接</p>");
+                    if(strToJson(data).base_resp.errcode == 0){
+                        document.getElementById('connectedsuccess').innerHTML = "";
+                        $("#connectedsuccess").append( "<p class=\"p_input p_input_yzm\"><em class=\"fa fa-envelope\"></em>"+deviceid+"<span style=\"float:right\">已绑定</span></p>");
+                        bleConn(deviceid);
+                    }
+                }
+            });
+        });
+    }
+
+    //获取设备信息
+    function getbindDevice(deviceid) {
+        var isDevice = 1;
+        smitPosSdkWx.getDevices(function(msg){
+            smitLogPrintWx("getDevices:" + msg);
+
+            if(strToJson(msg).deviceInfos.length > 1){
+                for(var i=0;i<strToJson(msg).deviceInfos.length;i++){
+                    unbindBle(strToJson(msg).deviceInfos[i].deviceId);
+                }
+            }
+
+            for(var i=0;i<strToJson(msg).deviceInfos.length;i++){
+                if(strToJson(msg).deviceInfos[i].deviceId == deviceid){
+                    isDevice = 0;
+                }else {
+                    unbindBle(strToJson(msg).deviceInfos[i].deviceId);
+                }
+            }
+
+            if(isDevice == 0){
+                bleConn(deviceid);
+            }else{
+                bindBle(deviceid);
+            }
+        });
+    }
+
+    //解绑设备
+    function unbindBle(deviceid) {
+        //先去后台验证一下当前用户的openid有效
+        $(function(){
+            var url = "/SmitPayWechat/bindDevice";
+            var args = {"url":httpurl,openid:OpenId,deviceid:deviceid,isBind:"1","time":new Date()};
+            $.post(url,args,function(data){
+                if(data != ""){
+                    $("#initBle").append("<p>bind       :" + data + "</p>");
+                    $("#initBle").append("<p>设备：" + deviceid + "已解绑成功</p>");
+//					window.setTimeout(getConnectedDeviceId,3000);
+                    $("#unbindsuccess").append("<li> <p class=\"p_input p_input_yzm\"><em class=\"fa fa-envelope\"></em>"+deviceid+"<span style=\"float:right;\">解绑成功</span></p></li>");
+                }
+            });
+        });
+    }
+
+    function smitLogPrintWx(data){
+        $("#initBle").append("<p>"+data+"</p>");
+    }
+
+    setInterval(function(){
+        var TxtDebug = document.getElementById('TxtDebug');
+        var TxtDebugs = document.getElementById('TxtDebugs');
+        TxtDebug.style.display='block';
+
+        var initBle = document.getElementById('initBle').innerHTML;
+        var initBles = document.getElementById('initBles').innerHTML;
+        if(initBle != initBles){
+            TxtDebug.scrollTop=TxtDebug.scrollHeight;
+            document.getElementById('initBles').innerHTML = initBle;
+        }
+    },1000);
+
+    var wait=10;
+    function SetTime() {
+        if (wait == 0) {
+            document.getElementById('scanbtn').innerHTML="<a onclick=\"ScanBlus()\" class=\"c_4\">扫描</a>";
+            wait = 10;
+        }
+        else {
+            document.getElementById('scanbtn').innerHTML="<a style=\"background:#BCBCBC;\">"+wait+"秒后可以重新扫描</a>";
+            wait--;
+            setTimeout(function() {
+                SetTime();
+            },1000);
+        };
+    }
+
+    function getLog(){
+        var debuggingTxt = document.getElementById('debuggingTxt');
+        debuggingTxt.style.display='none';
+        var debuggingLog = document.getElementById('debuggingLog');
+        debuggingLog.style.display='block';
+    }
+
+    function cancelLog(){
+        var debuggingTxt = document.getElementById('debuggingTxt');
+        debuggingTxt.style.display='block';
+        var debuggingLog = document.getElementById('debuggingLog');
+        debuggingLog.style.display='none';
+    }
+
+    //读卡
+    function getReadAllCards(){
+        var ReadAllCardJson ={};
+        ReadAllCardJson.trade_id = "1000";
+        ReadAllCardJson.trade_time = "20170205164415";
+        ReadAllCardJson.amount = 20;
+        ReadAllCardJson.timeout = 60;
+        ReadAllCardJson.trade_type = 1;
+        ReadAllCardJson.is_encrypt = 1;
+        ReadAllCardJson.data_format = 1;
+
+        smit.exec(smit.MSG_TYPE_READ_ALL_CARD,JSON.stringify(ReadAllCardJson),function(msg){
+            if(strToJson(msg).status  == 0 || strToJson(msg).status == 0x58){
+                $("#initBle").append("<p>read all card:" + msg + "</p>");
+            }else{
+                $("#initBle").append("<p>读卡失败:" + strToJson(msg).status + "</p>");
+            }
+        });
+    }
+
+</script>
+
+
+
+</body>
+
+</html>

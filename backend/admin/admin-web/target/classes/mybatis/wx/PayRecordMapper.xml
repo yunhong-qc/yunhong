@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.admin.wxapi.dao.PayRecordDao">
+
+	<select id="get" resultType="com.admin.wxapi.domain.PayRecordDO">
+		select `pay_id`,`pay_money`,`pay_device_no`,`pay_user_no`,`pay_card_type`,`pay_type`,`pay_result`,`is_del`,`create_time`,`order_no` from yunh_qc_pay_record where pay_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.admin.wxapi.domain.PayRecordDO">
+		select `pay_id`,`pay_money`,`pay_device_no`,`pay_user_no`,`pay_card_type`,`pay_type`,`pay_result`,`is_del`,`create_time`,`order_no` from yunh_qc_pay_record
+        <where>  
+		  		  <if test="payId != null and payId != ''"> and pay_id = #{payId} </if>
+		  		  <if test="payMoney != null and payMoney != ''"> and pay_money = #{payMoney} </if>
+		  		  <if test="payDeviceNo != null and payDeviceNo != ''"> and pay_device_no = #{payDeviceNo} </if>
+		  		  <if test="payUserNo != null and payUserNo != ''"> and pay_user_no = #{payUserNo} </if>
+		  		  <if test="payCardType != null and payCardType != ''"> and pay_card_type = #{payCardType} </if>
+		  		  <if test="payType != null and payType != ''"> and pay_type = #{payType} </if>
+		  		  <if test="payResult != null and payResult != ''"> and pay_result = #{payResult} </if>
+		  		  <if test="isDel != null and isDel != ''"> and is_del = #{isDel} </if>
+		  		  <if test="createTime != null and createTime != ''">
+		  		  	<bind name="pattern" value="'%' + createTime + '%'" />
+		  		    and create_time like #{pattern}
+		  		  </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by pay_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from yunh_qc_pay_record
+		 <where>  
+		  		  <if test="payId != null and payId != ''"> and pay_id = #{payId} </if>
+		  		  <if test="payMoney != null and payMoney != ''"> and pay_money = #{payMoney} </if>
+		  		  <if test="payDeviceNo != null and payDeviceNo != ''"> and pay_device_no = #{payDeviceNo} </if>
+		  		  <if test="payUserNo != null and payUserNo != ''"> and pay_user_no = #{payUserNo} </if>
+		  		  <if test="payCardType != null and payCardType != ''"> and pay_card_type = #{payCardType} </if>
+		  		  <if test="payType != null and payType != ''"> and pay_type = #{payType} </if>
+		  		  <if test="payResult != null and payResult != ''"> and pay_result = #{payResult} </if>
+		  		  <if test="isDel != null and isDel != ''"> and is_del = #{isDel} </if>
+		  		  <if test="createTime != null and createTime != ''">
+		  		  	<bind name="pattern" value="'%' + createTime + '%'" />
+		  		    and create_time like #{pattern}
+		  		  </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.admin.wxapi.domain.PayRecordDO" useGeneratedKeys="true" keyProperty="payId">
+		insert into yunh_qc_pay_record
+		(
+			`pay_money`, 
+			`pay_device_no`, 
+			`pay_user_no`, 
+			`pay_card_type`, 
+			`pay_type`, 
+			`pay_result`, 
+			`is_del`, 
+			`order_no`,
+			`create_time`
+		)
+		values
+		(
+			#{payMoney}, 
+			#{payDeviceNo}, 
+			#{payUserNo}, 
+			#{payCardType}, 
+			#{payType}, 
+			#{payResult}, 
+			#{isDel}, 
+			#{orderNo}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.admin.wxapi.domain.PayRecordDO">
+		update yunh_qc_pay_record 
+		<set>
+			<if test="payMoney != null">`pay_money` = #{payMoney}, </if>
+			<if test="payDeviceNo != null">`pay_device_no` = #{payDeviceNo}, </if>
+			<if test="payUserNo != null">`pay_user_no` = #{payUserNo}, </if>
+			<if test="payCardType != null">`pay_card_type` = #{payCardType}, </if>
+			<if test="payType != null">`pay_type` = #{payType}, </if>
+			<if test="payResult != null">`pay_result` = #{payResult}, </if>
+			<if test="isDel != null">`is_del` = #{isDel}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where pay_id = #{payId}
+	</update>
+	
+	<delete id="remove">
+		delete from yunh_qc_pay_record where pay_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from yunh_qc_pay_record where pay_id in 
+		<foreach item="payId" collection="array" open="(" separator="," close=")">
+			#{payId}
+		</foreach>
+	</delete>
+
+</mapper>

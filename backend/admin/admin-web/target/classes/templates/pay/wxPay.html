@@ -1,0 +1,141 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"></meta>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+
+<link rel="stylesheet" href="/css/pay/main.css"></link>
+<script type="text/javascript" src="/js/util/loading.js"></script>
+<script>
+	//防止重复点击
+	var submit = false;
+	/**
+	 * 充值金额选择
+	 * @param t
+	 * @returns
+	 */
+	$(document).ready(
+			function() {
+				$('#_loading_feng1').hide();
+				$('.click_li').click(function(t) {
+					$('.click_li').removeClass('selected');
+					$(this).addClass('selected');
+					var price = $(this).attr('price');
+					$('.rechnum').html(price + '.00 元');
+				});
+				//绑定微信事件
+				if (typeof WeixinJSBridge == "undefined") {
+					if (document.addEventListener) {
+						document.addEventListener('WeixinJSBridgeReady',
+								onBridgeReady, false);
+					} else if (document.attachEvent) {
+						document.attachEvent('WeixinJSBridgeReady',
+								onBridgeReady);
+						document.attachEvent('onWeixinJSBridgeReady',
+								onBridgeReady);
+					}
+				} else {
+					onBridgeReady();
+				}
+			});
+
+	function toPay() {
+		$('#container').text('正在支付...');
+		_loading.show();
+		if (submit) {
+			return;
+		}
+		submit = true;
+		//传递code和state去addOrder增加订单
+		var price = $('.selected').attr('price');
+		var order = {};
+		order.payType = 2;
+		order.payPrice = '1';
+		order.orderRemark = '充值燃气费';
+		order.openid = $('#openid').val();
+		order.payUser = $('#nickname').val();
+		//获取数据后，拉起支付界面
+		$.ajax({
+			type : "POST",
+			url : "addOrder",
+			async : true,
+			data : order,
+			success : function(data) {
+				onBridgeReady(data.data);
+			}
+		});
+	}
+	/**
+		调起支付
+	 */
+	function onBridgeReady(data) {
+		/*
+			拉起支付
+		 */
+		var payd = eval('(' + data + ')');
+		WeixinJSBridge.invoke('getBrandWCPayRequest', {
+			"appId" : payd.appId,
+			"timeStamp" : payd.timeStamp,
+			"nonceStr" : payd.nonceStr,
+			"package" : payd.pack_age,
+			"signType" : payd.signType,
+			"paySign" : payd.paySign
+		}, function(res) {
+			$('#container').text('立即支付');
+			submit = false;
+			_loading.hide();
+			if (res.err_msg == "get_brand_wcpay_request:ok") {
+				//调用设备写信息
+				_loading.show();
+				window.location.href = 'http://app.cdqckj.com/wx/ble/pubBind';
+			} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+				alert("用户取消支付");
+			} else {
+				alert("支付失败");
+			}
+		});
+
+	}
+
+	//支付结束
+</script>
+</head>
+<body style="padding: 0px 10px 0px 10px;">
+	<input type="hidden" id="openid" th:value="${openid}"></input>
+	<input type="hidden" id="nickname" th:value="${nickname}"></input>
+	<div class="tr_rechbox">
+		<div class="tr_rechhead">
+			<img th:src=${userhead}></img>
+			<p>
+				充值帐号： <a th:text=${nickname}></a>
+			</p>
+		</div>
+		<div class="tr_rechli am-form-group">
+			<ul class="ui-choose am-form-group" id="uc_01">
+				<li class="click_li selected" price="10"><label
+					class="am-radio-inline"> 10￥ </label></li>
+				<li class="click_li" price="20"><label class="am-radio-inline">
+						20￥ </label></li>
+				<li class="click_li" price="50"><label class="am-radio-inline">
+						50￥ </label></li>
+				<li class="click_li" price="100"><label class="am-radio-inline">
+						100￥ </label></li>
+				<li class="click_li" price="200"><label class="am-radio-inline">
+						200￥ </label></li>
+				<li class="click_li" price="500"><label class="am-radio-inline">
+						500￥ </label></li>
+			</ul>
+			<!--<span>1招兵币=1元 10元起充</span>-->
+		</div>
+		<div class="tr_rechnum">
+			<span>应付金额：</span>
+			<p class="rechnum">10.00元</p>
+		</div>
+	</div>
+	<div id="container" onclick="toPay()"
+		style="dth: 100%; text-align: center; background-color: rgba(39, 176, 214, .15); border-radius: 20px;">
+		立即支付</div>
+
+</body>
+</html>
