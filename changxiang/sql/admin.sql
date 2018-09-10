@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 10/09/2018 13:45:42
+ Date: 10/09/2018 16:22:15
 */
 
 SET NAMES utf8mb4;
@@ -53,6 +53,24 @@ CREATE TABLE `oa_notify_record`  (
   INDEX `oa_notify_record_user_id`(`user_id`) USING BTREE,
   INDEX `oa_notify_record_read_flag`(`is_read`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '通知通告发送记录' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for p_school_info
+-- ----------------------------
+DROP TABLE IF EXISTS `p_school_info`;
+CREATE TABLE `p_school_info`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `stu_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学校名',
+  `stu_address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学校地址',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '学校信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of p_school_info
+-- ----------------------------
+INSERT INTO `p_school_info` VALUES (1, '成都电子科技大学清水河校区', '清水河', NULL);
+INSERT INTO `p_school_info` VALUES (2, '四川大学', '一环路', NULL);
 
 -- ----------------------------
 -- Table structure for p_student_info
@@ -268,7 +286,7 @@ CREATE TABLE `sys_log`  (
   `ip` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
   `gmt_create` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 210 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 240 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_log
@@ -482,6 +500,36 @@ INSERT INTO `sys_log` VALUES (206, 1, 'admin', '编辑用户', 11, 'com.admin.sy
 INSERT INTO `sys_log` VALUES (207, 1, 'admin', '更新用户', 16, 'com.admin.system.controller.UserController.update()', NULL, '127.0.0.1', '2018-09-10 10:42:57');
 INSERT INTO `sys_log` VALUES (208, 1, 'admin', '编辑用户', 9, 'com.admin.system.controller.UserController.edit()', NULL, '127.0.0.1', '2018-09-10 10:43:02');
 INSERT INTO `sys_log` VALUES (209, 1, 'admin', '更新用户', 6, 'com.admin.system.controller.UserController.update()', NULL, '127.0.0.1', '2018-09-10 10:43:06');
+INSERT INTO `sys_log` VALUES (210, 1, 'admin', '登录', 16, 'com.admin.system.controller.LoginController.ajaxLogin()', NULL, '127.0.0.1', '2018-09-10 15:36:12');
+INSERT INTO `sys_log` VALUES (211, 1, 'admin', '请求访问主页', 40, 'com.admin.system.controller.LoginController.index()', NULL, '127.0.0.1', '2018-09-10 15:36:12');
+INSERT INTO `sys_log` VALUES (212, 1, 'admin', '添加菜单', 6, 'com.admin.system.controller.MenuController.add()', NULL, '127.0.0.1', '2018-09-10 15:52:20');
+INSERT INTO `sys_log` VALUES (213, 1, 'admin', '保存菜单', 5, 'com.admin.system.controller.MenuController.save()', NULL, '127.0.0.1', '2018-09-10 15:53:04');
+INSERT INTO `sys_log` VALUES (214, 1, 'admin', '编辑角色', 2, 'com.admin.system.controller.RoleController.edit()', NULL, '127.0.0.1', '2018-09-10 15:53:11');
+INSERT INTO `sys_log` VALUES (215, 1, 'admin', '更新角色', 32, 'com.admin.system.controller.RoleController.update()', NULL, '127.0.0.1', '2018-09-10 15:53:15');
+INSERT INTO `sys_log` VALUES (216, 1, 'admin', '登录', 4, 'com.admin.system.controller.LoginController.ajaxLogin()', NULL, '127.0.0.1', '2018-09-10 15:53:18');
+INSERT INTO `sys_log` VALUES (217, 1, 'admin', '请求访问主页', 10, 'com.admin.system.controller.LoginController.index()', NULL, '127.0.0.1', '2018-09-10 15:53:18');
+INSERT INTO `sys_log` VALUES (218, 1, 'admin', '登录', 9, 'com.admin.system.controller.LoginController.ajaxLogin()', NULL, '127.0.0.1', '2018-09-10 15:55:38');
+INSERT INTO `sys_log` VALUES (219, 1, 'admin', '请求访问主页', 31, 'com.admin.system.controller.LoginController.index()', NULL, '127.0.0.1', '2018-09-10 15:55:38');
+INSERT INTO `sys_log` VALUES (220, 1, 'admin', '编辑菜单', 12, 'com.admin.system.controller.MenuController.edit()', NULL, '127.0.0.1', '2018-09-10 15:57:08');
+INSERT INTO `sys_log` VALUES (221, 1, 'admin', '更新菜单', 9, 'com.admin.system.controller.MenuController.update()', NULL, '127.0.0.1', '2018-09-10 15:57:21');
+INSERT INTO `sys_log` VALUES (222, 1, 'admin', '登录', 6, 'com.admin.system.controller.LoginController.ajaxLogin()', NULL, '127.0.0.1', '2018-09-10 15:57:28');
+INSERT INTO `sys_log` VALUES (223, 1, 'admin', '请求访问主页', 15, 'com.admin.system.controller.LoginController.index()', NULL, '127.0.0.1', '2018-09-10 15:57:28');
+INSERT INTO `sys_log` VALUES (224, 1, 'admin', '登录', 14, 'com.admin.system.controller.LoginController.ajaxLogin()', NULL, '127.0.0.1', '2018-09-10 15:59:06');
+INSERT INTO `sys_log` VALUES (225, 1, 'admin', '请求访问主页', 40, 'com.admin.system.controller.LoginController.index()', NULL, '127.0.0.1', '2018-09-10 15:59:06');
+INSERT INTO `sys_log` VALUES (226, 1, 'admin', '登录', 11, 'com.admin.system.controller.LoginController.ajaxLogin()', NULL, '127.0.0.1', '2018-09-10 16:04:45');
+INSERT INTO `sys_log` VALUES (227, 1, 'admin', '请求访问主页', 41, 'com.admin.system.controller.LoginController.index()', NULL, '127.0.0.1', '2018-09-10 16:04:45');
+INSERT INTO `sys_log` VALUES (228, 1, 'admin', '添加菜单', 9, 'com.admin.system.controller.MenuController.add()', NULL, '127.0.0.1', '2018-09-10 16:04:57');
+INSERT INTO `sys_log` VALUES (229, 1, 'admin', '保存菜单', 7, 'com.admin.system.controller.MenuController.save()', NULL, '127.0.0.1', '2018-09-10 16:06:08');
+INSERT INTO `sys_log` VALUES (230, 1, 'admin', '添加菜单', 6, 'com.admin.system.controller.MenuController.add()', NULL, '127.0.0.1', '2018-09-10 16:06:12');
+INSERT INTO `sys_log` VALUES (231, 1, 'admin', '保存菜单', 5, 'com.admin.system.controller.MenuController.save()', NULL, '127.0.0.1', '2018-09-10 16:07:10');
+INSERT INTO `sys_log` VALUES (232, 1, 'admin', '添加菜单', 7, 'com.admin.system.controller.MenuController.add()', NULL, '127.0.0.1', '2018-09-10 16:07:16');
+INSERT INTO `sys_log` VALUES (233, 1, 'admin', '保存菜单', 5, 'com.admin.system.controller.MenuController.save()', NULL, '127.0.0.1', '2018-09-10 16:08:36');
+INSERT INTO `sys_log` VALUES (234, 1, 'admin', '添加菜单', 6, 'com.admin.system.controller.MenuController.add()', NULL, '127.0.0.1', '2018-09-10 16:08:40');
+INSERT INTO `sys_log` VALUES (235, 1, 'admin', '保存菜单', 6, 'com.admin.system.controller.MenuController.save()', NULL, '127.0.0.1', '2018-09-10 16:09:19');
+INSERT INTO `sys_log` VALUES (236, 1, 'admin', '编辑角色', 3, 'com.admin.system.controller.RoleController.edit()', NULL, '127.0.0.1', '2018-09-10 16:10:10');
+INSERT INTO `sys_log` VALUES (237, 1, 'admin', '更新角色', 24, 'com.admin.system.controller.RoleController.update()', NULL, '127.0.0.1', '2018-09-10 16:10:13');
+INSERT INTO `sys_log` VALUES (238, 1, 'admin', '登录', 3, 'com.admin.system.controller.LoginController.ajaxLogin()', NULL, '127.0.0.1', '2018-09-10 16:10:15');
+INSERT INTO `sys_log` VALUES (239, 1, 'admin', '请求访问主页', 8, 'com.admin.system.controller.LoginController.index()', NULL, '127.0.0.1', '2018-09-10 16:10:15');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -499,7 +547,7 @@ CREATE TABLE `sys_menu`  (
   `gmt_create` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `gmt_modified` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 115 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 120 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -556,6 +604,11 @@ INSERT INTO `sys_menu` VALUES (106, 105, '参与活动用户', '/pack/studentInf
 INSERT INTO `sys_menu` VALUES (112, 105, '收款记录查看', '/pack/studentInfo/payRecord', 'pack:studentInfo:studentInfo', 1, 'fa fa-bars', 3, NULL, NULL);
 INSERT INTO `sys_menu` VALUES (113, 106, '编辑', '/pack/studentInfo/edit', 'pack:studentInfo:edit', 2, 'fa fa-pencil-square-o', 1, NULL, NULL);
 INSERT INTO `sys_menu` VALUES (114, 112, '编辑', '/pack/studentInfo/payEdit', 'pack:studentInfo:edit', 2, 'fa fa-pencil-square-o', 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (115, 105, '学校管理', '/pack/schoolInfo', 'pack:schoolInfo:schoolInfo', 1, 'fa fa-bars', 3, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (116, 115, '新增', '/system/schoolInfo/add', 'pack:schoolInfo:add', 2, 'fa fa-plus', 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (117, 115, '编辑', '/system/schoolInfo/edit', 'pack:schoolInfo:edit', 2, 'fa fa-pencil-square-o', 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (118, 115, '删除', '/system/schoolInfo/remove', 'pack:schoolInfo:remove', 2, 'fa fa-remove', 3, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (119, 115, '批量删除', '/system/schoolInfo/batchRemove', 'pack:schoolInfo:batchRemove', 2, 'fa fa-trash-o', 4, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -589,7 +642,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3616 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3728 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -600,59 +653,64 @@ INSERT INTO `sys_role_menu` VALUES (3391, 61, 105);
 INSERT INTO `sys_role_menu` VALUES (3447, 62, 105);
 INSERT INTO `sys_role_menu` VALUES (3453, 62, 106);
 INSERT INTO `sys_role_menu` VALUES (3454, 62, -1);
-INSERT INTO `sys_role_menu` VALUES (3563, 1, 113);
-INSERT INTO `sys_role_menu` VALUES (3564, 1, 92);
-INSERT INTO `sys_role_menu` VALUES (3565, 1, 57);
-INSERT INTO `sys_role_menu` VALUES (3566, 1, 30);
-INSERT INTO `sys_role_menu` VALUES (3567, 1, 29);
-INSERT INTO `sys_role_menu` VALUES (3568, 1, 28);
-INSERT INTO `sys_role_menu` VALUES (3569, 1, 90);
-INSERT INTO `sys_role_menu` VALUES (3570, 1, 89);
-INSERT INTO `sys_role_menu` VALUES (3571, 1, 88);
-INSERT INTO `sys_role_menu` VALUES (3572, 1, 87);
-INSERT INTO `sys_role_menu` VALUES (3573, 1, 86);
-INSERT INTO `sys_role_menu` VALUES (3574, 1, 104);
-INSERT INTO `sys_role_menu` VALUES (3575, 1, 72);
-INSERT INTO `sys_role_menu` VALUES (3576, 1, 48);
-INSERT INTO `sys_role_menu` VALUES (3577, 1, 76);
-INSERT INTO `sys_role_menu` VALUES (3578, 1, 75);
-INSERT INTO `sys_role_menu` VALUES (3579, 1, 74);
-INSERT INTO `sys_role_menu` VALUES (3580, 1, 62);
-INSERT INTO `sys_role_menu` VALUES (3581, 1, 56);
-INSERT INTO `sys_role_menu` VALUES (3582, 1, 55);
-INSERT INTO `sys_role_menu` VALUES (3583, 1, 15);
-INSERT INTO `sys_role_menu` VALUES (3584, 1, 26);
-INSERT INTO `sys_role_menu` VALUES (3585, 1, 25);
-INSERT INTO `sys_role_menu` VALUES (3586, 1, 24);
-INSERT INTO `sys_role_menu` VALUES (3587, 1, 14);
-INSERT INTO `sys_role_menu` VALUES (3588, 1, 13);
-INSERT INTO `sys_role_menu` VALUES (3589, 1, 12);
-INSERT INTO `sys_role_menu` VALUES (3590, 1, 61);
-INSERT INTO `sys_role_menu` VALUES (3591, 1, 22);
-INSERT INTO `sys_role_menu` VALUES (3592, 1, 21);
-INSERT INTO `sys_role_menu` VALUES (3593, 1, 20);
-INSERT INTO `sys_role_menu` VALUES (3594, 1, 83);
-INSERT INTO `sys_role_menu` VALUES (3595, 1, 81);
-INSERT INTO `sys_role_menu` VALUES (3596, 1, 80);
-INSERT INTO `sys_role_menu` VALUES (3597, 1, 79);
-INSERT INTO `sys_role_menu` VALUES (3598, 1, 71);
-INSERT INTO `sys_role_menu` VALUES (3599, 1, 106);
-INSERT INTO `sys_role_menu` VALUES (3600, 1, 27);
-INSERT INTO `sys_role_menu` VALUES (3601, 1, 91);
-INSERT INTO `sys_role_menu` VALUES (3602, 1, 85);
-INSERT INTO `sys_role_menu` VALUES (3603, 1, 84);
-INSERT INTO `sys_role_menu` VALUES (3604, 1, 77);
-INSERT INTO `sys_role_menu` VALUES (3605, 1, 73);
-INSERT INTO `sys_role_menu` VALUES (3606, 1, 7);
-INSERT INTO `sys_role_menu` VALUES (3607, 1, 6);
-INSERT INTO `sys_role_menu` VALUES (3608, 1, 2);
-INSERT INTO `sys_role_menu` VALUES (3609, 1, 3);
-INSERT INTO `sys_role_menu` VALUES (3610, 1, 78);
-INSERT INTO `sys_role_menu` VALUES (3611, 1, 1);
-INSERT INTO `sys_role_menu` VALUES (3612, 1, 112);
-INSERT INTO `sys_role_menu` VALUES (3613, 1, 114);
-INSERT INTO `sys_role_menu` VALUES (3614, 1, 105);
-INSERT INTO `sys_role_menu` VALUES (3615, 1, -1);
+INSERT INTO `sys_role_menu` VALUES (3670, 1, 114);
+INSERT INTO `sys_role_menu` VALUES (3671, 1, 113);
+INSERT INTO `sys_role_menu` VALUES (3672, 1, 92);
+INSERT INTO `sys_role_menu` VALUES (3673, 1, 57);
+INSERT INTO `sys_role_menu` VALUES (3674, 1, 30);
+INSERT INTO `sys_role_menu` VALUES (3675, 1, 29);
+INSERT INTO `sys_role_menu` VALUES (3676, 1, 28);
+INSERT INTO `sys_role_menu` VALUES (3677, 1, 90);
+INSERT INTO `sys_role_menu` VALUES (3678, 1, 89);
+INSERT INTO `sys_role_menu` VALUES (3679, 1, 88);
+INSERT INTO `sys_role_menu` VALUES (3680, 1, 87);
+INSERT INTO `sys_role_menu` VALUES (3681, 1, 86);
+INSERT INTO `sys_role_menu` VALUES (3682, 1, 104);
+INSERT INTO `sys_role_menu` VALUES (3683, 1, 72);
+INSERT INTO `sys_role_menu` VALUES (3684, 1, 48);
+INSERT INTO `sys_role_menu` VALUES (3685, 1, 76);
+INSERT INTO `sys_role_menu` VALUES (3686, 1, 75);
+INSERT INTO `sys_role_menu` VALUES (3687, 1, 74);
+INSERT INTO `sys_role_menu` VALUES (3688, 1, 62);
+INSERT INTO `sys_role_menu` VALUES (3689, 1, 56);
+INSERT INTO `sys_role_menu` VALUES (3690, 1, 55);
+INSERT INTO `sys_role_menu` VALUES (3691, 1, 15);
+INSERT INTO `sys_role_menu` VALUES (3692, 1, 26);
+INSERT INTO `sys_role_menu` VALUES (3693, 1, 25);
+INSERT INTO `sys_role_menu` VALUES (3694, 1, 24);
+INSERT INTO `sys_role_menu` VALUES (3695, 1, 14);
+INSERT INTO `sys_role_menu` VALUES (3696, 1, 13);
+INSERT INTO `sys_role_menu` VALUES (3697, 1, 12);
+INSERT INTO `sys_role_menu` VALUES (3698, 1, 61);
+INSERT INTO `sys_role_menu` VALUES (3699, 1, 22);
+INSERT INTO `sys_role_menu` VALUES (3700, 1, 21);
+INSERT INTO `sys_role_menu` VALUES (3701, 1, 20);
+INSERT INTO `sys_role_menu` VALUES (3702, 1, 83);
+INSERT INTO `sys_role_menu` VALUES (3703, 1, 81);
+INSERT INTO `sys_role_menu` VALUES (3704, 1, 80);
+INSERT INTO `sys_role_menu` VALUES (3705, 1, 79);
+INSERT INTO `sys_role_menu` VALUES (3706, 1, 71);
+INSERT INTO `sys_role_menu` VALUES (3707, 1, 112);
+INSERT INTO `sys_role_menu` VALUES (3708, 1, 106);
+INSERT INTO `sys_role_menu` VALUES (3709, 1, 27);
+INSERT INTO `sys_role_menu` VALUES (3710, 1, 91);
+INSERT INTO `sys_role_menu` VALUES (3711, 1, 85);
+INSERT INTO `sys_role_menu` VALUES (3712, 1, 84);
+INSERT INTO `sys_role_menu` VALUES (3713, 1, 77);
+INSERT INTO `sys_role_menu` VALUES (3714, 1, 73);
+INSERT INTO `sys_role_menu` VALUES (3715, 1, 7);
+INSERT INTO `sys_role_menu` VALUES (3716, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (3717, 1, 2);
+INSERT INTO `sys_role_menu` VALUES (3718, 1, 3);
+INSERT INTO `sys_role_menu` VALUES (3719, 1, 78);
+INSERT INTO `sys_role_menu` VALUES (3720, 1, 1);
+INSERT INTO `sys_role_menu` VALUES (3721, 1, 115);
+INSERT INTO `sys_role_menu` VALUES (3722, 1, 119);
+INSERT INTO `sys_role_menu` VALUES (3723, 1, 118);
+INSERT INTO `sys_role_menu` VALUES (3724, 1, 117);
+INSERT INTO `sys_role_menu` VALUES (3725, 1, 116);
+INSERT INTO `sys_role_menu` VALUES (3726, 1, 105);
+INSERT INTO `sys_role_menu` VALUES (3727, 1, -1);
 
 -- ----------------------------
 -- Table structure for sys_task
@@ -705,15 +763,16 @@ CREATE TABLE `sys_user`  (
   `province` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '省份',
   `city` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所在城市',
   `district` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所在地区',
+  `school_id` int(11) NULL DEFAULT NULL COMMENT '学校ID',
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('01278', 'lisi', '李四', '1cde18eea8464e2fa614902845d1ac0d', 2, '312@QQ.COM', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_user` VALUES ('1', 'admin', '超级管理员', 'c1cee993ece039aa8b0efbe6f2754082', 3, 'lg932740579@163.com', '18108258001', 1, 1, '2017-08-15 21:40:39', '2017-08-15 21:41:00', 96, '2017-12-14 00:00:00', 138, 'ccc', '122;121;', '北京市', '北京市市辖区', '东城区');
-INSERT INTO `sys_user` VALUES ('1268', 'zhangsan', '张三', '631238c3e0326c0d26360e6f6e448452', 4, 'a.kiss@qq.com', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_user` VALUES ('01278', 'lisi', '李四', '1cde18eea8464e2fa614902845d1ac0d', 2, '312@QQ.COM', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_user` VALUES ('1', 'admin', '超级管理员', 'c1cee993ece039aa8b0efbe6f2754082', 3, 'lg932740579@163.com', '18108258001', 1, 1, '2017-08-15 21:40:39', '2017-08-15 21:41:00', 96, '2017-12-14 00:00:00', 138, 'ccc', '122;121;', '北京市', '北京市市辖区', '东城区', NULL);
+INSERT INTO `sys_user` VALUES ('1268', 'zhangsan', '张三', '631238c3e0326c0d26360e6f6e448452', 4, 'a.kiss@qq.com', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_role

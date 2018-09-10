@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.admin.pack.dao.SchoolInfoDao">
+
+	<select id="get" resultType="com.admin.pack.domain.SchoolInfoDO">
+		select `id`,`stu_name`,`stu_address` from p_school_info where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.admin.pack.domain.SchoolInfoDO">
+		select `id`,`stu_name`,`stu_address` from p_school_info
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="stuName != null and stuName != ''"> and stu_name = #{stuName} </if>
+		  		  <if test="stuAddress != null and stuAddress != ''"> and stu_address = #{stuAddress} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from p_school_info
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="stuName != null and stuName != ''"> and stu_name = #{stuName} </if>
+		  		  <if test="stuAddress != null and stuAddress != ''"> and stu_address = #{stuAddress} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.admin.pack.domain.SchoolInfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into p_school_info
+		(
+			`stu_name`, 
+			`stu_address`, 
+			`remark`
+		)
+		values
+		(
+			#{stuName}, 
+			#{stuAddress}, 
+			#{remark}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.admin.pack.domain.SchoolInfoDO">
+		update p_school_info 
+		<set>
+			<if test="stuName != null">`stu_name` = #{stuName}, </if>
+			<if test="stuAddress != null">`stu_address` = #{stuAddress}, </if>
+			<if test="remark != null">`remark` = #{remark}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from p_school_info where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from p_school_info where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
