@@ -24,7 +24,7 @@ public class SendShortMessage {
 	 * 2018年9月10日
 	 * 作者：fengchase
 	 */
-	public  void sendMess(String phone,String vcode,String useModel,String timeout) {
+	public HashMap<String, Object> sendMess(String phone,String vcode,String useModel,String timeout) {
 		HashMap<String, Object> result = null;
 		boolean isTest=true;
 		//初始化SDK
@@ -75,7 +75,7 @@ public class SendShortMessage {
 		result = restAPI.sendTemplateSMS(phone,useModel ,new String[]{vcode,timeout});
 		
 		System.out.println("SDKTestGetSubAccounts result=" + result);
-		if("000000".equals(result.get("statusCode"))){
+		/*if("000000".equals(result.get("statusCode"))){
 			//正常返回输出data包体信息（map）
 			HashMap<String,Object> data = (HashMap<String, Object>) result.get("data");
 			Set<String> keySet = data.keySet();
@@ -86,7 +86,8 @@ public class SendShortMessage {
 		}else{
 			//异常返回输出错误码和错误信息
 			System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
-		}
+		}*/
+		return result;
 	}
 
 }
