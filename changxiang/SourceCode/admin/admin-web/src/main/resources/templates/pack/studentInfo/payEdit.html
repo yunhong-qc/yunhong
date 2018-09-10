@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${studentInfo.id}"  type="hidden">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">是否支付：</label>
+								<div class="col-sm-8">
+									<select class="form-control" id="isPay" name="isPay">
+										<option value="0" th:selected="${studentInfo.isPay==0}">已支付</option>
+										<option value="1" th:selected="${studentInfo.isPay==1}">未支付</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/pack/studentInfo/edit.js">
+	</script>
+</body>
+</html>

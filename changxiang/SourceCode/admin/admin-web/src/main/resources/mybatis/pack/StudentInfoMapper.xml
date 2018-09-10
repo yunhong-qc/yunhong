@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.admin.pack.dao.StudentInfoDao">
+
+	<select id="get" resultType="com.admin.pack.domain.StudentInfoDO">
+		select `id`,`name`,`card_no`,`telephone`,`school_id`,`dorm_id`,`is_wb`,`is_success`,`user_id`,`create_time`,`is_pay` from p_student_info where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.admin.pack.domain.StudentInfoDO">
+		select `id`,`name`,`card_no`,`telephone`,`school_id`,`dorm_id`,`is_wb`,`is_success`,`user_id`,`create_time`,`is_pay` from p_student_info
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="cardNo != null and cardNo != ''"> and card_no = #{cardNo} </if>
+		  		  <if test="telephone != null and telephone != ''"> and telephone = #{telephone} </if>
+		  		  <if test="schoolId != null and schoolId != ''"> and school_id = #{schoolId} </if>
+		  		  <if test="dormId != null and dormId != ''"> and dorm_id = #{dormId} </if>
+		  		  <if test="isWb != null and isWb != ''"> and is_wb = #{isWb} </if>
+		  		  <if test="isSuccess != null and isSuccess != ''"> and is_success = #{isSuccess} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+					<if test="isPay != null and isPay != ''"> and `is_pay` = #{isPay} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from p_student_info
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="cardNo != null and cardNo != ''"> and card_no = #{cardNo} </if>
+		  		  <if test="telephone != null and telephone != ''"> and telephone = #{telephone} </if>
+		  		  <if test="schoolId != null and schoolId != ''"> and school_id = #{schoolId} </if>
+		  		  <if test="dormId != null and dormId != ''"> and dorm_id = #{dormId} </if>
+		  		  <if test="isWb != null and isWb != ''"> and is_wb = #{isWb} </if>
+		  		  <if test="isSuccess != null and isSuccess != ''"> and is_success = #{isSuccess} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			 <if test="isPay != null and isPay != ''"> and `is_pay` = #{isPay} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.admin.pack.domain.StudentInfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into p_student_info
+		(
+			`name`, 
+			`card_no`, 
+			`telephone`, 
+			`school_id`, 
+			`dorm_id`, 
+			`is_wb`, 
+			`is_success`, 
+			`user_id`, 
+			`create_time`,
+			`is_pay`
+		)
+		values
+		(
+			#{name}, 
+			#{cardNo}, 
+			#{telephone}, 
+			#{schoolId}, 
+			#{dormId}, 
+			#{isWb}, 
+			#{isSuccess}, 
+			#{userId}, 
+			#{createTime},
+			#{isPay}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.admin.pack.domain.StudentInfoDO">
+		update p_student_info 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="cardNo != null">`card_no` = #{cardNo}, </if>
+			<if test="telephone != null">`telephone` = #{telephone}, </if>
+			<if test="schoolId != null">`school_id` = #{schoolId}, </if>
+			<if test="dormId != null">`dorm_id` = #{dormId}, </if>
+			<if test="isWb != null">`is_wb` = #{isWb}, </if>
+			<if test="isSuccess != null">`is_success` = #{isSuccess}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="createTime != null">`create_time` = #{createTime},</if>
+			<if test="isPay != null">`is_pay` = #{isPay},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from p_student_info where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from p_student_info where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
