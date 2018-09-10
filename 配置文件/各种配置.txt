@@ -47,7 +47,7 @@ IPAddress:  24CF21E216EC
     "op_type": "1", 
     "product_id": "48353"
 }
-
+gh_05fc6bc0923c_ce80bfc1928adf76
 <div id="activity-detail" class="zh_CN ">
                     <div id='Deviceinfo' tabindex='2' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getDeviceInfo()">设备信息</div>
                     <div id='getRandom' tabindex='3' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getRandom()">随机数</div>

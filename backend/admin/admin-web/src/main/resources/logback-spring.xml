@@ -61,15 +61,11 @@
 
  
     <logger name="com.admin" level="info" additivity="false">
-        <appender-ref ref="debugLog" />
         <appender-ref ref="errorLog" />
     </logger>  
 
     <root level="error">
-        <appender-ref ref="console" />
-         <appender-ref ref="debugLog" />
         <appender-ref ref="errorLog" />
-        <appender-ref ref="infoLog" />
     </root>
 
 </configuration>

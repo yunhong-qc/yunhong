@@ -41,13 +41,51 @@ public class HttpUtils {
         }
         return respContent;
     }
+	public static String test(String url,JSONObject jsonParam) throws Exception {
+		
+		HttpPost httpPost = new HttpPost(url);
+		CloseableHttpClient client = HttpClients.createDefault();
+		String respContent = null;
+		
+		//StringEntity entity = new StringEntity(jsonParam.toString(),"utf-8");//解决中文乱码问题    
+		httpPost.addHeader("Content-type",CONTENTYPE_APPLICTIONJSON);  
+		httpPost.setHeader("Accept", "*/*");  
+		httpPost.setHeader("X-Requested-With", "XMLHttpRequest");  
+
+		httpPost.setHeader("Accept-Encoding", "gzip, deflate");  
+		httpPost.setHeader("Accept-Language", "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");  
+		httpPost.setHeader("Cache-Control", "no-cache");  
+		httpPost.setHeader("Connection", "keep-alive");  
+		httpPost.setHeader("Cookie", "PHPSESSID=k8r9196sov90tmk2jlp2bad5s0");  
+		httpPost.setHeader("Host", "47.93.119.90");  
+		httpPost.setHeader("Pragma", "no-cache");  
+		httpPost.setHeader("Refererh", "http://47.93.119.90/Mobile/index.html");  
+		httpPost.setHeader("X-Requested-With", "XMLHttpRequest");  
+		httpPost.setHeader("X-Requested-With", "XMLHttpRequest");  
+		
+		//httpPost.setEntity(entity);
+		
+		HttpResponse resp = client.execute(httpPost);
+		if(resp.getStatusLine().getStatusCode() == 200) {
+			HttpEntity he = resp.getEntity();
+			respContent = EntityUtils.toString(he,"UTF-8");
+		}
+		return respContent;
+	}
 	public static String sendGET(String url, String param) {
         String result = "";// 访问返回结果
         BufferedReader read = null;// 读取访问结果
  
         try {
             // 创建url
-            URL realurl = new URL(url + "?" + param);
+        	URL realurl ;
+        	if(StringUtils.isNullString(param)) {
+        		realurl= new URL(url);
+        	}else {
+        		
+        		realurl= new URL(url + "?" + param);
+        	}
+        	System.out.println(realurl);
             // 打开连接
             URLConnection connection = realurl.openConnection();
             // 设置通用的请求属性
@@ -114,4 +152,5 @@ public class HttpUtils {
 		
 		return result;
 	}
+	
 }

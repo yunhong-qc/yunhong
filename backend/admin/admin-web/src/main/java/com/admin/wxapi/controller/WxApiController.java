@@ -11,6 +11,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,7 @@ import com.admin.utils.BaseResultModel;
 import com.admin.utils.DateUtils;
 import com.admin.utils.FileLog;
 import com.admin.utils.GetMacAddr;
+import com.admin.utils.HttpUtils;
 import com.admin.utils.StringUtils;
 import com.admin.utils.pay.wex.ServiceUtil;
 import com.admin.utils.wx.StrXmlToMap;
@@ -65,6 +70,10 @@ public class WxApiController {
 		FileLog.debugLog("12312321");
 		FileLog.errorLog("7679879");
 		return prefix + "/BleConnectsxlb";
+	}
+	@GetMapping("/toConnTips")
+	String toConnTips() {
+		return prefix + "/conntips";
 	}
 
 	@GetMapping("/authdev")
@@ -216,5 +225,52 @@ public class WxApiController {
 		}
 		return null;
 	}
+	@RequestMapping("/hengtai")
+	@ResponseBody
+	public String tseet(HttpServletRequest request) {
+		try {
+			String url=request.getParameter("url");
+			String result=HttpUtils.test(url, null);
+			Document doc = Jsoup.parse(result);
+			// 获取导航栏文本
+			Elements tb1=doc.select(".sl-zx-tb1");
+			for(Element e2 : tb1) {
+				Elements tb2=e2.select(".sl-zx-tb3");
+				for(Element e3 : tb2) {
+					String e2h=e3.html();
+					if(e2h.contains("-")) {
+						continue;
+					}
+					System.out.println("值"+e2h);
+					Double b=Double.parseDouble(e2h)+0.5;
+					e3.html(b.toString());
+				}
+			}
+			return result;
+//			String result=HttpUtils.sendGET("http://47.93.119.90/Mobile/index.html", null);
+			
+			// return wx.encryptMsg("已收到你的消息，马上前往支援。", DateUtils.format(new Date(),
+			// DateUtils.DATE_TIME_STAMP), WxUtils.getRandomStr());
+		} catch (Exception e) {
+			// TODO 打印输出日志
+			e.printStackTrace();
+		}
+		return "success";
+	}
+	@RequestMapping("/hengtai2")
+	public String tseet2(HttpServletRequest request) {
+		try {
+			//String result=HttpUtils.sendGET("http://47.93.119.90/Mobile/index.html", null);
+			//return result;
+			// return wx.encryptMsg("已收到你的消息，马上前往支援。", DateUtils.format(new Date(),
+			// DateUtils.DATE_TIME_STAMP), WxUtils.getRandomStr());
+		} catch (Exception e) {
+			// TODO 打印输出日志
+			e.printStackTrace();
+		}
+		return "hengtai/index";
+	}
+	
+	
 
 }

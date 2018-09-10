@@ -509,7 +509,7 @@ function CardRead1608() {
 }
 
 // 写燃气卡
-function gasCardWrite() {
+function gasCardWrite(callBack) {
 	var params = {};
 	switch (card_type) {
 	case 0:
@@ -560,8 +560,15 @@ function gasCardWrite() {
 				$("#initBle").append("<p>gasCardWrite:" + msg + "</p>");
 				var msgJson = JSON.parse(msg);
 				if (msgJson.status === '00') {
+					//发送ajax请求增加卡写入记录
+					if(callBack){
+						var cdata={};
+						cdata.deviceNo=deviceSn;
+						callBack(cdata);
+					}
 					smitLogPrintWx('写卡成功');
 				}
+				
 			}.bind(this));
 }
 
