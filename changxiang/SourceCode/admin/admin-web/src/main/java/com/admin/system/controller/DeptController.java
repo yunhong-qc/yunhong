@@ -60,7 +60,7 @@ public class DeptController extends BaseController {
 	String add(@PathVariable("pId") Long pId, Model model) {
 		model.addAttribute("pId", pId);
 		if (pId == 0) {
-			model.addAttribute("pName", "总部门");
+			model.addAttribute("pName", "顶级节点");
 		} else {
 			model.addAttribute("pName", sysDeptService.get(pId).getName());
 		}

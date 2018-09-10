@@ -7,27 +7,44 @@
 		select `id`,`name`,`card_no`,`telephone`,`school_id`,`dorm_id`,`is_wb`,`is_success`,`user_id`,`create_time`,`is_pay` from p_student_info where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.admin.pack.domain.StudentInfoDO">
-		select `id`,`name`,`card_no`,`telephone`,`school_id`,`dorm_id`,`is_wb`,`is_success`,`user_id`,`create_time`,`is_pay` from p_student_info
+	<select id="list" resultType="java.util.HashMap">
+		SELECT
+		a.id as id,
+		a.NAME as name,
+		a.card_no as cardNo,
+		a.telephone as telephone,
+		a.school_id as schoolId,
+		a.dorm_id as dormId,
+		a.is_wb as isWb,
+		a.is_success as isSuccess,
+		a.user_id as userId,
+		a.create_time as createTime,
+		a.is_pay as isPay,
+		b.name  as schoolName
+		FROM
+		p_student_info a
+		LEFT JOIN sys_dept b
+		ON
+		a.school_id = b.dept_id
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="cardNo != null and cardNo != ''"> and card_no = #{cardNo} </if>
-		  		  <if test="telephone != null and telephone != ''"> and telephone = #{telephone} </if>
-		  		  <if test="schoolId != null and schoolId != ''"> and school_id = #{schoolId} </if>
-		  		  <if test="dormId != null and dormId != ''"> and dorm_id = #{dormId} </if>
-		  		  <if test="isWb != null and isWb != ''"> and is_wb = #{isWb} </if>
-		  		  <if test="isSuccess != null and isSuccess != ''"> and is_success = #{isSuccess} </if>
-		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-					<if test="isPay != null and isPay != ''"> and `is_pay` = #{isPay} </if>
+		  		  <if test="id != null and id != ''"> and a.id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and a.name = #{name} </if>
+		  		  <if test="cardNo != null and cardNo != ''"> and a.card_no = #{cardNo} </if>
+		  		  <if test="telephone != null and telephone != ''"> and a.telephone = #{telephone} </if>
+		  		  <if test="schoolId != null and schoolId != ''"> and a.school_id = #{schoolId} </if>
+		  		  <if test="dormId != null and dormId != ''"> and a.dorm_id = #{dormId} </if>
+		  		  <if test="isWb != null and isWb != ''"> and a.is_wb = #{isWb} </if>
+		  		  <if test="isSuccess != null and isSuccess != ''"> and a.is_success = #{isSuccess} </if>
+		  		  <if test="userId != null and userId != ''"> and a.user_id = #{userId} </if>
+		  		  <if test="createTime != null and createTime != ''"> and a.create_time = #{createTime} </if>
+					<if test="isPay != null and isPay != ''"> and a.is_pay = #{isPay} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id desc
+                order by a.id desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">

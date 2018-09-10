@@ -18,28 +18,28 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">用户名：</label>
+							<label class="col-sm-3 control-label">登录名：</label>
 							<div class="col-sm-8">
 								<input id="username" name="username" class="form-control"
 									type="text" th:value="${user.username}" readonly>
 							</div>
 						</div>
 						<div class="form-group">
-								<label class="col-sm-3 control-label">部门：</label>
+								<label class="col-sm-3 control-label">所属小组：</label>
 								<div class="col-sm-8">
 									<input id="deptId" name="deptId" class="hidden" th:value="${user.deptId}">
 									 <input id="deptName" name="deptName"
 										class="form-control" type="text" style="cursor: pointer;"
-										onclick="openDept()" readonly="readonly" placeholder="所属部门" th:value="${user.deptName}">
+										onclick="openDept()" readonly="readonly" placeholder="所属小组" th:value="${user.deptName}">
 								</div>
 							</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">E-mail：</label>
-							<div class="col-sm-8">
-								<input id="email" name="email" class="form-control" type="email"
-									th:value="${user.email}">
-							</div>
-						</div>
+						<!--<div class="form-group">-->
+							<!--<label class="col-sm-3 control-label">E-mail：</label>-->
+							<!--<div class="col-sm-8">-->
+								<!--<input id="email" name="email" class="form-control" type="email"-->
+									<!--th:value="${user.email}">-->
+							<!--</div>-->
+						<!--</div>-->
 						<div class="form-group">
 							<label class="col-sm-3 control-label">状态:</label>
 							<div class="col-sm-8">
@@ -58,8 +58,7 @@
 							<label class="col-sm-3 control-label">角色</label>
 							<div class="col-sm-8">
 								<label th:each="role:${roles}" class="checkbox-inline">
-									<input name="role" type="checkbox" th:value="${role.roleId}"
-									th:text="${role.roleName}" th:checked="${role.roleSign}">
+									<input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}" th:checked="${role.roleSign}">
 								</label>
 							</div>
 						</div>

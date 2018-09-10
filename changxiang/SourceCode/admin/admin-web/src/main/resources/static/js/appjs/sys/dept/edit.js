@@ -33,17 +33,17 @@ function update() {
 
 }
 function validateRule() {
-	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
-		rules : {
-			name : {
-				required : true
-			}
-		},
-		messages : {
-			name : {
-				required : icon + "请输入名字"
-			}
-		}
-	})
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#signupForm").validate({
+        rules : {
+            name : {
+                required : true
+            }
+        },
+        messages : {
+            name : {
+                required : icon + "组名称不能为空"
+            }
+        }
+    })
 }

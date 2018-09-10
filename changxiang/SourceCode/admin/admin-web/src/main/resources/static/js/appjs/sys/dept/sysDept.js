@@ -31,7 +31,8 @@ function load() {
 					},
 					{
 						field : 'name',
-						title : '部门名称',
+						title : '组名称',
+                        align : 'center',
                         valign : 'center',
 						witth :20
 					},

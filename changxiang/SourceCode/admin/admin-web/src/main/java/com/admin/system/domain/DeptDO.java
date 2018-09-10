@@ -1,5 +1,7 @@
 package com.admin.system.domain;
 
+import io.swagger.models.auth.In;
+
 import java.io.Serializable;
 
 
@@ -24,6 +26,8 @@ public class DeptDO implements Serializable {
 	private Integer orderNum;
 	//是否删除  -1：已删除  0：正常
 	private Integer delFlag;
+	//是否学校:0否 1是
+	private Integer isSchool;
 
 	/**
 	 * 设置：
@@ -84,6 +88,13 @@ public class DeptDO implements Serializable {
 	 */
 	public Integer getDelFlag() {
 		return delFlag;
+	}
+
+	public Integer getIsSchool(){
+		return isSchool;
+	}
+	public void setIsSchool(Integer isSchool){
+		this.isSchool = isSchool;
 	}
 
 	@Override

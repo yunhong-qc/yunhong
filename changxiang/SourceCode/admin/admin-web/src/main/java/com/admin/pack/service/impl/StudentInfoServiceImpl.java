@@ -23,7 +23,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 	}
 	
 	@Override
-	public List<StudentInfoDO> list(Map<String, Object> map){
+	public List<Map<String,Object>> list(Map<String, Object> map){
 		return studentInfoDao.list(map);
 	}
 	

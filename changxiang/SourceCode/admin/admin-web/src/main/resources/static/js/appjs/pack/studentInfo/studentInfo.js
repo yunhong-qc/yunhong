@@ -55,7 +55,7 @@ function load() {
 									title : '电话'
 								},
 																{
-									field : 'schoolId', 
+									field : 'schoolName',
 									title : '学校'
 								},
 																{

@@ -18,7 +18,7 @@ public interface StudentInfoDao {
 
 	StudentInfoDO get(Integer id);
 	
-	List<StudentInfoDO> list(Map<String, Object> map);
+	List<Map<String,Object>> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
 	

@@ -59,7 +59,7 @@ function load(deptId) {
 					},
 					{
 						field : 'username',
-						title : '用户名'
+						title : '登录名'
 					},
 					{
 						field : 'email',

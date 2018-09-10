@@ -74,10 +74,10 @@ function validateRule() {
 				minlength : 6,
 				equalTo : "#password"
 			},
-			email : {
-				required : true,
-				email : true
-			},
+			// email : {
+			// 	required : true,
+			// 	email : true
+			// },
 			topic : {
 				required : "#newsletter:checked",
 				minlength : 2
@@ -102,8 +102,8 @@ function validateRule() {
 				required : icon + "请再次输入密码",
 				minlength : icon + "密码必须6个字符以上",
 				equalTo : icon + "两次输入的密码不一致"
-			},
-			email : icon + "请输入您的E-mail",
+			}
+			// email : icon + "请输入您的E-mail",
 		}
 	})
 }

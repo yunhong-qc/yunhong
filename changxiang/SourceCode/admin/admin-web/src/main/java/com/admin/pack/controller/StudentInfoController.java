@@ -58,7 +58,7 @@ public class StudentInfoController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		List<StudentInfoDO> studentInfoList = studentInfoService.list(query);
+		List<Map<String,Object>> studentInfoList = studentInfoService.list(query);
 		int total = studentInfoService.count(query);
 		PageUtils pageUtils = new PageUtils(studentInfoList, total);
 		return pageUtils;

@@ -5,19 +5,21 @@
 
 	<select id="get" resultType="com.admin.system.domain.DeptDO">
 		select
-		`dept_id`,`parent_id`,`name`,`order_num`,`del_flag` from sys_dept
+		`dept_id`,`parent_id`,`name`,`order_num`,`del_flag`,`is_school` from sys_dept
 		where dept_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.admin.system.domain.DeptDO">
-		select `dept_id`,`parent_id`,`name`,`order_num`,`del_flag` from
+		select `dept_id`,`parent_id`,`name`,`order_num`,`del_flag`,`is_school` from
 		sys_dept
 		<where>
 			<if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
-			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+			<if test="parentId != null"> and parent_id = #{parentId} </if>
 			<if test="name != null and name != ''"> and name = #{name} </if>
 			<if test="orderNum != null and orderNum != ''"> and order_num = #{orderNum} </if>
 			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+			<if test="isSchool != null and isSchool != ''"> and is_school = #{isSchool} </if>
+
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -40,6 +42,7 @@
 			<if test="name != null and name != ''"> and name = #{name} </if>
 			<if test="orderNum != null and orderNum != ''"> and order_num = #{orderNum} </if>
 			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+			<if test="isSchool != null and isSchool != ''"> and is_school = #{isSchool} </if>
 		</where>
 	</select>
 
@@ -50,14 +53,14 @@
 		`parent_id`,
 		`name`,
 		`order_num`,
-		`del_flag`
+		`is_school`
 		)
 		values
 		(
 		#{parentId},
 		#{name},
 		#{orderNum},
-		#{delFlag}
+		#{isSchool}
 		)
 	</insert>
 
@@ -67,7 +70,8 @@
 			<if test="parentId != null">`parent_id` = #{parentId}, </if>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="orderNum != null">`order_num` = #{orderNum}, </if>
-			<if test="delFlag != null">`del_flag` = #{delFlag}</if>
+			<if test="delFlag != null">`del_flag` = #{delFlag},</if>
+			<if test="delFlag != null">`is_school` = #{isSchool}</if>
 		</set>
 		where dept_id = #{deptId}
 	</update>
