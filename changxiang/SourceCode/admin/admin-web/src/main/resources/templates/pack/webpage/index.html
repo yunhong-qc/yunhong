@@ -84,7 +84,7 @@
 
 	<script>
 		var entity = {
-			getCode : true,
+			getCode : true,//是否可以获取code了，如果还没有走出超时时间，就不允许获取
 			codeTime : 5,
 			codeStart : function() {
 				$('#_getCode').css('background-color', '#cccccc');
@@ -111,7 +111,7 @@
 					$('#_errTips').text(msg);
 
 				} else {
-					var tipsHtml = '<div id="_errTips" style="border-radius:5px;top:20px;position:fixed;width:80%;left:10%;height:40px;line-height:40px;text-align:center;background-color:red;">'
+					var tipsHtml = '<div id="_errTips" style="border-radius:5px;top:20px;position:fixed;width:80%;left:10%;height:40px;line-height:40px;text-align:center;background-color:#ec5224;">'
 							+ msg + '</div>';
 					$('body').append(tipsHtml);
 				}
@@ -226,23 +226,35 @@
 						entity.codeNPass($('#telephone'));
 						return;
 					}
-
 					if (entity.getCode) {
-						entity.getCode = false;
 						$('#_getCode').css('background-color', '#cccccc');
-						$('#_getCode').text(
-								'(' + (--entity.codeTime) + ')S后再次获取');
-						var codeInv = setInterval(function() {
-							if (entity.codeTime <= 1) {
-								entity.codeEnd();
-								;
-								window.clearInterval(codeInv);
-							} else {
-								$('#_getCode').text(
-										'(' + (--entity.codeTime) + ')S后再次获取');
+						$('#_getCode').text('(' + (--entity.codeTime) + ')S后再次获取');
+						//ajax获取验证码
+						$.ajax({
+							url:'getVcode',
+							data:{phone:thenVal},
+							async:false,
+							success:function(data){
+								if(data.code=="000000"){
+									//成功
+									entity.getCode = false;
+									var codeInv = setInterval(function() {
+										if (entity.codeTime <= 1) {
+											entity.codeEnd();
+											window.clearInterval(codeInv);
+										} else {
+											$('#_getCode').text(
+													'(' + (--entity.codeTime) + ')S后再次获取');
 
+										}
+									}, 1000);
+								}else{
+									//失败
+									entity.errTips(data.msg);
+								}
 							}
-						}, 1000);
+						});
+						//获取验证码结束
 					}
 				})
 		$('[name="nice-select"] li').hover(function(e) {

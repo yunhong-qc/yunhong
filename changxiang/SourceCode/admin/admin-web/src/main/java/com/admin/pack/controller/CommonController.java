@@ -5,6 +5,7 @@ import com.admin.system.domain.DeptDO;
 import com.admin.system.domain.UserDO;
 import com.admin.system.service.DeptService;
 import com.admin.system.service.UserService;
+import com.admin.utils.SMS.Constants;
 import com.admin.utils.SMS.SendShortMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 学校信息表
@@ -85,15 +88,48 @@ public class CommonController {
 	@ResponseBody
 	@RequestMapping("/getVcode")
 	public ResultMap getShortCode(HttpServletRequest request,@RequestParam String phone){
+		ResultMap rm=new ResultMap();
 		try {
-			int len=6;
-			String vcode="";
-			for(int i=0;i<len;i++) {
-				Random rm=new Random(10);
-				vcode=vcode+rm.nextInt();
+			HttpSession session= request.getSession();
+			Long newTime=new Date().getTime();
+			try {
+				String lastTime=(String) session.getAttribute(Constants.CODETIMEKEY);
+				if(lastTime!=null && lastTime!="") {
+					long cha=(newTime-Long.parseLong(lastTime))/1000;
+					if(cha<Constants.VCODTIMEOUT) {
+						//未超时，不予获取
+						rm.setCode("000002");
+						rm.setMsg("请"+cha+"秒后再试");
+						rm.setData(cha);
+						return rm;
+					}
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-			SendShortMessage.sendMess(phone, vcode, "1", "3");
-			return ResultMap.getSuccessJo();
+			
+			String vcode="";
+			for(int i=0;i<Constants.VCODELENGTH;i++) {
+				Random rms=new Random();
+				vcode=vcode+rms.nextInt(10);
+			}
+			session.setAttribute(Constants.CODEKEY, vcode);
+			session.setAttribute(Constants.CODETIMEKEY, new Date().getTime());
+			System.out.println(phone+"--"+vcode);
+			if(!Constants.ISTEST) {
+				HashMap<String, Object> result=SendShortMessage.sendMess(phone, vcode, "1", "3");
+				if("000000".equals(result.get("statusCode"))){
+					//正常返回输出data包体信息（map）
+					return ResultMap.getSuccessJo();
+				}else{
+					//异常返回输出错误码和错误信息
+					System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
+					
+					rm.setCode("000001");
+					rm.setMsg(result.get("statusMsg").toString());
+				}
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
