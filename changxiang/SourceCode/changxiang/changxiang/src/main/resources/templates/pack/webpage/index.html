@@ -51,22 +51,18 @@
 			</div>
 			<div class="pc-kk-form-list pc-kk-form-list-clear">
 				<div class="nice-select" name="nice-select">
-					<input id="_shcool" type="text" value="选择学校" readonly="readonly"
+					<input not='not' data-value="" id="_shcool" type="text" value="选择学校" readonly="readonly"
 						valid="not" v-value="选择学校" tips="请正确选择学校!">
 					<ul id="_shcool_ul">
-						<li data-value="time1">成都网络科技大学</li>
-						<li data-value="time2">成都外国语大学</li>
-						<li data-value="time3">成都音乐学院</li>
+						<li data-value="选择学校">选择学校</li> 
 					</ul>
 
 				</div>
 				<div class="nice-select" name="nice-select" style="float: right">
-					<input id="_persents" type="text" value="业务员" readonly="readonly"
-						valid="not" v-value="业务员" tips="请正确选择业务员!">
+					<input id="_persents" data-value="" type="text" value="选择业务员" readonly="readonly"
+						valid="not" not='not' v-value="选择业务员" tips="请正确选择业务员!">
 					<ul id="_persents_ul">
-						<li data-value="USA">USA</li>
-						<li data-value="Britain">Britain</li>
-						<li data-value="Britain">Germany</li>
+						<li data-value="选择业务员">选择业务员</li>
 					</ul>
 
 				</div>
@@ -85,7 +81,7 @@
 	<script>
 		var entity = {
 			getCode : true,//是否可以获取code了，如果还没有走出超时时间，就不允许获取
-			codeTime : 5,
+			codeTime : 60,
 			codeStart : function() {
 				$('#_getCode').css('background-color', '#cccccc');
 				$('#_getCode').text('(' + (entity.codeTime--) + ')S后再次获取');
@@ -124,6 +120,16 @@
 					}, 2000);
 				}
 
+			},startloading:function(){
+				var isload=$('#_loading').text();
+				if(isload){
+					$('#_loading').show();
+				}else{
+					var loadHtml='<div id="_loading" style="border-radius:5px;top:20px;position:fixed;width:100%;height:100%;text-align:center;background-color:black;opacity:0.5;"><div style="margin-top:10%;color:white;">加载中..</div></div>';
+					$('body').append(loadHtml);
+				}
+			},endloading:function(){
+				$('#_loading').hide();
 			}
 		}
 		function test() {
@@ -134,12 +140,13 @@
 			if (params.res) {
 				console.log('pass');
 				var isInter = $('#isWb').is(':checked');//是否安装宽带
-				params.isWb = isInter;
-				params['schoolId']=params._shcool;
-				params['userId']=params._persents;
+				params.isWb = isInter?0:1;
+				params['schoolId']=$('#_shcool').attr('data-value');
+				params['userId']=$('#_persents').attr('data-value');
 				//提交信息
 				$.ajax({
 					url:'../studentInfo/save',
+					type:"post",
 					data:params,
 					async:false,
 					success:function(data){
@@ -148,7 +155,7 @@
 							alert('保存成功。');
 							window.location.href="toWebPage";
 						}else{
-							entity.errTips('提交失败,请重新尝试');
+							entity.errTips(data.msg);
 						}
 					}
 				})
@@ -208,25 +215,70 @@
 			return params;
 		}
 		function getYeValue(s) {
-			var ul = '<li data-value="USA">janpennis</li><li data-value="Britain">Britain</li><li data-value="Britain">Germany</li>';
-			$('#_persents_ul').html(ul);
-			$('#_persents').val('业务员');
+			$.ajax({
+				url:'listSchoolInfo/'+s,
+				type:"post",
+				data:{},
+				async:false,
+				success:function(param){
+					if(param.code="000000"){
+						var data=param.data;
+						var html="";
+						for(var i=0;i<data.length;i++){
+							var thda=data[i];
+							html+='<li data-value="'+thda.userId+'">'+(thda.name+'-'+thda.userId)+'</li>';
+						}
+						$('#_persents_ul').html(html);
+						$('#_persents').val('选择业务员');
+					}else{
+						entity.errTips(param.msg);
+					}
+				}
+				
+			})
+			
+		}
+		function getShcoolVal(){
+			$.ajax({
+				url:'listSchoolInfo',
+				type:"post",
+				data:{},
+				async:false,
+				success:function(param){
+					if(param.code="000000"){
+						var data=param.data;
+						var html="";
+						for(var i=0;i<data.length;i++){
+							var thda=data[i];
+							html+='<li data-value="'+thda.deptId+'">'+(thda.name)+'</li>';
+						}
+						$('#_shcool_ul').html(html);
+					}else{
+						entity.errTips(data.msg);
+					}
+				}
+				
+			})
 		}
 		function getYSchoolValue() {
 			var ul = '';
 			$('#_shcool').html();
 		}
 		$(function() {
-			$('#drag').drag();
+			//验证框
+			//$('#drag').drag();
 			$(":submit").click(function() {
 				_submit();
 				return false;
 			})
+			getShcoolVal();
 			$(document).ajaxStart(function () {
 		        //正在加载
+		        entity.startloading();
 		    });
 		    $(document).ajaxStop(function () {
 		       //删除加载
+		       entity.endloading();
 		    });
 		})
 
@@ -249,16 +301,17 @@
 						return;
 					}
 					if (entity.getCode) {
-						$('#_getCode').css('background-color', '#cccccc');
-						$('#_getCode').text('(' + (--entity.codeTime) + ')S后再次获取');
 						//ajax获取验证码
 						$.ajax({
 							url:'getVcode',
 							data:{phone:thenVal},
+							type:"post",
 							async:false,
 							success:function(data){
 								if(data.code=="000000"){
 									//成功
+									$('#_getCode').css('background-color', '#cccccc');
+									$('#_getCode').text('(' + (--entity.codeTime) + ')S后再次获取');
 									entity.getCode = false;
 									var codeInv = setInterval(function() {
 										if (entity.codeTime <= 1) {
@@ -290,12 +343,15 @@
 		$('[name="nice-select"]').on('click', 'li', function(e) {
 			var pid = $(this).parent('ul').attr('id');
 			var val = $(this).text();
-			$(this).parents('[name="nice-select"]').find('input').val(val);
+			var vid=$(this).attr('data-value');
+			$(this).parents('[name="nice-select"]').find('input').val(val).attr('data-value',vid);
 			$('[name="nice-select"] ul').hide();
 			e.stopPropagation();
 
 			if (pid == '_shcool_ul') {
-				getYeValue();
+				if(val!="选择学校"){
+					getYeValue(vid);
+				}
 			}
 
 		});

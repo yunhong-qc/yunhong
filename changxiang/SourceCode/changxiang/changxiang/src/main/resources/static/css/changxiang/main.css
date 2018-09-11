@@ -131,7 +131,7 @@ img {
 		}
 		.nice-select{
 			position: relative;
-			background: #fff url(../img/changxiang/a2.jpg) no-repeat right center;
+			background: #fff url(/img/changxiang/a2.jpg) no-repeat right center;
 			background-size:18px;
 			width:47%;
 			float:left;

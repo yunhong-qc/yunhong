@@ -1,7 +1,11 @@
 package com.admin.pack.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.admin.pack.domain.ResultMap;
 import com.admin.pack.domain.StudentInfoDO;
 import com.admin.pack.service.StudentInfoService;
+import com.admin.utils.SMS.Constants;
+import com.admin.utils.strv.StringUtils;
 import com.admin.common.utils.PageUtils;
 import com.admin.common.utils.Query;
 import com.admin.common.utils.R;
@@ -90,13 +97,26 @@ public class StudentInfoController {
 	 * 保存
 	 */
 	@ResponseBody
-	@PostMapping("/save")
-	@RequiresPermissions("pack:studentInfo:add")
-	public R save( StudentInfoDO studentInfo){
-		if(studentInfoService.save(studentInfo)>0){
-			return R.ok();
+	@RequestMapping("/save")
+	public ResultMap save( StudentInfoDO studentInfo,HttpServletRequest request,String validCode){
+		HttpSession session= request.getSession();
+		String code=(String) session.getAttribute(Constants.CODEKEY);
+		System.out.println(validCode+"--"+code);
+		if(StringUtils.isNullString(validCode)) {
+			return ResultMap.getErrorJo("验证码错误!");
 		}
-		return R.error();
+		if(code==validCode || validCode.equals(code)) {
+			//相同
+			studentInfo.setIsSuccess(1);
+			studentInfo.setIsPay(1);
+			studentInfo.setCreateTime(new Date());
+			if(studentInfoService.save(studentInfo)>0){
+				return ResultMap.getSuccessJo();
+			}
+		}else {
+			return ResultMap.getErrorJo("验证码错误!");
+		}
+		return ResultMap.getErrorJo();
 	}
 	/**
 	 * 修改

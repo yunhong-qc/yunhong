@@ -34,6 +34,12 @@ public class ResultMap {
 		rm.setMsg("失败");
 		return rm;
 	}
+	public static ResultMap getErrorJo(String msg) {
+		ResultMap rm=new ResultMap();
+		rm.setCode("000001");
+		rm.setMsg(msg);
+		return rm;
+	}
 	public static ResultMap getSuccessJo() {
 		ResultMap rm=new ResultMap();
 		rm.setCode("000000");

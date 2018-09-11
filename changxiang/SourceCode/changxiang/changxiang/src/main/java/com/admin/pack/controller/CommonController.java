@@ -1,6 +1,7 @@
 package com.admin.pack.controller;
 
 import com.admin.pack.domain.ResultMap;
+import com.admin.pack.domain.ResultUser;
 import com.admin.system.domain.DeptDO;
 import com.admin.system.domain.UserDO;
 import com.admin.system.service.DeptService;
@@ -11,7 +12,8 @@ import com.admin.utils.SMS.SendShortMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,7 +35,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/pack/common")
 public class CommonController {
-
+	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);
 	@Autowired
 	private DeptService deptService;
 	@Autowired
@@ -46,11 +48,20 @@ public class CommonController {
 	  */
 	@ResponseBody
 	@RequestMapping("/listSchoolInfo")
-	public List<DeptDO> listSchoolInfo(){
-		Map<String, Object> map = new HashMap<>();
-		map.put("parentId",0);
-		map.put("isSchool",1);
-		return deptService.list(map);
+	public ResultMap listSchoolInfo(){
+		ResultMap rm=new ResultMap();
+		try {
+
+			Map<String, Object> map = new HashMap<>();
+			map.put("parentId",0);
+			map.put("isSchool",1);
+			rm.setCode("000000");
+			rm.setData(deptService.list(map)); 
+			return rm;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ResultMap.getErrorJo();
 	}
 
 	/**
@@ -60,23 +71,36 @@ public class CommonController {
 	  */
 	@ResponseBody
 	@RequestMapping("/listSchoolInfo/{deptId}")
-	public List<UserDO> listUser(@PathVariable("deptId") Long deptId){
-		//查询学校已经下级
-		Map<String, Object> map = new HashMap<>();
-		map.put("parentId",deptId);
-		DeptDO dept = deptService.get(deptId);
-		List<DeptDO> schList = deptService.list(map);
-		schList.add(dept);
-		List<UserDO> list = new ArrayList<UserDO>();
-		for(DeptDO d:schList){
-			Map<String,Object> userMap = new HashMap<>();
-			userMap.put("deptId",d.getDeptId());
-			List<UserDO> ul = userService.list(userMap);
-			for(UserDO u : ul){
-				list.add(u);
+	public ResultMap listUser(@PathVariable("deptId") Long deptId){
+		ResultMap rm=new ResultMap();
+		try {
+			//查询学校已经下级
+			Map<String, Object> map = new HashMap<>();
+			map.put("parentId",deptId);
+			DeptDO dept = deptService.get(deptId);
+			List<DeptDO> schList = deptService.list(map);
+			schList.add(dept);
+			List<ResultUser> list = new ArrayList<ResultUser>();
+			for(DeptDO d:schList){
+				Map<String,Object> userMap = new HashMap<>();
+				userMap.put("deptId",d.getDeptId());
+				List<UserDO> ul = userService.list(userMap);
+				for(UserDO u : ul){
+					ResultUser rs=new ResultUser();
+					rs.setName(u.getName());
+					rs.setUserId(u.getUserId());
+					rs.setUsername(u.getUsername());
+					list.add(rs);
+				}
 			}
+			rm.setCode("000000");
+			rm.setData(list);
+			return rm;
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		return list;
+		return ResultMap.getErrorJo();
+		
 	}
 	/**
 	 * 获取验证码接口
@@ -114,7 +138,7 @@ public class CommonController {
 				vcode=vcode+rms.nextInt(10);
 			}
 			session.setAttribute(Constants.CODEKEY, vcode);
-			session.setAttribute(Constants.CODETIMEKEY, new Date().getTime());
+			session.setAttribute(Constants.CODETIMEKEY, new Date().getTime()+"");
 			System.out.println(phone+"--"+vcode);
 			if(!Constants.ISTEST) {
 				HashMap<String, Object> result=SendShortMessage.sendMess(phone, vcode, "1", "3");
@@ -123,19 +147,20 @@ public class CommonController {
 					return ResultMap.getSuccessJo();
 				}else{
 					//异常返回输出错误码和错误信息
-					System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
-					
+					logger.debug("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
 					rm.setCode("000001");
 					rm.setMsg(result.get("statusMsg").toString());
+					return rm;
 				}
 			}
+			return ResultMap.getSuccessJo();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return ResultMap.getErrorJo();
 	}
-	@RequestMapping("/toWebPage")
+	@RequestMapping("/ch_index")
 	public String toWebPage(HttpServletRequest request){
 		try {
 			
