@@ -27,6 +27,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/main/resources/SMS/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

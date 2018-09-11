@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
 
+
 /**
 作者：fengchase
 时间：2018年9月10日
@@ -12,22 +13,11 @@ import com.cloopen.rest.sdk.CCPRestSmsSDK;
 项目：admin-web
 */
 public class SendShortMessage {
-
-	
-	/**
-	 * 
-	 * @param phone  电话
-	 * @param vcode	验证码
-	 * @param useModel	使用那个模板，测试为1
-	 * @param timeout	超时时间 单位：min
-	 * 2018年9月10日
-	 * 作者：fengchase
-	 */
-	public HashMap<String, Object> sendMess(String phone,String vcode,String useModel,String timeout) {
-		HashMap<String, Object> result = null;
+	private static CCPRestSmsSDK restAPI = new CCPRestSmsSDK();
+	static {
 		boolean isTest=true;
 		//初始化SDK
-		CCPRestSmsSDK restAPI = new CCPRestSmsSDK();
+//		CCPRestSmsSDK restAPI = new CCPRestSmsSDK();
 		
 		//******************************注释*********************************************
 		//*初始化服务器地址和端口                                                       *
@@ -55,6 +45,22 @@ public class SendShortMessage {
 		//*应用ID的获取：登陆官网，在“应用-应用列表”，点击应用名称，看应用详情获取APP ID*
 		//*******************************************************************************
 		restAPI.setAppId("8aaf070865ae03e80165c10b52a109d5");
+		
+		
+		
+	}
+	/**
+	 * 
+	 * @param phone  电话
+	 * @param vcode	验证码
+	 * @param useModel	使用那个模板，测试为1
+	 * @param timeout	超时时间 单位：min
+	 * 2018年9月10日
+	 * 作者：fengchase
+	 */
+	public static HashMap<String, Object> sendMess(String phone,String vcode,String useModel,String timeout) {
+		HashMap<String, Object> result = null;
+		
 		
 		
 		//******************************注释****************************************************************

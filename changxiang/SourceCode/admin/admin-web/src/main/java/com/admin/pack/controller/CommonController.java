@@ -1,9 +1,12 @@
 package com.admin.pack.controller;
 
+import com.admin.pack.domain.ResultMap;
 import com.admin.system.domain.DeptDO;
 import com.admin.system.domain.UserDO;
 import com.admin.system.service.DeptService;
 import com.admin.system.service.UserService;
+import com.admin.utils.SMS.SendShortMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 学校信息表
@@ -36,7 +42,7 @@ public class CommonController {
 	  * @Date: 2018/9/10 17:47
 	  */
 	@ResponseBody
-	@GetMapping("/listSchoolInfo")
+	@RequestMapping("/listSchoolInfo")
 	public List<DeptDO> listSchoolInfo(){
 		Map<String, Object> map = new HashMap<>();
 		map.put("parentId",0);
@@ -50,7 +56,7 @@ public class CommonController {
 	  * @Date: 2018/9/10 18:05
 	  */
 	@ResponseBody
-	@GetMapping("/listSchoolInfo/{deptId}")
+	@RequestMapping("/listSchoolInfo/{deptId}")
 	public List<UserDO> listUser(@PathVariable("deptId") Long deptId){
 		//查询学校已经下级
 		Map<String, Object> map = new HashMap<>();
@@ -69,5 +75,39 @@ public class CommonController {
 		}
 		return list;
 	}
+	/**
+	 * 获取验证码接口
+	 * @param deptId
+	 * @return
+	 * 2018年9月11日
+	 * 作者：fengchase
+	 */
+	@ResponseBody
+	@RequestMapping("/getVcode")
+	public ResultMap getShortCode(HttpServletRequest request,@RequestParam String phone){
+		try {
+			int len=6;
+			String vcode="";
+			for(int i=0;i<len;i++) {
+				Random rm=new Random(10);
+				vcode=vcode+rm.nextInt();
+			}
+			SendShortMessage.sendMess(phone, vcode, "1", "3");
+			return ResultMap.getSuccessJo();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ResultMap.getErrorJo();
+	}
+	@RequestMapping("/toWebPage")
+	public String toWebPage(HttpServletRequest request){
+		try {
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "pack/webpage/index";
+	}
+	
 
 }
