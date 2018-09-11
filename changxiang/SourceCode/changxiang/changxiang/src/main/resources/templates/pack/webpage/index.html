@@ -131,11 +131,16 @@
 		}
 		function _submit() {
 			var params = validateFrom();
-
 			if (params.res) {
 				console.log('pass');
 				var isInter = $('#isWb').is(':checked');//是否安装宽带
 				params.isWb = isInter;
+				params['schoolId']=params._shcool;
+				params['userId']=params._persents;
+				//提交信息
+				$.ajax({
+					
+				})
 			} else {
 				console.log('nopass');
 			}

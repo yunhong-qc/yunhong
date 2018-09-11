@@ -7,9 +7,9 @@
 		<artifactId>admin</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>admin-web</artifactId>
-	<name>admin-web</name>
-	<description>admin-web</description>
+	<artifactId>changxiang</artifactId>
+	<name>changxiang</name>
+	<description>changxiang</description>
 
 	<dependencies>
 		<dependency>
