@@ -31,14 +31,9 @@ public class LoginController extends BaseController {
 	MenuService menuService;
 	@Autowired
 	FileService fileService;
-	@GetMapping({ "/", "" })
-	String welcome(Model model) {
-
-		return "redirect:/login";
-	}
 
 	@Log("请求访问主页")
-	@GetMapping({ "/index" })
+	@GetMapping({ "/yh_index" })
 	String index(Model model) {
 		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
 		model.addAttribute("menus", menus);
@@ -57,7 +52,7 @@ public class LoginController extends BaseController {
 		return "index";
 	}
 
-	@GetMapping("/login")
+	@GetMapping("/yh_login")
 	String login() {
 		return "login";
 	}
@@ -80,10 +75,10 @@ public class LoginController extends BaseController {
 	@GetMapping("/logout")
 	String logout() {
 		ShiroUtils.logout();
-		return "redirect:/login";
+		return "redirect:/yh_login";
 	}
 
-	@GetMapping("/main")
+	@GetMapping("/yh_main")
 	String main() {
 		return "main";
 	}
