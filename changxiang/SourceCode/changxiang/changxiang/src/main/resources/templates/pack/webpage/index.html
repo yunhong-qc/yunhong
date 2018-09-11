@@ -139,7 +139,18 @@
 				params['userId']=params._persents;
 				//提交信息
 				$.ajax({
-					
+					url:'../studentInfo/save',
+					data:params,
+					async:false,
+					success:function(data){
+						if(data.code==0){
+							//成功
+							alert('保存成功。');
+							window.location.href="toWebPage";
+						}else{
+							entity.errTips('提交失败,请重新尝试');
+						}
+					}
 				})
 			} else {
 				console.log('nopass');
@@ -211,6 +222,12 @@
 				_submit();
 				return false;
 			})
+			$(document).ajaxStart(function () {
+		        //正在加载
+		    });
+		    $(document).ajaxStop(function () {
+		       //删除加载
+		    });
 		})
 
 		$('[name="nice-select"]').click(function(e) {
