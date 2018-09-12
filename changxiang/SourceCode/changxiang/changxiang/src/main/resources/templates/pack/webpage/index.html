@@ -148,7 +148,6 @@
 					url:'../studentInfo/save',
 					type:"post",
 					data:params,
-					async:false,
 					success:function(data){
 						if(data.code==0){
 							//成功
@@ -219,7 +218,6 @@
 				url:'listSchoolInfo/'+s,
 				type:"post",
 				data:{},
-				async:false,
 				success:function(param){
 					if(param.code="000000"){
 						var data=param.data;
@@ -243,7 +241,6 @@
 				url:'listSchoolInfo',
 				type:"post",
 				data:{},
-				async:false,
 				success:function(param){
 					if(param.code="000000"){
 						var data=param.data;
@@ -306,7 +303,6 @@
 							url:'getVcode',
 							data:{phone:thenVal},
 							type:"post",
-							async:false,
 							success:function(data){
 								if(data.code=="000000"){
 									//成功
