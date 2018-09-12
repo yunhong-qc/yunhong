@@ -141,7 +141,7 @@ public class CommonController {
 			session.setAttribute(Constants.CODETIMEKEY, new Date().getTime()+"");
 			System.out.println(phone+"--"+vcode);
 			if(!Constants.ISTEST) {
-				HashMap<String, Object> result=SendShortMessage.sendMess(phone, "你的验证码是"+vcode+",", "328753", "3");
+				HashMap<String, Object> result=SendShortMessage.sendMess(phone, "你的验证码是"+vcode+",请于3分钟内输入。", "329072", "3");
 				if("000000".equals(result.get("statusCode"))){
 					//正常返回输出data包体信息（map）
 					return ResultMap.getSuccessJo();

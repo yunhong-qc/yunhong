@@ -35,21 +35,27 @@ public class LoginController extends BaseController {
 	@Log("请求访问主页")
 	@GetMapping({ "/yh_index" })
 	String index(Model model) {
-		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
-		model.addAttribute("menus", menus);
-		model.addAttribute("name", getUser().getName());
-		FileDO fileDO = fileService.get(getUser().getPicId());
-		if(fileDO!=null&&fileDO.getUrl()!=null){
-			if(fileService.isExist(fileDO.getUrl())){
-				model.addAttribute("picUrl",fileDO.getUrl());
+		try {
+			List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
+			model.addAttribute("menus", menus);
+			model.addAttribute("name", getUser().getName());
+			FileDO fileDO = fileService.get(getUser().getPicId());
+			if(fileDO!=null&&fileDO.getUrl()!=null){
+				if(fileService.isExist(fileDO.getUrl())){
+					model.addAttribute("picUrl",fileDO.getUrl());
+				}else {
+					model.addAttribute("picUrl","/img/photo_s.jpg");
+				}
 			}else {
 				model.addAttribute("picUrl","/img/photo_s.jpg");
 			}
-		}else {
-			model.addAttribute("picUrl","/img/photo_s.jpg");
+			model.addAttribute("username", getUser().getUsername());
+			return "index";
+		}catch(Exception e) {
+			
 		}
-		model.addAttribute("username", getUser().getUsername());
-		return "index";
+		return "login";
+		
 	}
 
 	@GetMapping("/yh_login")
