@@ -8,6 +8,7 @@ import com.admin.system.service.DeptService;
 import com.admin.system.service.UserService;
 import com.admin.utils.SMS.Constants;
 import com.admin.utils.SMS.SendShortMessage;
+import com.admin.utils.strv.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -111,12 +112,20 @@ public class CommonController {
 	 */
 	@ResponseBody
 	@RequestMapping("/getVcode")
-	public ResultMap getShortCode(HttpServletRequest request,@RequestParam String phone){
+	public ResultMap getShortCode(HttpServletRequest request,@RequestParam String phone,@RequestParam String ttcode){
 		ResultMap rm=new ResultMap();
 		try {
 			HttpSession session= request.getSession();
 			Long newTime=new Date().getTime();
 			try {
+				String stcode=(String) session.getAttribute("stcode");
+				System.out.println(stcode+"--"+ttcode);
+				if(StringUtils.isNullString(ttcode)) {
+					return ResultMap.getErrorJo("请拖动滑块验证!");
+				}
+				if(!ttcode.equals(stcode)) {
+					return ResultMap.getErrorJo("请拖动滑块验证!");
+				}
 				String lastTime=(String) session.getAttribute(Constants.CODETIMEKEY);
 				if(lastTime!=null && lastTime!="") {
 					long cha=(newTime-Long.parseLong(lastTime))/1000;
@@ -141,7 +150,7 @@ public class CommonController {
 			session.setAttribute(Constants.CODETIMEKEY, new Date().getTime()+"");
 			System.out.println(phone+"--"+vcode);
 			if(!Constants.ISTEST) {
-				HashMap<String, Object> result=SendShortMessage.sendMess(phone, "你的验证码是"+vcode+",请于3分钟内输入。", "329072", "3");
+				HashMap<String, Object> result=SendShortMessage.sendMess(phone, vcode, "330663", "3");
 				if("000000".equals(result.get("statusCode"))){
 					//正常返回输出data包体信息（map）
 					return ResultMap.getSuccessJo();
@@ -163,7 +172,13 @@ public class CommonController {
 	@RequestMapping("/ch_index")
 	public String toWebPage(HttpServletRequest request){
 		try {
-			
+			String tcode="";
+			for(int i=0;i<Constants.VCODELENGTH;i++) {
+				Random rms=new Random();
+				tcode=tcode+rms.nextInt(10);
+			}
+			request.setAttribute("tcode", tcode);
+			request.getSession().setAttribute("stcode", tcode);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

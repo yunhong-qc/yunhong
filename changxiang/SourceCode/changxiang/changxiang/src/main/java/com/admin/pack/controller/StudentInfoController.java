@@ -98,8 +98,16 @@ public class StudentInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public ResultMap save( StudentInfoDO studentInfo,HttpServletRequest request,String validCode){
+	public ResultMap save( StudentInfoDO studentInfo,HttpServletRequest request,String validCode,String ttcode){
 		HttpSession session= request.getSession();
+		String stcode=(String) session.getAttribute("stcode");
+		System.out.println(stcode+"--"+ttcode);
+		if(StringUtils.isNullString(ttcode)) {
+			return ResultMap.getErrorJo("请拖动滑块验证!");
+		}
+		if(!ttcode.equals(stcode)) {
+			return ResultMap.getErrorJo("请拖动滑块验证!");
+		}
 		String code=(String) session.getAttribute(Constants.CODEKEY);
 		System.out.println(validCode+"--"+code);
 		if(StringUtils.isNullString(validCode)) {
