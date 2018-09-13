@@ -27,18 +27,23 @@
 		ON
 		a.school_id = b.dept_id
         <where>  
-		  		  <if test="id != null and id != ''"> and a.id = #{id} </if>
-		  		  <if test="name != null and name != ''"> and a.name = #{name} </if>
-		  		  <if test="cardNo != null and cardNo != ''"> and a.card_no = #{cardNo} </if>
-		  		  <if test="telephone != null and telephone != ''"> and a.telephone = #{telephone} </if>
-		  		  <if test="schoolId != null and schoolId != ''"> and a.school_id = #{schoolId} </if>
-		  		  <if test="dormId != null and dormId != ''"> and a.dorm_id = #{dormId} </if>
-		  		  <if test="isWb != null and isWb != ''"> and a.is_wb = #{isWb} </if>
-		  		  <if test="isSuccess != null and isSuccess != ''"> and a.is_success = #{isSuccess} </if>
-		  		  <if test="userId != null and userId != ''"> and a.user_id = #{userId} </if>
-		  		  <if test="createTime != null and createTime != ''"> and a.create_time = #{createTime} </if>
-					<if test="isPay != null and isPay != ''"> and a.is_pay = #{isPay} </if>
-		  		</where>
+		  <if test="id != null and id != ''"> and a.id = #{id} </if>
+		  <if test="name != null and name != ''"> and a.name  like CONCAT('%',#{name},'%')</if>
+		  <if test="cardNo != null and cardNo != ''"> and a.card_no = #{cardNo} </if>
+		  <if test="telephone != null and telephone != ''"> and a.telephone = #{telephone} </if>
+		  <if test="schoolId != null and schoolId != ''"> and a.school_id = #{schoolId} </if>
+		  <if test="dormId != null and dormId != ''"> and a.dorm_id = #{dormId} </if>
+		  <if test="isWb != null and isWb != ''"> and a.is_wb = #{isWb} </if>
+		  <if test="isSuccess != null and isSuccess != ''"> and a.is_success = #{isSuccess} </if>
+		  <if test="userId != null and userId != ''"> and a.user_id = #{userId} </if>
+          <if test="beginTime != null || beginTime != ''">
+            and a.create_time &gt;= #{beginTime}
+          </if>
+		  <if test="endTime != null and endTime != ''">
+		    and a.create_time &lt;= #{endTime}
+          </if>
+          <if test="isPay != null and isPay != ''"> and a.is_pay = #{isPay} </if>
+		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}

@@ -34,6 +34,9 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
 					            isSuccess:$('#isSuccess').val(),
+                                name:$("#name").val(),
+                                beginTime:$("#beginTime").val(),
+                                endTime:$("#endTime").val(),
 					            sort:'create_time',
 					            order:'desc'
 							};
@@ -115,6 +118,16 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 	
 }
+
+function resert() {
+	$("#name").val("");
+	$("#beginTime").val("");
+	$("#endTime").val("");
+	$("#isSuccess").val("");
+    $('#exampleTable').bootstrapTable('refresh');
+}
+
+
 function onModIsSuc(id){
 	var isInter = $('#_isSuc'+id).is(':checked');
 	$.ajax({
@@ -180,8 +193,7 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
-}
+
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
