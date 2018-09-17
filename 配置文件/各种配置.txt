@@ -1,0 +1,83 @@
+211.149.210.122:33790
+administrator， qckj,./0709
+
+域名：app.cdqckj.com
+
+端口范围：8870-8880
+
+
+mysql：3307
+tomcat：8872
+svn:8873
+spring-boot:8874
+
+数据库：211.149.210.122:8871,root,qaz123
+token: qinchuan
+Aeskey: MQaCz7zLq212FwHJjGXlJ5WApZQ4yhc5DdYp5D88sov
+
+商户号：1510530611@1510530611
+
+公众号：421709591@qq.com 421709591@qq.com
+产品id：   48353
+deviceid:   gh_05fc6bc0923c_4335cbddacce01e0
+二维码：http://we.qq.com/d/AQCc2ZPSN2xHP0hRv1BqjmHZ22Pr616N2L_hCbra
+
+原始id：gh_05fc6bc0923c
+appID:   wx3d7f7c26f2369785
+appsecret:   c34fde54dfac1f9c2870ee8edf467ebf
+
+IPAddress:  24CF21E216EC
+
+{
+    "device_num": "1", 
+    "device_list": [
+        {
+            "id": "gh_05fc6bc0923c_38c8652b9bc08a5a", 
+            "mac": "24CF21E216EC", 
+            "connect_protocol": "3|1", 
+            "auth_key": "", 
+            "close_strategy": "1", 
+            "conn_strategy": "1", 
+            "crypt_method": "0", 
+            "auth_ver": "0", 
+            "manu_mac_pos": "-1", 
+            "ser_mac_pos": "-1", 
+        }
+    ], 
+    "op_type": "1", 
+    "product_id": "48353"
+}
+gh_05fc6bc0923c_ce80bfc1928adf76
+<div id="activity-detail" class="zh_CN ">
+                    <div id='Deviceinfo' tabindex='2' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getDeviceInfo()">设备信息</div>
+                    <div id='getRandom' tabindex='3' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getRandom()">随机数</div>
+                    <div id='externalAuth' tabindex='4' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="externalAuth()">外部认证</div>
+                    <div id='deviceAuth' tabindex='5' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="deviceAuth()">设备认证</div>
+                    <div id='getTsk' tabindex='6' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getTsk()">获取TSK</div>
+                    <div id='gasCardSetType442' tabindex='7' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="gasCardSetType442()">442卡类型</div>
+                    <div id='gasCardSetType102' tabindex='8' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="gasCardSetType102()">102卡类型</div>
+                    <div id='gasCardSetType' tabindex='9' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="cardCheck()">卡检测</div>
+                    <div id='gasCardCheckPwd' tabindex='10' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="gasCardCheckPwd()">密码校验</div>
+                    <div id='gasCardRead' tabindex='11' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="gasCardRead()">读燃气卡</div>
+                    <div id='gasCardWrite' tabindex='12' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="gasCardWrite()">写燃气卡</div>
+                    <div id='elecCardCheck' tabindex='13' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="elecCardCheck()">电卡检测</div>
+                    <div id='elecCardSetType' tabindex='14' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="elecCardSetType()">电卡类型</div>
+                    <div id='elecCardPoweron' tabindex='15' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="elecCardPoweron()">电卡上电</div>
+                    <div id='elecCardComunication' tabindex='16' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="elecCardComunication()">电卡通讯</div>
+                    <div id='elecCardPoweroff' tabindex='17' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="elecCardPoweroff()">电卡下电</div>
+                    <div tabindex='7' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="gasCardSetType153()">153卡类型</div>
+                    <div tabindex='11' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="CardRead153()">读153卡</div>
+                    <div tabindex='12' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="gasCardWrite153()">写153卡</div>
+                    <div tabindex='7' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="gasCardSetType1608()">1608卡类型</div>
+                    <div tabindex='11' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="CardRead1608()">读1608卡</div>
+                    <div tabindex='12' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="gasCardWrite1608()">写1608卡</div>
+                    <div id='getFirmwareInfo' tabindex='18' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getFirmwareInfo()">固件信息</div>
+                    <div id='getBlestate' tabindex='19' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getBlestate()">蓝牙状态</div>
+                    <div id='bleDisConnect' tabindex='20' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="bleDisConnect()">断开连接</div>
+                    <div id='StopScanBlu' tabindex='21' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="bleStopConn()">连接状态</div>
+                    <div id='ConnectedDeviceId' tabindex='22' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getConnectedDeviceIds()">已连接设备</div>
+                    <div id='unbindBle' tabindex='23' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="getbindDevice()">解绑设备</div>
+                    <div style="float:left;width:95%;">
+                        <input class='wdbll4' type ="text" id="texts" name="texts" value ="" style="width:60%;height:35px"></input>
+                        <div id='SendText' tabindex='8' class='weui_btn login-btn weui_btn_primary wdbll4' onclick="encrySendData()">发送数据</div>
+                    </div>
