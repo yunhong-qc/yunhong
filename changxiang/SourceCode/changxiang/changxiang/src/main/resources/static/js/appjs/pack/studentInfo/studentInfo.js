@@ -71,24 +71,13 @@ function load() {
 									title : '录入日期'
 								},
 																{
-									field : 'isWb', 
-									title : '是否安装宽带',
-									formatter:function (value, row, index) {
-										if (value == 1) {
-											return '<span class="label label-danger">否</span>';
-										}else{
-											return '<span class="label label-primary">是</span>';
-										}
-									}
-								},
-																{
 									field : 'isSuccess', 
-									title : '审核结果' ,
+									title : '是否办理成功' ,
 									formatter:function (value, row, index) {
                                         if (value == 1) {
-                                            return '<span class="label label-danger">不通过</span>';
+                                            return '<span class="label label-danger">否</span>';
                                         }else{
-                                            return '<span class="label label-primary">已通过</span>';
+                                            return '<span class="label label-primary">是</span>';
 										}
 									}
 								},

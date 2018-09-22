@@ -1,14 +1,25 @@
 var menuIds;
 $(function() {
 	getMenuTreeData();
-	validateRule();
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#signupForm").validate({
+        rules : {
+            roleName : {
+                required : true
+            }
+        },
+        messages : {
+            roleName : {
+                required : icon + "请输入角色名"
+            }
+        },
+        submitHandler:function () {
+            getAllSelectNodes();
+            update();
+        }
+    });
 });
-$.validator.setDefaults({
-	submitHandler : function() {
-		getAllSelectNodes();
-		update();
-	}
-});
+
 function loadMenuTree(menuTree) {
 	$('#menuTree').jstree({
 		"plugins" : [ "wholerow", "checkbox" ],
@@ -65,21 +76,6 @@ function update() {
 				parent.layer.msg(r.msg);
 			}
 
-		}
-	});
-}
-function validateRule() {
-	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
-		rules : {
-			roleName : {
-				required : true
-			}
-		},
-		messages : {
-			roleName : {
-				required : icon + "请输入角色名"
-			}
 		}
 	});
 }

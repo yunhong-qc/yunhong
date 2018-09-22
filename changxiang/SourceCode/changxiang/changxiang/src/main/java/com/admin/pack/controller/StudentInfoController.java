@@ -58,6 +58,17 @@ public class StudentInfoController {
 	String payRecord(){
 		return "pack/studentInfo/payRecord";
 	}
+
+	/**
+	 * @Description: 宽带页面
+	 * @Author: luojing
+	 * @Date: 2018/9/9 21:13
+	 */
+	@GetMapping("/wb")
+	@RequiresPermissions("pack:studentInfo:studentInfo")
+	String wb(){
+		return "pack/studentInfo/wb";
+	}
 	
 	@ResponseBody
 	@GetMapping("/list")

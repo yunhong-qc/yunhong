@@ -30,8 +30,6 @@ $(function(){
 
   'use strict';
 
-  var console = window.console || { log: function () {} };
-
   function CropAvatar($element) {
     this.$ggcontainer = $element;
     this.$loading = this.$ggcontainer.find('.loading');
@@ -49,7 +47,6 @@ $(function(){
     this.$avatarPreview = this.$avatarForm.find('.avatar-preview');
 
     this.init();
-    console.log(this);
   }
 
   CropAvatar.prototype = {
@@ -101,14 +98,12 @@ $(function(){
           try {
             data = $(this).contents().find('body').text();
           } catch (e) {
-            console.log(e.message);
           }
 
           if (data) {
             try {
               data = $.parseJSON(data);
             } catch (e) {
-              console.log(e.message);
             }
 
             _this.submitDone(data);
@@ -138,11 +133,9 @@ $(function(){
           if (this.isImageFile(file)) {
             if (this.url) {
               URL.revokeObjectURL(this.url);// Revoke the old one
-                console.log(this.url);
             }
 
             this.url = URL.createObjectURL(file);
-            console.log(this.url);
             this.startCropper();
           }
         }
@@ -261,7 +254,6 @@ $(function(){
     },
 
     submitDone: function (data) {
-      console.log(data);
 
       if ($.isPlainObject(data) && data.code === 0) {
         if (data.url) {
