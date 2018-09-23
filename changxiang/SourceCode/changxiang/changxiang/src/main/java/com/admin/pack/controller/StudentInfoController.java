@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.admin.common.controller.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -38,7 +39,7 @@ import com.admin.common.utils.R;
  
 @Controller
 @RequestMapping("/pack/studentInfo")
-public class StudentInfoController {
+public class StudentInfoController extends BaseController {
 	@Autowired
 	private StudentInfoService studentInfoService;
 	
@@ -74,12 +75,7 @@ public class StudentInfoController {
 	@GetMapping("/list")
 	@RequiresPermissions("pack:studentInfo:studentInfo")
 	public PageUtils list(@RequestParam Map<String, Object> params){
-		//查询列表数据
-        Query query = new Query(params);
-		List<Map<String,Object>> studentInfoList = studentInfoService.list(query);
-		int total = studentInfoService.count(query);
-		PageUtils pageUtils = new PageUtils(studentInfoList, total);
-		return pageUtils;
+		return studentInfoService.selectPage(params,this.getUser());
 	}
 	
 	@GetMapping("/add")

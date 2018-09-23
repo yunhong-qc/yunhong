@@ -34,7 +34,6 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
 					            isPay:$('#isPay').val(),
-					            isSuccess:0,
                                 name:$("#name").val(),
                                 beginTime:$("#beginTime").val(),
                                 endTime:$("#endTime").val(),

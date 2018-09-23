@@ -4,7 +4,7 @@
 <mapper namespace="com.admin.pack.dao.StudentInfoDao">
 
 	<select id="get" resultType="com.admin.pack.domain.StudentInfoDO">
-		select `id`,`name`,`card_no`,`telephone`,`school_id`,`dorm_id`,`is_wb`,`is_success`,`user_id`,`create_time`,`is_pay` from p_student_info where id = #{value}
+		select id,name,card_no,telephone,school_id,dorm_id,is_wb,is_success,user_id,create_time,is_pay from p_student_info where id = #{value}
 	</select>
 
 	<select id="list" resultType="java.util.HashMap">
@@ -27,22 +27,27 @@
 		ON
 		a.school_id = b.dept_id
         <where>  
-		  <if test="id != null and id != ''"> and a.id = #{id} </if>
-		  <if test="name != null and name != ''"> and a.name  like CONCAT('%',#{name},'%')</if>
-		  <if test="cardNo != null and cardNo != ''"> and a.card_no = #{cardNo} </if>
-		  <if test="telephone != null and telephone != ''"> and a.telephone = #{telephone} </if>
-		  <if test="schoolId != null and schoolId != ''"> and a.school_id = #{schoolId} </if>
-		  <if test="dormId != null and dormId != ''"> and a.dorm_id = #{dormId} </if>
-		  <if test="isWb != null and isWb != ''"> and a.is_wb = #{isWb} </if>
-		  <if test="isSuccess != null and isSuccess != ''"> and a.is_success = #{isSuccess} </if>
-		  <if test="userId != null and userId != ''"> and a.user_id = #{userId} </if>
-          <if test="beginTime != null || beginTime != ''">
-            and a.create_time &gt;= #{beginTime}
-          </if>
-		  <if test="endTime != null and endTime != ''">
-		    and a.create_time &lt;= #{endTime}
-          </if>
-          <if test="isPay != null and isPay != ''"> and a.is_pay = #{isPay} </if>
+			<if test="id != null and id != ''"> and a.id = #{id} </if>
+			<if test="name != null and name != ''"> and a.name  like CONCAT('%',#{name},'%')</if>
+			<if test="cardNo != null and cardNo != ''"> and a.card_no = #{cardNo} </if>
+			<if test="telephone != null and telephone != ''"> and a.telephone = #{telephone} </if>
+			<if test="schoolId != null and schoolId != ''"> and a.school_id = #{schoolId} </if>
+			<if test="dormId != null and dormId != ''"> and a.dorm_id = #{dormId} </if>
+			<if test="isWb != null and isWb != ''"> and a.is_wb = #{isWb} </if>
+			<if test="isSuccess != null and isSuccess != ''"> and a.is_success = #{isSuccess} </if>
+			<if test="userId != null and userId != ''"> and a.user_id = #{userId} </if>
+			<if test="beginTime != null and beginTime != ''">
+				and a.create_time &gt;= #{beginTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				and a.create_time &lt;= #{endTime}
+			</if>
+			<if test="isPay != null and isPay != ''"> and a.is_pay = #{isPay} </if>
+			<if test="userIds != null"> and a.user_id in
+				<foreach collection="userIds" index="index" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
 		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -69,24 +74,34 @@
 		  		  <if test="isWb != null and isWb != ''"> and is_wb = #{isWb} </if>
 		  		  <if test="isSuccess != null and isSuccess != ''"> and is_success = #{isSuccess} </if>
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-			 <if test="isPay != null and isPay != ''"> and `is_pay` = #{isPay} </if>
-		  		</where>
+				 <if test="beginTime != null and beginTime != ''">
+					 and create_time &gt;= #{beginTime}
+				 </if>
+				 <if test="endTime != null and endTime != ''">
+					 and create_time &lt;= #{endTime}
+				 </if>
+				 <if test="isPay != null and isPay != ''"> and is_pay = #{isPay} </if>
+				 <if test="userIds != null"> and user_id in
+					 <foreach collection="userIds" index="index" item="item" open="(" separator="," close=")">
+						 #{item}
+					 </foreach>
+				 </if>
+		 </where>
 	</select>
 	 
 	<insert id="save" parameterType="com.admin.pack.domain.StudentInfoDO" useGeneratedKeys="true" keyProperty="id">
 		insert into p_student_info
 		(
-			`name`, 
-			`card_no`, 
-			`telephone`, 
-			`school_id`, 
-			`dorm_id`, 
-			`is_wb`, 
-			`is_success`, 
-			`user_id`, 
-			`create_time`,
-			`is_pay`
+			name, 
+			card_no, 
+			telephone, 
+			school_id, 
+			dorm_id, 
+			is_wb, 
+			is_success, 
+			user_id, 
+			create_time,
+			is_pay
 		)
 		values
 		(
@@ -106,16 +121,16 @@
 	<update id="update" parameterType="com.admin.pack.domain.StudentInfoDO">
 		update p_student_info 
 		<set>
-			<if test="name != null">`name` = #{name}, </if>
-			<if test="cardNo != null">`card_no` = #{cardNo}, </if>
-			<if test="telephone != null">`telephone` = #{telephone}, </if>
-			<if test="schoolId != null">`school_id` = #{schoolId}, </if>
-			<if test="dormId != null">`dorm_id` = #{dormId}, </if>
-			<if test="isWb != null">`is_wb` = #{isWb}, </if>
-			<if test="isSuccess != null">`is_success` = #{isSuccess}, </if>
-			<if test="userId != null">`user_id` = #{userId}, </if>
-			<if test="createTime != null">`create_time` = #{createTime},</if>
-			<if test="isPay != null">`is_pay` = #{isPay},</if>
+			<if test="name != null">name = #{name}, </if>
+			<if test="cardNo != null">card_no = #{cardNo}, </if>
+			<if test="telephone != null">telephone = #{telephone}, </if>
+			<if test="schoolId != null">school_id = #{schoolId}, </if>
+			<if test="dormId != null">dorm_id = #{dormId}, </if>
+			<if test="isWb != null">is_wb = #{isWb}, </if>
+			<if test="isSuccess != null">is_success = #{isSuccess}, </if>
+			<if test="userId != null">user_id = #{userId}, </if>
+			<if test="createTime != null">create_time = #{createTime},</if>
+			<if test="isPay != null">is_pay = #{isPay},</if>
 		</set>
 		where id = #{id}
 	</update>

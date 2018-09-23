@@ -1,6 +1,8 @@
 package com.admin.pack.service;
 
+import com.admin.common.utils.PageUtils;
 import com.admin.pack.domain.StudentInfoDO;
+import com.admin.system.domain.UserDO;
 
 import java.util.List;
 import java.util.Map;
@@ -16,8 +18,8 @@ public interface StudentInfoService {
 	
 	StudentInfoDO get(Integer id);
 
-	List<Map<String,Object>> list(Map<String, Object> map);
-	
+	PageUtils selectPage(Map<String, Object> map, UserDO user);
+
 	int count(Map<String, Object> map);
 	
 	int save(StudentInfoDO studentInfo);
