@@ -70,6 +70,17 @@ public class StudentInfoController extends BaseController {
 	String wb(){
 		return "pack/studentInfo/wb";
 	}
+
+	/**
+	 * @Description: 宽带协议页面
+	 * @Author: luojing
+	 * @Date: 2018/9/9 21:13
+	 */
+	@GetMapping("/wbProtocol")
+	@RequiresPermissions("pack:studentInfo:studentInfo")
+	String wbProtocol(){
+		return "pack/studentInfo/wbProtocol";
+	}
 	
 	@ResponseBody
 	@GetMapping("/list")

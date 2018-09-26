@@ -23,11 +23,10 @@
                     </div>
 
                     <div class="pull-right search col-md-2">
-                        <select data-placeholder="选择是否办理" class="form-control" id="wbIsSuccess">
-                            <option value="">选择是否办理宽带</option>
-                            <option value="0">已办理</option>
-                            <option value="1">未办理</option>
-                            <option value="-1">办理失败</option>
+                        <select data-placeholder="选择是否办理" class="form-control" id="isProtocol">
+                            <option value="">选择是否签订协议</option>
+                            <option value="0">已签</option>
+                            <option value="1">未签</option>
                         </select>
                     </div>
                     <div class="pull-right search col-md-2">
@@ -51,11 +50,11 @@
         </div>
     </div>
 </div>
+<div th:include="include :: footer"></div>
 <!--shiro控制bootstraptable行内按钮看见性 来自Admin的创新方案 -->
 <div>
     <script type="text/javascript">
         var s_yes_h = 'hidden';
-        var s_no_h = 'hidden';
     </script>
 </div>
 <div shiro:hasPermission="pack:studentInfo:edit">
@@ -63,12 +62,6 @@
         s_yes_h = '';
     </script>
 </div>
-<div shiro:hasPermission="pack:studentInfo:edit">
-    <script type="text/javascript">
-        s_no_h = '';
-    </script>
-</div>
-<div th:include="include :: footer"></div>
-<script type="text/javascript" src="/js/appjs/pack/studentInfo/wb.js"></script>
+<script type="text/javascript" src="/js/appjs/pack/studentInfo/wbProtocol.js"></script>
 </body>
 </html>

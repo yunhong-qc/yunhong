@@ -34,7 +34,7 @@ function load() {
                         limit: params.limit,
                         offset:params.offset,
                         isWb:0,
-                        wbIsSuccess:$("#wbIsSuccess").val(),
+                        isProtocol:$("#isProtocol").val(),
                         name:$("#name").val(),
                         beginTime:$("#beginTime").val(),
                         endTime:$("#endTime").val(),
@@ -72,19 +72,8 @@ function load() {
                         title : '录入日期'
                     },
                     {
-                        field : 'isProtocol',
-                        title : '是否签订宽带协议',
-                        formatter:function (value, row, index) {
-                            if (value == 1) {
-                                return '<span class="label label-danger">未签订</span>';
-                            }else if (value == 0){
-                                return '<span class="label label-primary">已签订</span>';
-                            }
-                        }
-                    },
-                    {
                         field : 'wbIsSuccess',
-                        title : '是否办理宽带',
+                        title : '办理宽带状态',
                         formatter:function (value, row, index) {
                             if (value == 1) {
                                 return '<span class="label label-danger">未办理</span>';
@@ -96,19 +85,25 @@ function load() {
                         }
                     },
                     {
+                        field : 'isProtocol',
+                        title : '是否签订宽带协议',
+                        formatter:function (value, row, index) {
+                            if (value == 1) {
+                                return '<span class="label label-danger">未签订</span>';
+                            }else if (value == 0){
+                                return '<span class="label label-primary">已签订</span>';
+                            }
+                        }
+                    },
+                    {
                         title : '操作',
                         field : 'id',
                         align : 'center',
                         formatter : function(value, row, index) {
-                            var json = JSON.stringify(row).replace(/\"/g,"'");
-                            console.log(json);
-                            var e = '<a class="btn btn-primary btn-sm '+s_yes_h+'" href="#" mce_href="#" title="办理成功" onclick="yes('
-                                + json
-                                + ')"><i class="fa fa-check"></i></a> ';
-                            var d = '<a class="btn btn-warning btn-sm '+s_no_h+'" href="#" mce_href="#" title="办理失败"  onclick="no(\''
+                            var e = '<a class="btn btn-primary btn-sm '+s_yes_h+'" href="#" mce_href="#" title="签订" onclick="yes(\''
                                 + row.id
-                                + '\')"><i class="fa fa-remove"></i></a> ';
-                            return e + d ;
+                                + '\')"><i class="fa fa-check"></i></a> ';
+                            return e ;
                         }
                     } ]
             });
@@ -122,51 +117,19 @@ function resert() {
     $("#name").val("");
     $("#beginTime").val("");
     $("#endTime").val("");
-    $("#wbIsSuccess").val("");
+    $("#isProtocol").val("");
     $('#exampleTable').bootstrapTable('refresh');
 }
 
-//办理成功
-function yes(row){
-    if(row.isProtocol == 1){
-        layer.msg('未签订宽带协议');
-    }else{
-        layer.confirm('确定已经办理成功？', {
-            btn : [ '确定', '取消' ]
-        }, function() {
-            $.ajax({
-                cache : true,
-                type : "POST",
-                url : "/pack/studentInfo/update",
-                data : {wbIsSuccess:0,id:row.id},// 你的formid
-                async : false,
-                error : function(request) {
-                    parent.layer.alert("Connection error");
-                },
-                success : function(data) {
-                    if (data.code == 0) {
-                        layer.msg("操作成功");
-                        reLoad();
-                    } else {
-                        layer.alert(data.msg)
-                    }
-
-                }
-            });
-        })
-    }
-}
-
-//办理失败
-function no(id){
-    layer.confirm('确定已经办理失败？', {
+function yes(id){
+    layer.confirm('确定已经签订宽带协议？', {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
             cache : true,
             type : "POST",
             url : "/pack/studentInfo/update",
-            data : {wbIsSuccess:-1,id:id},// 你的formid
+            data : {isProtocol:0,id:id},// 你的formid
             async : false,
             error : function(request) {
                 parent.layer.alert("Connection error");

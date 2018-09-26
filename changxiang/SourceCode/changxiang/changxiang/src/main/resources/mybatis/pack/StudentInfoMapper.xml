@@ -4,7 +4,7 @@
 <mapper namespace="com.admin.pack.dao.StudentInfoDao">
 
 	<select id="get" resultType="com.admin.pack.domain.StudentInfoDO">
-		select id,name,card_no,telephone,school_id,dorm_id,is_wb,is_success,user_id,create_time,is_pay from p_student_info where id = #{value}
+		select id,name,card_no,telephone,school_id,dorm_id,is_wb,is_success,user_id,create_time,is_pay,wb_is_success,is_protocol from p_student_info where id = #{value}
 	</select>
 
 	<select id="list" resultType="java.util.HashMap">
@@ -19,6 +19,8 @@
 		a.is_success as isSuccess,
 		a.user_id as userId,
 		a.create_time as createTime,
+		a.wb_is_success as wbIsSuccess,
+		a.is_protocol as isProtocol,
 		a.is_pay as isPay,
 		b.name  as schoolName
 		FROM
@@ -34,6 +36,8 @@
 			<if test="schoolId != null and schoolId != ''"> and a.school_id = #{schoolId} </if>
 			<if test="dormId != null and dormId != ''"> and a.dorm_id = #{dormId} </if>
 			<if test="isWb != null and isWb != ''"> and a.is_wb = #{isWb} </if>
+			<if test="isProtocol != null and isProtocol != ''"> and a.is_protocol = #{isProtocol} </if>
+			<if test="wbIsSuccess != null and wbIsSuccess != ''"> and a.wb_is_success = #{wbIsSuccess} </if>
 			<if test="isSuccess != null and isSuccess != ''"> and a.is_success = #{isSuccess} </if>
 			<if test="userId != null and userId != ''"> and a.user_id = #{userId} </if>
 			<if test="beginTime != null and beginTime != ''">
@@ -72,6 +76,8 @@
 		  		  <if test="schoolId != null and schoolId != ''"> and school_id = #{schoolId} </if>
 		  		  <if test="dormId != null and dormId != ''"> and dorm_id = #{dormId} </if>
 		  		  <if test="isWb != null and isWb != ''"> and is_wb = #{isWb} </if>
+			 <if test="isProtocol != null and isProtocol != ''"> and is_protocol = #{isProtocol} </if>
+			 		<if test="wbIsSuccess != null and wbIsSuccess != ''"> and wb_is_success = #{wbIsSuccess} </if>
 		  		  <if test="isSuccess != null and isSuccess != ''"> and is_success = #{isSuccess} </if>
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 				 <if test="beginTime != null and beginTime != ''">
@@ -101,7 +107,9 @@
 			is_success, 
 			user_id, 
 			create_time,
-			is_pay
+			is_pay,
+			wb_is_success,
+			is_protocol
 		)
 		values
 		(
@@ -114,7 +122,9 @@
 			#{isSuccess}, 
 			#{userId}, 
 			#{createTime},
-			#{isPay}
+			#{isPay},
+			#{wbIsSuccess},
+			#{isProtocol}
 		)
 	</insert>
 	 
@@ -131,6 +141,8 @@
 			<if test="userId != null">user_id = #{userId}, </if>
 			<if test="createTime != null">create_time = #{createTime},</if>
 			<if test="isPay != null">is_pay = #{isPay},</if>
+			<if test="wbIsSuccess != null">wb_is_success = #{wbIsSuccess},</if>
+			<if test="isProtocol != null">is_protocol = #{isProtocol},</if>
 		</set>
 		where id = #{id}
 	</update>

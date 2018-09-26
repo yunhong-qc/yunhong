@@ -24,9 +24,10 @@
 
 						<div class="pull-right search col-md-2">
 							<select data-placeholder="选择是否办理" class="form-control" id="isSuccess">
-								<option value="">选择是否已经办理存费套餐</option>
+								<option value="">选择是否办理</option>
 								<option value="0">已办理</option>
 								<option value="1">未办理</option>
+								<option value="-1">办理失败</option>
 							</select>
 						</div>
                         <div class="pull-right search col-md-2">
@@ -51,28 +52,21 @@
 		</div>
 	</div>
 	<!--shiro控制bootstraptable行内按钮看见性 来自Admin的创新方案 -->
-		<div>
-			<script type="text/javascript">
-				var s_edit_h = 'hidden';
-				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
-			</script>
-		</div>
-		<div shiro:hasPermission="pack:studentInfo:edit">
-			<script type="text/javascript">
-				s_edit_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="pack:studentInfo:remove">
-			<script type="text/javascript">
-				var s_remove_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="pack:studentInfo:resetPwd">
-			<script type="text/javascript">
-				var s_resetPwd_h = '';
-			</script>
-		</div>
+	<div>
+		<script type="text/javascript">
+			var s_yes_h = 'hidden';
+			var s_no_h = 'hidden';
+		</script>
+	</div>
+	<div shiro:hasPermission="pack:studentInfo:edit">
+		<script type="text/javascript">
+			s_yes_h = '';
+		</script>
+	</div>
+	<div shiro:hasPermission="pack:studentInfo:edit">
+		<script type="text/javascript">
+			s_no_h = '';
+		</script>
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/pack/studentInfo/studentInfo.js"></script>

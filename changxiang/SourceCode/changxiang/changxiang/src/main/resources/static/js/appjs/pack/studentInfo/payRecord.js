@@ -71,6 +71,19 @@ function load() {
 								title : '录入日期'
 							},
                             {
+                                field : 'isSuccess',
+                                title : '是否办理' ,
+                                formatter:function (value, row, index) {
+                                    if (value == 1) {
+                                        return '<span class="label label-danger">未办理</span>';
+                                    }else if(value == 0){
+                                        return '<span class="label label-primary">已办理</span>';
+                                    }else{
+                                        return '<span class="label label-danger">办理失败</span>';
+                                    }
+                                }
+                            },
+                            {
                                 field : 'isPay',
                                 title : '是否支付' ,
                                 formatter:function (value, row, index) {
@@ -86,19 +99,14 @@ function load() {
                                 field : 'id',
                                 align : 'center',
                                 formatter : function(value, row, index) {
-                                    /*var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                                        + row.id
-                                        + '\')"><i class="fa fa-edit"></i></a> ';
-                                    var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                                    var json = JSON.stringify(row).replace(/\"/g,"'");
+                                    var e = '<a class="btn btn-primary btn-sm '+s_yes_h+'" href="#" mce_href="#" title="支付成功" onclick="yes('
+                                        + json
+                                        + ')"><i class="fa fa-check"></i></a> ';
+                                    var d = '<a class="btn btn-warning btn-sm '+s_no_h+'" href="#" mce_href="#" title="支付失败"  onclick="no(\''
                                         + row.id
                                         + '\')"><i class="fa fa-remove"></i></a> ';
-                                    var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-                                        + row.id
-                                        + '\')"><i class="fa fa-key"></i></a> ';
-                                    return e + d ;*/
-                                    var isP=row.isPay;
-									var e='<input id="_isPay'+row.id+'" class="uiswitch" onclick="onModeIsPay('+row.id+')" '+(isP==0?'checked="checked"':'')+' type="checkbox">';
-									return e;
+                                    return e + d ;
                                 }
                             } ]
                     });
@@ -113,101 +121,60 @@ function resert() {
     $("#isPay").val("");
     $('#exampleTable').bootstrapTable('refresh');
 }
-function onModeIsPay(id){
-	var isInter = $('#_isPay'+id).is(':checked');
-	$.ajax({
-		cache : true,
-		type : "POST",
-		url : "/pack/studentInfo/update",
-		data : {isPay:(isInter?0:1),id:id},// 你的formid
-		async : false,
-		error : function(request) {
-			parent.layer.alert("Connection error");
-		},
-		success : function(data) {
-			if (data.code == 0) {
-				layer.msg("操作成功");
-				reLoad();
+//支付成功
+function yes(row){
+    if(row.isSuccess != 0){
+        layer.msg('套餐未办理成功');
+    }else{
+        layer.confirm('确定已经支付成功？', {
+            btn : [ '确定', '取消' ]
+        }, function() {
+            $.ajax({
+                cache : true,
+                type : "POST",
+                url : "/pack/studentInfo/update",
+                data : {isPay:0,id:row.id},// 你的formid
+                async : false,
+                error : function(request) {
+                    parent.layer.alert("Connection error");
+                },
+                success : function(data) {
+                    if (data.code == 0) {
+                        layer.msg("操作成功");
+                        reLoad();
+                    } else {
+                        layer.alert(data.msg)
+                    }
 
-			} else {
-				layer.alert(data.msg)
-			}
+                }
+            });
+        })
+    }
+}
 
-		}
-	});
-}
-function add() {
-	layer.open({
-		type : 2,
-		title : '增加',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
-	});
-}
-function edit(id) {
-	layer.open({
-		type : 2,
-		title : '编辑',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/payEdit/' + id // iframe的url
-	});
-}
-function remove(id) {
-	layer.confirm('确定要删除选中的记录？', {
-		btn : [ '确定', '取消' ]
-	}, function() {
-		$.ajax({
-			url : prefix+"/remove",
-			type : "post",
-			data : {
-				'id' : id
-			},
-			success : function(r) {
-				if (r.code==0) {
-					layer.msg(r.msg);
-					reLoad();
-				}else{
-					layer.msg(r.msg);
-				}
-			}
-		});
-	})
-}
-function batchRemove() {
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
-		return;
-	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
-		btn : [ '确定', '取消' ]
-	// 按钮
-	}, function() {
-		var ids = new Array();
-		// 遍历所有选择的行数据，取每条数据对应的ID
-		$.each(rows, function(i, row) {
-			ids[i] = row['id'];
-		});
-		$.ajax({
-			type : 'POST',
-			data : {
-				"ids" : ids
-			},
-			url : prefix + '/batchRemove',
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	}, function() {
+//支付失败
+function no(id){
+    layer.confirm('确定已经支付失败？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : "/pack/studentInfo/update",
+            data : {isPay:-1,id:id},// 你的formid
+            async : false,
+            error : function(request) {
+                parent.layer.alert("Connection error");
+            },
+            success : function(data) {
+                if (data.code == 0) {
+                    layer.msg("操作成功");
+                    reLoad();
+                } else {
+                    layer.alert(data.msg)
+                }
 
-	});
+            }
+        });
+    })
 }

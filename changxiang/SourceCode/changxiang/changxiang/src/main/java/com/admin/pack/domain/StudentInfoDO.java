@@ -1,5 +1,7 @@
 package com.admin.pack.domain;
 
+import io.swagger.models.auth.In;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -37,6 +39,10 @@ public class StudentInfoDO implements Serializable {
 	private Date createTime;
 	//是否支付：0未支付，1支付
 	private Integer isPay;
+	//宽带是否办理成功：0已办理，1未办理，-1办理失败
+	private Integer wbIsSuccess;
+	//是否签订宽带协议：0已签，1未签
+	private Integer isProtocol;
 
 	/**
 	 * 设置：主键ID
@@ -165,5 +171,19 @@ public class StudentInfoDO implements Serializable {
 
 	public Integer getIsPay() {
 		return isPay;
+	}
+
+	public Integer getWbIsSuccess(){
+		return wbIsSuccess;
+	}
+	public void setWbIsSuccess(Integer wbIsSuccess){
+		this.wbIsSuccess = wbIsSuccess;
+	}
+
+	public Integer getIsProtocol(){
+		return isProtocol;
+	}
+	public void setIsProtocol(Integer isProtocol){
+		this.isProtocol = isProtocol;
 	}
 }

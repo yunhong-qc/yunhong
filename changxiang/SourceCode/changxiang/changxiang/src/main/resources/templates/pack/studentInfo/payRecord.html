@@ -51,26 +51,19 @@
 <!--shiro控制bootstraptable行内按钮看见性 来自Admin的创新方案 -->
 <div>
     <script type="text/javascript">
-        var s_edit_h = 'hidden';
-        var s_remove_h = 'hidden';
-        var s_resetPwd_h = 'hidden';
+        var s_yes_h = 'hidden';
+        var s_no_h = 'hidden';
     </script>
 </div>
 <div shiro:hasPermission="pack:studentInfo:edit">
     <script type="text/javascript">
-        s_edit_h = '';
+        s_yes_h = '';
     </script>
 </div>
-<div shiro:hasPermission="pack:studentInfo:remove">
+<div shiro:hasPermission="pack:studentInfo:edit">
     <script type="text/javascript">
-        var s_remove_h = '';
+        s_no_h = '';
     </script>
-</div>
-<div shiro:hasPermission="pack:studentInfo:resetPwd">
-    <script type="text/javascript">
-        var s_resetPwd_h = '';
-    </script>
-</div>
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/pack/studentInfo/payRecord.js"></script>
