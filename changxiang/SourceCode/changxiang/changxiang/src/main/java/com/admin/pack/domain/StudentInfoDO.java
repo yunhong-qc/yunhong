@@ -43,7 +43,16 @@ public class StudentInfoDO implements Serializable {
 	private Integer wbIsSuccess;
 	//是否签订宽带协议：0已签，1未签
 	private Integer isProtocol;
+	//赠品类型
+	private Integer zenpType;
 
+	
+	public Integer getZenType() {
+		return zenpType;
+	}
+	public void setZenpType(Integer zenpType) {
+		this.zenpType = zenpType;
+	}
 	/**
 	 * 设置：主键ID
 	 */

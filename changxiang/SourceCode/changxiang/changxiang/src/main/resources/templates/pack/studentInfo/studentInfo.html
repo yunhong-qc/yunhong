@@ -9,47 +9,67 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="pack:studentInfo:add" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="pack:studentInfo:add" type="button"
+								class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
-							<button shiro:hasPermission="pack:studentInfo:batchRemove" type="button" class="btn  btn-danger"
-								onclick="batchRemove()">
+							<button shiro:hasPermission="pack:studentInfo:batchRemove"
+								type="button" class="btn  btn-danger" onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
 						</div>
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
-                            <button class="btn btn-success" onclick="resert()">重置</button>
+							<button class="btn btn-success" onclick="resert()">重置</button>
 						</div>
 
-						<div class="pull-right search col-md-2">
-							<select data-placeholder="选择是否办理" class="form-control" id="isSuccess">
-								<option value="">选择是否办理</option>
+						<div class="pull-right search col-md-1">
+							<select data-placeholder="是否办理" class="form-control"
+								id="isSuccess">
+								<option value="">选择所有</option>
 								<option value="0">已办理</option>
 								<option value="1">未办理</option>
 								<option value="-1">办理失败</option>
 							</select>
 						</div>
-                        <div class="pull-right search col-md-2">
-                            <input type="text" class="form-control" id="endTime" name="endTime" placeholder="录入结束时间"
-                                   onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="background-color: #fff;" readonly="readonly"/>
-                        </div>
-
-                        <div class="pull-right search col-md-2">
-                            <input type="text" class="form-control" id="beginTime" name="beginTime" placeholder="录入开始时间"
-                                   onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="background-color: #fff;" readonly="readonly"/>
-                        </div>
-						<div class="pull-right search col-md-2 nopadding">
-							<input id="name" type="text" class="form-control"
-								   placeholder="学生姓名">
+						<div class="pull-right search col-md-1">
+							<select data-placeholder="是否支付" class="form-control" id="isPay">
+								<option value="">选择所有</option>
+								<option value="0">已支付</option>
+								<option value="1">未支付</option>
+							</select>
 						</div>
-
+						<div class="pull-right search col-md-1">
+							<select data-placeholder="选择学校" class="form-control"
+								id="schoolId">
+								<option value="">所有</option>
+							</select>
+						</div>
 					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
+					<div class="pull-right search col-md-1">
+						<input type="text" class="form-control" id="endTime"
+							name="endTime" placeholder="录入结束时间"
+							onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"
+							style="background-color: #fff;" readonly="readonly" />
+					</div>
+
+					<div class="pull-right search col-md-1">
+						<input type="text" class="form-control" id="beginTime"
+							name="beginTime" placeholder="录入开始时间"
+							onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})"
+							style="background-color: #fff;" readonly="readonly" />
+					</div>
+					<div class="pull-right search col-md-1 nopadding">
+						<input id="name" type="text" class="form-control"
+							placeholder="学生姓名">
+					</div>
+
 				</div>
+				<table id="exampleTable" data-mobile-responsive="true">
+				</table>
 			</div>
 		</div>
+	</div>
 	</div>
 	<!--shiro控制bootstraptable行内按钮看见性 来自Admin的创新方案 -->
 	<div>
@@ -69,6 +89,7 @@
 		</script>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/pack/studentInfo/studentInfo.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/pack/studentInfo/studentInfo.js"></script>
 </body>
 </html>

@@ -62,6 +62,7 @@ var entity = {
 				params.isWb = isInter?0:1;
 				params['schoolId']=$('#_shcool').attr('data-value');
 				params['userId']=$('#_persents').attr('data-value');
+				params['zenpType']=$('#_zenpType').attr('data-value');
 				params['ttcode']=$('#_tcode').text() || 1;
 				//提交信息
 				$.ajax({

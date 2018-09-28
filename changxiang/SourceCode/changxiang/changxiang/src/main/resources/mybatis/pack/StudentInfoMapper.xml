@@ -21,6 +21,7 @@
 		a.create_time as createTime,
 		a.wb_is_success as wbIsSuccess,
 		a.is_protocol as isProtocol,
+		a.zenp_type as zenpType,
 		a.is_pay as isPay,
 		b.name  as schoolName
 		FROM
@@ -109,7 +110,8 @@
 			create_time,
 			is_pay,
 			wb_is_success,
-			is_protocol
+			is_protocol,
+			zenp_type
 		)
 		values
 		(
@@ -124,7 +126,8 @@
 			#{createTime},
 			#{isPay},
 			#{wbIsSuccess},
-			#{isProtocol}
+			#{isProtocol},
+			#{zenpType}
 		)
 	</insert>
 	 

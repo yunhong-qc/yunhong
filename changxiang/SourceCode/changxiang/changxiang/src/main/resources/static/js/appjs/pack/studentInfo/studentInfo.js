@@ -2,6 +2,7 @@
 var prefix = "/pack/studentInfo"
 $(function() {
 	load();
+    getShcollList();
 });
 
 function load() {
@@ -34,6 +35,8 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
 					            isSuccess:$('#isSuccess').val(),
+					            schoolId:$('#schoolId').val(),
+					            isPay:$('#isPay').val(),
                                 name:$("#name").val(),
                                 beginTime:$("#beginTime").val(),
                                 endTime:$("#endTime").val(),
@@ -67,9 +70,41 @@ function load() {
 									field : 'dormId', 
 									title : '寝室编号' 
 								},{
+	                                field : 'zenpType',
+	                                title : '赠品',
+	                                formatter:function (value, row, index) {
+	                                	if(value==0){
+	                                		return "Type-C";
+	                                	}
+	                                	else if(value==1){
+	                                		return "iPhone-7";
+	                                	}
+	                                	else if(value==2){
+	                                		return "iPhone-8";
+	                                	}
+	                                	else if(value==3){
+	                                		return "iPhone-X";
+	                                	}
+	                                	else if(value==4){
+	                                		return "安卓";
+	                                	}else{
+	                                		return "未选择赠品";
+	                                	}
+	                                }
+	                            },{
 									field : 'createTime', 
 									title : '录入日期'
-								},
+								},{
+	                                field : 'isPay',
+	                                title : '是否支付' ,
+	                                formatter:function (value, row, index) {
+	                                    if (value == 1) {
+	                                        return '<span class="label label-danger">未支付</span>';
+	                                    }else{
+	                                        return '<span class="label label-primary">已支付</span>';
+	                                    }
+	                                }
+	                            },
 																{
 									field : 'isSuccess', 
 									title : '是否办理' ,
@@ -139,7 +174,35 @@ function yes(id){
         });
     })
 }
+/**
+ * 获取学校列表
+ * @returns
+ */
+function getShcollList(){
+	$.ajax({
+        cache : true,
+        type : "POST",
+        url : "/pack/common/listSchoolInfo",
+        async : false,
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },
+        success : function(data) {
+            if (data.code == '000000') {
+               var html="";
+               var schs=data.data;
+               for(var i=0;i<schs.length;i++){
+            	   var sch=schs[i];
+            	   html+='<option value="'+sch.deptId+'">'+sch.name+'</option>';
+               }
+               $('#schoolId').html(html);
+            } else {
+                layer.alert(data.msg)
+            }
 
+        }
+    });
+}
 //办理失败
 function no(id){
     layer.confirm('确定已经办理失败？', {
