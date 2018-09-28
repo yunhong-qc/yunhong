@@ -77,16 +77,7 @@ function load() {
 	                                		return "Type-C";
 	                                	}
 	                                	else if(value==1){
-	                                		return "iPhone-7";
-	                                	}
-	                                	else if(value==2){
-	                                		return "iPhone-8";
-	                                	}
-	                                	else if(value==3){
-	                                		return "iPhone-X";
-	                                	}
-	                                	else if(value==4){
-	                                		return "安卓";
+	                                		return "iPhone";
 	                                	}else{
 	                                		return "未选择赠品";
 	                                	}
