@@ -41,7 +41,7 @@ function load() {
                                 beginTime:$("#beginTime").val(),
                                 endTime:$("#endTime").val(),
 					            sort:'create_time',
-					            order:'desc'
+					            order:'asc'
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -191,7 +191,7 @@ function getShcollList(){
         },
         success : function(data) {
             if (data.code == '000000') {
-               var html="";
+            	var html='<option value="">所有学校</option>';
                var schs=data.data;
                for(var i=0;i<schs.length;i++){
             	   var sch=schs[i];
