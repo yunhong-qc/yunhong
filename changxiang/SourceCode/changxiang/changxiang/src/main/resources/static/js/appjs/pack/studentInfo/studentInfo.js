@@ -2,7 +2,7 @@
 var prefix = "/pack/studentInfo"
 $(function() {
 	load();
-    getShcollList();
+//    getShcollList();
 });
 
 function load() {
@@ -35,7 +35,7 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
 					            isSuccess:$('#isSuccess').val(),
-					            schoolId:$('#schoolId').val(),
+//					            schoolId:$('#schoolId').val(),
 					            isPay:$('#isPay').val(),
                                 name:$("#name").val(),
                                 beginTime:$("#beginTime").val(),
@@ -61,28 +61,7 @@ function load() {
 																{
 									field : 'telephone', 
 									title : '电话'
-								},
-																{
-									field : 'schoolName',
-									title : '学校'
-								},
-																{
-									field : 'dormId', 
-									title : '寝室编号' 
 								},{
-	                                field : 'zenpType',
-	                                title : '赠品',
-	                                formatter:function (value, row, index) {
-	                                	if(value==0){
-	                                		return "Type-C";
-	                                	}
-	                                	else if(value==1){
-	                                		return "iPhone";
-	                                	}else{
-	                                		return "未选择赠品";
-	                                	}
-	                                }
-	                            },{
 									field : 'createTime', 
 									title : '录入日期'
 								},{
